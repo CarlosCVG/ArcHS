@@ -8,4 +8,6 @@ public class ControladorLoginArc {
     int h = 0;
     
     int y = 1;
+    
+    int yo_si_rifo_soy_del_tec_2 = 23550323;
 }
