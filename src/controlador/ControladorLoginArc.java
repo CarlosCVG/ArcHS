@@ -6,4 +6,6 @@ public class ControladorLoginArc {
     int j = 1;
     
     int h = 0;
+    
+    int y = 1;
 }
