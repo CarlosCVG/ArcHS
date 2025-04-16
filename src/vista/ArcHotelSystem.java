@@ -1,11 +1,12 @@
 package vista;
 
 import repositorio.*;
+import vista.ventanas.Login;
 
 public class ArcHotelSystem {
 
     public static void main(String[] args) {
-        vLoginSelect vloginselect = new vLoginSelect();
-        vloginselect.setVisible(true);
+        Login login = new Login();
+        login.setVisible(true);
     }
 }
