@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package vista.componentes;
+package vista.paneles;
 
 /**
  *
  * @author karlo
  */
-public class loginUI extends javax.swing.JPanel {
+public class reservacionUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form Login
+     * Creates new form reservacionUI
      */
-    public loginUI() {
+    public reservacionUI() {
         initComponents();
     }
 
@@ -34,7 +34,7 @@ public class loginUI extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 662, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
