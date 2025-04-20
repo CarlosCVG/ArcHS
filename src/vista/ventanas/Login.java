@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista.ventanas;
 
-/**
- *
- * @author karlo
- */
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -29,7 +21,6 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         body = new javax.swing.JPanel();
-        panel_btn1 = new componentes.panel_btn();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aguila Real Chihuahua");
@@ -40,6 +31,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setLayout(flowLayout1);
 
         jButton1.setText("X");
+        jButton1.setFocusable(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -53,17 +45,11 @@ public class Login extends javax.swing.JFrame {
         body.setLayout(bodyLayout);
         bodyLayout.setHorizontalGroup(
             bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyLayout.createSequentialGroup()
-                .addContainerGap(444, Short.MAX_VALUE)
-                .addComponent(panel_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(290, 290, 290))
+            .addGap(0, 850, Short.MAX_VALUE)
         );
         bodyLayout.setVerticalGroup(
             bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bodyLayout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(panel_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+            .addGap(0, 477, Short.MAX_VALUE)
         );
 
         getContentPane().add(body, java.awt.BorderLayout.CENTER);
@@ -118,6 +104,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel body;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private componentes.panel_btn panel_btn1;
     // End of variables declaration//GEN-END:variables
 }

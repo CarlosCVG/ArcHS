@@ -2,6 +2,7 @@ package componentes;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -28,6 +29,7 @@ public class panel_btn extends JPanel implements MouseListener {
         setBackground(isNormal);
         add(label, BorderLayout.CENTER);
         addMouseListener(this);
+        setPreferredSize(new Dimension(100, 100));
     }
 
     @Override
