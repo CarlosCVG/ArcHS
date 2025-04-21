@@ -42,7 +42,6 @@ public class Empleado extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 700));
 
         Header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
 
@@ -63,7 +62,8 @@ public class Empleado extends javax.swing.JFrame {
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
-        Rigth.setLayout(new java.awt.BorderLayout());
+        Rigth.setBackground(new java.awt.Color(51, 51, 51));
+        Rigth.setLayout(new java.awt.CardLayout());
         getContentPane().add(Rigth, java.awt.BorderLayout.CENTER);
 
         Footer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING, 30, 5));

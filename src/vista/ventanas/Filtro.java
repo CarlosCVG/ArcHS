@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package vista.paneles;
+package vista.ventanas;
 
 /**
  *
  * @author karlo
  */
-public class reservaUI extends javax.swing.JPanel {
+public class Filtro extends javax.swing.JPanel {
 
     /**
-     * Creates new form registroUI
+     * Creates new form Filtro
      */
-    public reservaUI() {
+    public Filtro() {
         initComponents();
     }
 

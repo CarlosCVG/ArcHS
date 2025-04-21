@@ -26,19 +26,73 @@ public class ingresoUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        up = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        body = new javax.swing.JPanel();
+        southBody = new javax.swing.JPanel();
+        panel_btn1 = new componentes.panel_btn();
+        panel_btn2 = new componentes.panel_btn();
+        panel_btn3 = new componentes.panel_btn();
+        northBody = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        down = new javax.swing.JPanel();
+        web_label1 = new componentes.web_label();
+        web_label2 = new componentes.web_label();
+        web_label3 = new componentes.web_label();
+
+        setLayout(new java.awt.BorderLayout());
+
+        up.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 30));
+
+        jLabel1.setText("jLabel1");
+        up.add(jLabel1);
+
+        add(up, java.awt.BorderLayout.NORTH);
+
+        body.setLayout(new java.awt.BorderLayout());
+
+        southBody.add(panel_btn1);
+        southBody.add(panel_btn2);
+        southBody.add(panel_btn3);
+
+        body.add(southBody, java.awt.BorderLayout.CENTER);
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Lorem ipsum dolor sit amet, \nconsectetur adipiscing elit, \nsed do eiusmod tempor incididunt ut \nlabore et dolore magna aliqua.\nUt enim ad minim veniam,\nquis nostrud exercitation ullamco \nlaboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in \nreprehenderit in voluptate velit esse \ncillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia \ndeserunt \nmollit anim id est laborum.");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        northBody.add(jScrollPane1);
+
+        body.add(northBody, java.awt.BorderLayout.PAGE_START);
+
+        add(body, java.awt.BorderLayout.CENTER);
+
+        down.add(web_label1);
+        down.add(web_label2);
+        down.add(web_label3);
+
+        add(down, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel body;
+    private javax.swing.JPanel down;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JPanel northBody;
+    private componentes.panel_btn panel_btn1;
+    private componentes.panel_btn panel_btn2;
+    private componentes.panel_btn panel_btn3;
+    private javax.swing.JPanel southBody;
+    private javax.swing.JPanel up;
+    private componentes.web_label web_label1;
+    private componentes.web_label web_label2;
+    private componentes.web_label web_label3;
     // End of variables declaration//GEN-END:variables
 }

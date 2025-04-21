@@ -58,7 +58,8 @@ public class Usuario extends javax.swing.JFrame {
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
-        Rigth.setLayout(new java.awt.BorderLayout());
+        Rigth.setBackground(new java.awt.Color(51, 51, 51));
+        Rigth.setLayout(new java.awt.CardLayout());
         getContentPane().add(Rigth, java.awt.BorderLayout.CENTER);
 
         pack();
