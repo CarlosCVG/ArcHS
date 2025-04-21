@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.MatteBorder;
 
-public class web_label extends JLabel implements MouseListener {
+public class web_label extends JLabel implements MouseListener{
 
     private String url;
 
