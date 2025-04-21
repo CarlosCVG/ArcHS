@@ -8,12 +8,12 @@ package vista.ventanas;
  *
  * @author karlo
  */
-public class Usuario extends javax.swing.JFrame {
+public class Fecha extends javax.swing.JFrame {
 
     /**
-     * Creates new form Usuario
+     * Creates new form Fecha
      */
-    public Usuario() {
+    public Fecha() {
         initComponents();
     }
 
@@ -26,40 +26,28 @@ public class Usuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        Header = new javax.swing.JPanel();
+        body = new javax.swing.JPanel();
+        header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Left = new javax.swing.JPanel();
-        panel_btn1 = new componentes.panel_btn();
-        panel_btn2 = new componentes.panel_btn();
-        panel_btn3 = new componentes.panel_btn();
-        Rigth = new javax.swing.JPanel();
-
-        jMenuItem1.setText("jMenuItem1");
+        footer = new javax.swing.JPanel();
+        roundedButton1 = new componentes.RoundedButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        Header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
+        body.setLayout(new java.awt.GridBagLayout());
+        getContentPane().add(body, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setText("Usuario");
-        Header.add(jLabel1);
+        header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 50));
 
-        getContentPane().add(Header, java.awt.BorderLayout.NORTH);
+        jLabel1.setText("jLabel1");
+        header.add(jLabel1);
 
-        Left.setMinimumSize(new java.awt.Dimension(190, 0));
-        Left.setPreferredSize(new java.awt.Dimension(190, 0));
-        Left.setRequestFocusEnabled(false);
-        Left.setLayout(new java.awt.GridLayout(3, 0, 20, 20));
-        Left.add(panel_btn1);
-        panel_btn1.getAccessibleContext().setAccessibleDescription("");
+        getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
 
-        Left.add(panel_btn2);
-        Left.add(panel_btn3);
+        footer.add(roundedButton1);
 
-        getContentPane().add(Left, java.awt.BorderLayout.WEST);
-
-        Rigth.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(Rigth, java.awt.BorderLayout.CENTER);
+        getContentPane().add(footer, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -81,35 +69,29 @@ public class Usuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Fecha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Usuario().setVisible(true);
+                new Fecha().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Header;
-    private javax.swing.JPanel Left;
-    private javax.swing.JPanel Rigth;
+    private javax.swing.JPanel body;
+    private javax.swing.JPanel footer;
+    private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private componentes.panel_btn panel_btn1;
-    private componentes.panel_btn panel_btn2;
-    private componentes.panel_btn panel_btn3;
+    private componentes.RoundedButton roundedButton1;
     // End of variables declaration//GEN-END:variables
 }
