@@ -11,7 +11,7 @@ package vista.ventanas;
 public class Empleado extends javax.swing.JFrame {
 
     /**
-     * Creates new form Empleado
+     * Creates new form Usuario
      */
     public Empleado() {
         initComponents();
@@ -26,18 +26,35 @@ public class Empleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        Left = new javax.swing.JPanel();
+        panel_btn1 = new componentes.panel_btn();
+        panel_btn2 = new componentes.panel_btn();
+        panel_btn3 = new componentes.panel_btn();
+        Right = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        Left.setMaximumSize(new java.awt.Dimension(200, 32767));
+        Left.setLayout(new javax.swing.BoxLayout(Left, javax.swing.BoxLayout.Y_AXIS));
+        Left.add(panel_btn1);
+        Left.add(panel_btn2);
+        Left.add(panel_btn3);
+
+        getContentPane().add(Left);
+
+        javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
+        Right.setLayout(RightLayout);
+        RightLayout.setHorizontalGroup(
+            RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        RightLayout.setVerticalGroup(
+            RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 477, Short.MAX_VALUE)
         );
+
+        getContentPane().add(Right);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -68,6 +85,7 @@ public class Empleado extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,5 +96,10 @@ public class Empleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Left;
+    private javax.swing.JPanel Right;
+    private componentes.panel_btn panel_btn1;
+    private componentes.panel_btn panel_btn2;
+    private componentes.panel_btn panel_btn3;
     // End of variables declaration//GEN-END:variables
 }

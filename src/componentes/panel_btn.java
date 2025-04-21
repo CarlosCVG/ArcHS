@@ -24,7 +24,8 @@ public class panel_btn extends JLayeredPane implements MouseListener {
     private String text = "box";
 
     public panel_btn() {
-        setPreferredSize(new Dimension(255, 255));
+        int px = 180;
+        setPreferredSize(new Dimension(px, px));
         setLayout(null);
         setBackground(isNormal);
         setOpaque(true);
@@ -32,7 +33,7 @@ public class panel_btn extends JLayeredPane implements MouseListener {
 
         //image setup
         imageLabel = new JLabel();
-        imageLabel.setBounds(0, 0, 255, 255);
+        imageLabel.setBounds(0, 0, px, px);
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
         imageLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(url)));
@@ -40,7 +41,7 @@ public class panel_btn extends JLayeredPane implements MouseListener {
         //text setup
         textLabel = new JLabel(text, SwingConstants.CENTER);
         textLabel.setFont(this.getFont());
-        textLabel.setBounds(0, 0, 255, 255);
+        textLabel.setBounds(0, 0, px, px);
         textLabel.setForeground(Color.BLACK);
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
         textLabel.setVerticalAlignment(SwingConstants.CENTER);
