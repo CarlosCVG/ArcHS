@@ -8,12 +8,12 @@ package vista.paneles;
  *
  * @author karlo
  */
-public class reservacionUI extends javax.swing.JPanel {
+public class reservaUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form reservacionUI
+     * Creates new form reservaUI
      */
-    public reservacionUI() {
+    public reservaUI() {
         initComponents();
     }
 
@@ -34,7 +34,7 @@ public class reservacionUI extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 662, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

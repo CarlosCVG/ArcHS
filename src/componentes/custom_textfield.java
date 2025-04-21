@@ -23,6 +23,7 @@ public class custom_textfield extends JTextField implements FocusListener {
         init();
         initListeners();
     }
+    
 
     private void init() {
         setOpaque(false);
@@ -30,6 +31,7 @@ public class custom_textfield extends JTextField implements FocusListener {
         setCursor(new Cursor(Cursor.TEXT_CURSOR));
         setForeground(Color.DARK_GRAY);
         setHorizontalAlignment(CENTER);
+        setForeground(Color.BLACK);
         
     }
 
