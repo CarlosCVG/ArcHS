@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista.ventanas;
 
 /**
@@ -11,7 +7,7 @@ package vista.ventanas;
 public class Filtro extends javax.swing.JFrame {
 
     /**
-     * Creates new form Filtro
+     * Creates new form
      */
     public Filtro() {
         initComponents();
@@ -170,7 +166,6 @@ public class Filtro extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSlider jSlider1;
-    private MiBoton miBoton1;
     private componentes.RoundedButton roundedButton1;
     private componentes.RoundedButton roundedButton2;
     // End of variables declaration//GEN-END:variables

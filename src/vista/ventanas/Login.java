@@ -30,24 +30,10 @@ public class Login extends javax.swing.JFrame {
         setLocation(new java.awt.Point(10, 10));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel1.setText("imagenAguila, con nombre");
+        Left.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout LeftLayout = new javax.swing.GroupLayout(Left);
-        Left.setLayout(LeftLayout);
-        LeftLayout.setHorizontalGroup(
-            LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LeftLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel1)
-                .addContainerGap(67, Short.MAX_VALUE))
-        );
-        LeftLayout.setVerticalGroup(
-            LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LeftLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(jLabel1)
-                .addContainerGap(167, Short.MAX_VALUE))
-        );
+        jLabel1.setText("imagenAguila, con nombre");
+        Left.add(jLabel1, "card2");
 
         getContentPane().add(Left);
 
