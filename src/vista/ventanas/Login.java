@@ -21,6 +21,9 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         body = new javax.swing.JPanel();
+        web_label1 = new componentes.web_label();
+        panel_btn1 = new componentes.panel_btn();
+        panel_btn2 = new componentes.panel_btn();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aguila Real Chihuahua");
@@ -41,15 +44,43 @@ public class Login extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
+        web_label1.setText("Click me");
+        web_label1.setURL("https://www.youtube.com/watch?v=xvFZjo5PgG0&pp=ygUJcmljayByb2xs");
+
+        panel_btn1.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        panel_btn1.setTextForeground(new java.awt.Color(255, 255, 255));
+
+        panel_btn2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 48)); // NOI18N
+
         javax.swing.GroupLayout bodyLayout = new javax.swing.GroupLayout(body);
         body.setLayout(bodyLayout);
         bodyLayout.setHorizontalGroup(
             bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyLayout.createSequentialGroup()
+                .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bodyLayout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(web_label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bodyLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(panel_btn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(105, 105, 105)
+                .addComponent(panel_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         bodyLayout.setVerticalGroup(
             bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGroup(bodyLayout.createSequentialGroup()
+                .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bodyLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(web_label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(panel_btn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bodyLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(panel_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         getContentPane().add(body, java.awt.BorderLayout.CENTER);
@@ -104,5 +135,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel body;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private componentes.panel_btn panel_btn1;
+    private componentes.panel_btn panel_btn2;
+    private componentes.web_label web_label1;
     // End of variables declaration//GEN-END:variables
 }

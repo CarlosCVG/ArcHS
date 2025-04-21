@@ -1,37 +1,99 @@
 package componentes;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
 import javax.swing.SwingConstants;
 
-public class panel_btn extends JPanel implements MouseListener {
+public class panel_btn extends JLayeredPane implements MouseListener {
 
-     private JLabel label;
+    private JLabel imageLabel;
+    private JLabel textLabel;
+
+    // properties
     private Color isNormal = new Color(100, 10, 100);
     private Color isHover = new Color(10, 10, 10);
     private Color isClicked = new Color(100, 100, 200);
+    //defaults
+    private String url = "vista/images/default.png";
+    private String text = "box";
 
     public panel_btn() {
-        this("Botón");
-    }
-
-    public panel_btn(String text) {
-        super();
-        label = new JLabel(text, SwingConstants.CENTER);
-        label.setForeground(Color.WHITE);
-        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(255, 255));
+        setLayout(null);
         setBackground(isNormal);
-        add(label, BorderLayout.CENTER);
+        setOpaque(true);
         addMouseListener(this);
-        setPreferredSize(new Dimension(100, 100));
+
+        //image setup
+        imageLabel = new JLabel();
+        imageLabel.setBounds(0, 0, 255, 255);
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        imageLabel.setVerticalAlignment(SwingConstants.CENTER);
+        imageLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(url)));
+
+        //text setup
+        textLabel = new JLabel(text, SwingConstants.CENTER);
+        textLabel.setFont(this.getFont());
+        textLabel.setBounds(0, 0, 255, 255);
+        textLabel.setForeground(Color.BLACK);
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        textLabel.setVerticalAlignment(SwingConstants.CENTER);
+
+        //labels
+        add(imageLabel, JLayeredPane.DEFAULT_LAYER);
+        add(textLabel, JLayeredPane.PALETTE_LAYER);
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+        if (textLabel != null) {
+            textLabel.setText(text);
+        }
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+        if (imageLabel != null) {
+            imageLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(url)));
+        }
+    }
+    
+    public Color getTextForeground(){
+        return textLabel.getForeground();
+    }
+    
+    public void setTextForeground(Color color){
+        textLabel.setForeground(color);
+    }
+   
+    public void setNormalColor(Color color) {
+        this.isNormal = color;
+        setBackground(isNormal);
+    }
+
+    public void setHoverColor(Color color) {
+        this.isHover = color;
+    }
+
+    public void setClickedColor(Color color) {
+        this.isClicked = color;
+    }
+
+    // MouseListeners
     @Override
     public void mouseClicked(MouseEvent e) {
         setBackground(isClicked);
@@ -53,32 +115,5 @@ public class panel_btn extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
         setBackground(isNormal);
-    }
-
-    public void setIcon(ImageIcon icon) {
-        label.setIcon(icon);
-        label.setText("");
-    }
-
-    public void setText(String text) {
-        label.setIcon(null);
-        label.setText(text);
-    }
-
-    public void setNormalColor(Color color) {
-        this.isNormal = color;
-        setBackground(isNormal); 
-    }
-
-    public void setHoverColor(Color color) {
-        this.isHover = color;
-    }
-
-    public void setClickedColor(Color color) {
-        this.isClicked = color;
-    }
-    
-    public void changeText(String text){
-        label.setText(text);
     }
 }
