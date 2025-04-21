@@ -26,19 +26,46 @@ public class reservaUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        header = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        body = new javax.swing.JPanel();
+        panelCarrusel1 = new componentes.PanelCarrusel();
+        footer = new javax.swing.JPanel();
+        roundedButton1 = new componentes.RoundedButton();
+        roundedButton2 = new componentes.RoundedButton();
+
+        setLayout(new java.awt.BorderLayout());
+
+        header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 10));
+
+        jLabel1.setText("jLabel1");
+        header.add(jLabel1);
+
+        add(header, java.awt.BorderLayout.NORTH);
+
+        body.setLayout(new java.awt.BorderLayout());
+
+        panelCarrusel1.setMinimumSize(new java.awt.Dimension(62, 450));
+        panelCarrusel1.setPreferredSize(new java.awt.Dimension(100, 450));
+        body.add(panelCarrusel1, java.awt.BorderLayout.CENTER);
+
+        add(body, java.awt.BorderLayout.CENTER);
+
+        footer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 10));
+        footer.add(roundedButton1);
+        footer.add(roundedButton2);
+
+        add(footer, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel body;
+    private javax.swing.JPanel footer;
+    private javax.swing.JPanel header;
+    private javax.swing.JLabel jLabel1;
+    private componentes.PanelCarrusel panelCarrusel1;
+    private componentes.RoundedButton roundedButton1;
+    private componentes.RoundedButton roundedButton2;
     // End of variables declaration//GEN-END:variables
 }

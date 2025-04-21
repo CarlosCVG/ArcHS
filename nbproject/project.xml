@@ -21,6 +21,14 @@
                 <id>jar</id>
             </reference>
             <reference>
+                <foreign-project>Practica7_Boton3D</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
                 <foreign-project>Practica8_LigaPrograma</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
