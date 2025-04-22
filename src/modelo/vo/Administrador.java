@@ -3,6 +3,8 @@ package modelo.vo;
 import java.time.LocalDate;
 
 public class Administrador {
+    private String usuario;
+    private String pass;
     private int id_admin;
     private String nombre;
     private String ap1;
@@ -15,7 +17,7 @@ public class Administrador {
     private LocalDate fnac;
     private String direccion;
 
-    public Administrador(int id_admin, String nombre, String ap1, String ap2, String correo, String telefono, String rfc, String nss, String curp, LocalDate fnac, String direccion) {
+    public Administrador(String usuario, String pass, int id_admin, String nombre, String ap1, String ap2, String correo, String telefono, String rfc, String nss, String curp, LocalDate fnac, String direccion) {
         this.id_admin = id_admin;
         this.nombre = nombre;
         this.ap1 = ap1;
