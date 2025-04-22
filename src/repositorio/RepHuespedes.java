@@ -67,7 +67,7 @@ public class RepHuespedes {
         return coincidencias;
     }
     
-    public static List<Huesped> getListaHuespedes() {
+    public static List<Huesped> getHuespedes() {
         return listaHuespedes;
     }
 

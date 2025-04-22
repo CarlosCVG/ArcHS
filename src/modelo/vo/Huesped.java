@@ -80,6 +80,24 @@ public class Huesped {
         return "Huesped{" + "id_huesped=" + id_huesped + ", nombre=" + nombre + ", ap1=" + ap1 + ", ap2=" + ap2 + ", num_tarjeta=" + num_tarjeta + ", idioma=" + idioma + ", correo=" + correo + '}';
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+    
+    
+
     public String[] toArrayString() {
         String[] strArrHuesped = new String[7];
         strArrHuesped[0] = String.valueOf(this.id_huesped);

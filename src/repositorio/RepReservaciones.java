@@ -65,7 +65,7 @@ public class RepReservaciones {
         return coincidencias;
     }
     
-    public static List<Reservacion> getListaReservaciones() {
+    public static List<Reservacion> getReservaciones() {
         return listaReservaciones;
     }
 

@@ -123,6 +123,24 @@ public class Administrador {
         this.direccion = direccion;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Administrador{" + "id_admin=" + id_admin + ", nombre=" + nombre + ", ap1=" + ap1 + ", ap2=" + ap2 + ", correo=" + correo + ", telefono=" + telefono + ", rfc=" + rfc + ", nss=" + nss + ", curp=" + curp + ", fnac=" + fnac + ", direccion=" + direccion + '}';
