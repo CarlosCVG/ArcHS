@@ -1,14 +1,15 @@
 package modelo.vo;
 
 public class Huesped {
-
+    private String usuario;
+    private String pass;
     private int id_huesped;
     private String nombre, ap1, ap2, num_tarjeta, idioma, correo;
 
     public Huesped() {
     }
 
-    public Huesped(int id_huesped, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) {
+    public Huesped(String usuario, String pass, int id_huesped, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) {
         this.id_huesped = id_huesped;
         this.nombre = nombre;
         this.ap1 = ap1;
