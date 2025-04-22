@@ -71,6 +71,14 @@ public class Administrador {
         return curp;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
     public LocalDate getFnac() {
         return fnac;
     }

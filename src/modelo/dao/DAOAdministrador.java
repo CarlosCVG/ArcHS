@@ -18,5 +18,9 @@ public class DAOAdministrador {
     public Administrador buscarPorId(int id) {
         return repAdministrador.search(id);
     }
+    
+    public Administrador buscarPorCredenciales(String user, String pass) {
+        return repAdministrador.search(user, pass);
+    }
 
 }
