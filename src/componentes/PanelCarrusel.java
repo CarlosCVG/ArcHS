@@ -10,74 +10,82 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+
 public class PanelCarrusel extends JPanel implements ActionListener, Observable {
 
-    /*
-    Clase que implementa un carrusel de paneles con animaciones y transiciones automáticas.
-    El intervalo de transición automática se puede configurar con el método setAutoScrollInterval.
-    El carrusel permite agregar paneles mediante setPanelList o agregarPanel, y realizar animaciones de transición entre los paneles.
-    Además, se utiliza el patrón Observable para notificar cambios a los observadores del componente que contiene al carrusel.
-    */
+    private int indiceActual = 0;
+    private int proximoIndice = 0;
+    private float alpha = 0.0f;
 
-    /*
-    Se pueden modificar algunas de las propiedades en las propiedades del componente 
-    al añadir el componente a la paleta de componentes de Swing.
-    */
-    
-    private int indiceActual = 0;  // Indice del panel actual
-    private int proximoIndice = 0;  // Indice del siguiente panel
-    private float alpha = 0.0f;  // Opacidad para la transición de desvanecimiento
+    private Timer autoScrollTimer;
+    private final Timer timer;
 
-    private Timer autoScrollTimer;  // Timer para el cambio automático de paneles
-    private final Timer timer;  // Timer para la animación del desvanecimiento
+    private int autoScrollInterval = 4000;
+    private Color btnColor = Color.WHITE;
 
-    private int autoScrollInterval = 4000;  // Intervalo de tiempo para el cambio automático de panel
-    private Color btnColor = Color.WHITE;  // Color de los botones
+    private final JButton btnIzquierda, btnDerecha;
+    private final JPanel contenedorPanel;
+    private final JPanel veloBlanco;
+    private boolean desvaneciendoIn = true;
+    private final JLayeredPane layeredPane;
+    private final List<Observer> observers = new ArrayList<>();
+    private final int ancho;
+    private final int alto;
+    private int btnWidth = 50;
+    private List<JPanel> panelList;
 
-    private final JButton btnIzquierda, btnDerecha;  // Botones para navegar entre los paneles
-    private final JPanel contenedorPanel;  // Panel que contiene el panel actual
-    private final JPanel veloBlanco;  // Panel para el efecto de desvanecimiento
-    private boolean desvaneciendoIn = true;  // Indicador de si la transición está ocurriendo
-    private final JLayeredPane layeredPane;  // Panel que permite apilar componentes
-    private final List<Observer> observers = new ArrayList<>();  // Lista de observadores
-    private final int ancho;  // Ancho del carrusel
-    private final int alto;  // Alto del carrusel
-    private int btnWidth = 50;  // Ancho de los botones
-    private List<JPanel> panelList;  // Lista de paneles en el carrusel
-
-    // Colores configurables para eventos del mouse en los botones
-    private Color btnColorForMouseEntered = Color.BLACK;
+    private Color btnColorForMouseEntered = new Color(254, 220, 221);
     private Color btnColorForMouseExit = Color.WHITE;
-    private Color btnColorForMousePressed = Color.GRAY;
-    private Color btnColorForMouseReleased = Color.BLACK;
+    private Color btnColorForMousePressed = new Color(254, 220, 221);
+    private Color btnColorForMouseReleased = new Color(254, 220, 221);
 
-    // === CONSTRUCTOR PREDETERMINADO ===
     public PanelCarrusel() {
-        this(700, 650);
+        this(800, 650);
     }
 
-    // === CONSTRUCTOR CON TAMAÑO PERSONALIZADO ===
     public PanelCarrusel(int ancho, int alto) {
         this.ancho = ancho;
         this.alto = alto;
-        setLayout(new BorderLayout());
+        setLayout(null);
+        setPreferredSize(new Dimension(ancho, alto));
 
         btnIzquierda = crearBotonPersonalizado("<");
         btnDerecha = crearBotonPersonalizado(">");
 
-        btnIzquierda.setPreferredSize(new Dimension(btnWidth, alto));
-        btnDerecha.setPreferredSize(new Dimension(btnWidth, alto));
-        add(btnIzquierda, BorderLayout.WEST);
-        add(btnDerecha, BorderLayout.EAST);
+        btnIzquierda.setBounds(0, 0, btnWidth, alto);
+        btnDerecha.setBounds(ancho - btnWidth, 0, btnWidth, alto);
+        add(btnIzquierda);
+        add(btnDerecha);
 
         layeredPane = new JLayeredPane();
-        add(layeredPane, BorderLayout.CENTER);
+        layeredPane.setBounds(btnWidth, 0, ancho - 2 * btnWidth, alto);
+        add(layeredPane);
 
-        contenedorPanel = new JPanel(new BorderLayout());
+        contenedorPanel = new JPanel(null);
         contenedorPanel.setOpaque(false);
-        contenedorPanel.setBounds(0, 0, ancho, alto);
-        setContenedorPanel();
+        contenedorPanel.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
         layeredPane.add(contenedorPanel, JLayeredPane.DEFAULT_LAYER);
+        setContenedorPanel();
 
         veloBlanco = new JPanel() {
             @Override
@@ -92,7 +100,7 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         };
         veloBlanco.setOpaque(false);
         veloBlanco.setLayout(null);
-        veloBlanco.setBounds(0, 0, ancho, alto);
+        veloBlanco.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
         veloBlanco.setVisible(false);
         layeredPane.add(veloBlanco, JLayeredPane.PALETTE_LAYER);
 
@@ -101,36 +109,55 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         btnDerecha.addActionListener(this);
 
         timer = new Timer(40, e -> animarVelo());
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int w = getWidth();
+                int h = getHeight();
+
+                btnIzquierda.setBounds(0, 0, btnWidth, h);
+                btnDerecha.setBounds(w - btnWidth, 0, btnWidth, h);
+
+                layeredPane.setBounds(btnWidth, 0, w - 2 * btnWidth, h);
+                contenedorPanel.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
+                veloBlanco.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
+
+                for (JPanel panel : panelList) {
+                    panel.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
+                }
+                if (!panelList.isEmpty()) {
+                    mostrarPanel(indiceActual);
+                }
+            }
+        });
     }
 
-    // === METODOS OBSERVABLE ===
     @Override
     public void addObserver(Observer observer) {
-        observers.add(observer);  // Agrega un nuevo observador
+        observers.add(observer);
     }
 
     @Override
     public void deleteObserver(Observer observer) {
-        observers.remove(observer);  // Elimina un observador
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        // Notifica a todos los observadores sobre un cambio
         for (Observer o : observers) {
-            o.update();  // Llama al método update de cada observador
+            o.update();
         }
     }
 
-    // === MANEJO DE PANELES ===
     public JPanel getCurrentPanel() {
-        return panelList.get(indiceActual);  // Devuelve el panel actual
+        return panelList.get(indiceActual);
     }
 
     public void eliminarPanel(JPanel panel) {
-        panelList.remove(panel);  // Elimina un panel del carrusel
+        panelList.remove(panel);
         if (indiceActual >= panelList.size()) {
-            indiceActual = Math.max(0, panelList.size() - 1);  // Ajusta el índice si el panel actual fue eliminado
+            indiceActual = Math.max(0, panelList.size() - 1);
         }
         if (!panelList.isEmpty()) {
             mostrarPanel(indiceActual);
@@ -139,26 +166,25 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
             contenedorPanel.revalidate();
             contenedorPanel.repaint();
         }
-        notifyObservers();  // Notifica a los observadores
+        notifyObservers();
     }
 
     public void agregarPanel(JPanel panel) {
-        panel.setPreferredSize(new Dimension(ancho, alto));
-        panelList.add(panel);  // Agrega un nuevo panel al carrusel
+        panel.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
+        panelList.add(panel);
         if (panelList.size() == 1) {
-            mostrarPanel(0);  // Muestra el primer panel si es el único
+            mostrarPanel(0);
         }
     }
 
     public void removePanels() {
-        panelList.clear();  // Elimina todos los paneles
+        panelList.clear();
     }
 
     private void mostrarPanel(int indice) {
         contenedorPanel.removeAll();
         JPanel panel = panelList.get(indice);
-        panel.setPreferredSize(new Dimension(ancho, alto));
-        contenedorPanel.add(panel, BorderLayout.CENTER);
+        contenedorPanel.add(panel);
         contenedorPanel.revalidate();
         contenedorPanel.repaint();
     }
@@ -181,7 +207,7 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
             if (alpha >= 1.0f) {
                 alpha = 1.0f;
                 desvaneciendoIn = false;
-                mostrarPanel(proximoIndice);  // Muestra el siguiente panel
+                mostrarPanel(proximoIndice);
             }
         } else {
             alpha -= 0.1f;
@@ -191,26 +217,23 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
                 veloBlanco.setVisible(false);
             }
         }
-        veloBlanco.repaint();  // Refresca la animación del velo
+        veloBlanco.repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         int nuevoIndice = indiceActual;
-
         if (e.getSource() == btnIzquierda) {
             nuevoIndice = (indiceActual == 0) ? panelList.size() - 1 : indiceActual - 1;
         } else if (e.getSource() == btnDerecha) {
             nuevoIndice = (indiceActual == panelList.size() - 1) ? 0 : indiceActual + 1;
         }
-
         if (nuevoIndice != indiceActual) {
             indiceActual = nuevoIndice;
-            iniciarTransicion(indiceActual);  // Inicia la transición
+            iniciarTransicion(indiceActual);
         }
     }
 
-    // === CREAR BOTON PERSONALIZADO CON COLORES CONFIGURABLES ===
     private JButton crearBotonPersonalizado(String texto) {
         JButton boton = new JButton(texto);
         configurarEstiloBoton(boton);
@@ -225,7 +248,6 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         boton.setContentAreaFilled(true);
         boton.setOpaque(true);
 
-        // Remover listeners anteriores
         for (MouseListener listener : boton.getMouseListeners()) {
             if (listener instanceof MouseAdapter) {
                 boton.removeMouseListener(listener);
@@ -255,13 +277,12 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         });
     }
 
-    // === GETTERS Y SETTERS DE NUEVOS ATRIBUTOS ===
     public Color getBtnColorForMouseReleased() {
         return btnColorForMouseReleased;
     }
 
-    public void setBtnColorForMouseReleased(Color btnColorForMouseReleased) {
-        this.btnColorForMouseReleased = btnColorForMouseReleased;
+    public void setBtnColorForMouseReleased(Color c) {
+        this.btnColorForMouseReleased = c;
         refrescarEstilosBotones();
     }
 
@@ -269,8 +290,8 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         return btnColorForMousePressed;
     }
 
-    public void setBtnColorForMousePressed(Color btnColorForMousePressed) {
-        this.btnColorForMousePressed = btnColorForMousePressed;
+    public void setBtnColorForMousePressed(Color c) {
+        this.btnColorForMousePressed = c;
         refrescarEstilosBotones();
     }
 
@@ -278,8 +299,8 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         return btnColorForMouseExit;
     }
 
-    public void setBtnColorForMouseExit(Color btnColorForMouseExit) {
-        this.btnColorForMouseExit = btnColorForMouseExit;
+    public void setBtnColorForMouseExit(Color c) {
+        this.btnColorForMouseExit = c;
         refrescarEstilosBotones();
     }
 
@@ -287,8 +308,8 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         return btnColorForMouseEntered;
     }
 
-    public void setBtnColorForMouseEntered(Color btnColorForMouseEntered) {
-        this.btnColorForMouseEntered = btnColorForMouseEntered;
+    public void setBtnColorForMouseEntered(Color c) {
+        this.btnColorForMouseEntered = c;
         refrescarEstilosBotones();
     }
 
@@ -296,16 +317,19 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         return autoScrollInterval;
     }
 
-    public void setAutoScrollInterval(int autoScrollInterval) {
-        this.autoScrollInterval = autoScrollInterval;
+    public void setAutoScrollInterval(int interval) {
+        this.autoScrollInterval = interval;
     }
 
     public List<JPanel> getPanelList() {
         return panelList;
     }
 
-    public void setPanelList(List<JPanel> panelList) {
-        this.panelList = panelList;
+    public void setPanelList(List<JPanel> list) {
+        this.panelList = list;
+        for (JPanel panel : panelList) {
+            panel.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
+        }
         mostrarPanel(0);
     }
 
@@ -326,16 +350,20 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         refrescarEstilosBotones();
     }
 
+    public int getIndiceActual() {
+        return indiceActual;
+    }
+
     private void setContenedorPanel() {
         contenedorPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                detenerAutoScroll();  // Detiene el autoscroll cuando el mouse entra en el panel
+                detenerAutoScroll();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                iniciarAutoScroll(4000);  // Reinicia el autoscroll cuando el mouse sale del panel
+                iniciarAutoScroll(4000);
             }
         });
     }
@@ -347,10 +375,9 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
 
         autoScrollTimer = new Timer(delayMilisegundos, e -> {
             int nuevoIndice = (indiceActual == panelList.size() - 1) ? 0 : indiceActual + 1;
-
             if (nuevoIndice != indiceActual) {
                 indiceActual = nuevoIndice;
-                iniciarTransicion(indiceActual);  // Inicia la transición automática
+                iniciarTransicion(indiceActual);
             }
         });
 
@@ -359,7 +386,7 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
 
     public void detenerAutoScroll() {
         if (autoScrollTimer != null) {
-            autoScrollTimer.stop();  // Detiene el autoscroll
+            autoScrollTimer.stop();
         }
     }
 
@@ -367,4 +394,5 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         configurarEstiloBoton(btnIzquierda);
         configurarEstiloBoton(btnDerecha);
     }
+
 }
