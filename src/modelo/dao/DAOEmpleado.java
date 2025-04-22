@@ -5,31 +5,32 @@
 package modelo.dao;
 
 import java.util.List;
+import repositorio.RepEmpleados;
 
 /**
  *
  * @author edwin
  */
 public class DAOEmpleado {
-    RepositorioEmpleado repEmpleado = new RepositorioEmpleado();
+    RepEmpleados repEmpleado = new RepEmpleados();
 
     public Alumno buscarPorId(int numControl) {
-        return repAlumno.buscarPorId(numControl);
+        return repEmpleado.buscarPorId(numControl);
     }
 
     public List<Alumno> daoBuscarAlumno(String numControl, String nombre, String ap1, String ap2, String carrera, String telefono, String semestre, String correo) {
-        return RepositorioAlumnos.buscarAlumno(numControl, nombre, ap1, ap2, carrera, telefono, semestre, correo);
+        return repEmpleado.buscarAlumno(numControl, nombre, ap1, ap2, carrera, telefono, semestre, correo);
     }
 
     public boolean daoEliminarAlumno(Alumno alumno){
-        return repAlumno.eliminarAlumno(alumno);
+        return repEmpleado.eliminarAlumno(alumno);
     }
     
     public Alumno daoAgregarAlumno(Alumno alumno){
-        return RepositorioAlumnos.agregarAlumno(alumno);
+        return repEmpleado.agregarAlumno(alumno);
     }
     
     public Alumno daoModificarAlumno(Alumno alumno){
-        return RepositorioAlumnos.modificarAlumno(alumno);
+        return repEmpleado.modificarAlumno(alumno);
     }
 }
