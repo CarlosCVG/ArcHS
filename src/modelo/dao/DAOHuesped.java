@@ -28,11 +28,11 @@ public class DAOHuesped {
         return repHuesped.delete(huesped);
     }
 
-    public boolean daoAgregarEmpleado(Huesped huesped) {
+    public boolean daoAgregarHuesped(Huesped huesped) {
         return repHuesped.insert(huesped);
     }
 
-    public boolean daoModificarEmpleado(Huesped huesped) {
+    public boolean daoModificarHuesped(Huesped huesped) {
         return repHuesped.update(huesped);
     }
 }

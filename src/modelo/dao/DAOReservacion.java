@@ -19,20 +19,20 @@ public class DAOReservacion {
         return repReservacion.search(id);
     }
 
-    public List<Reservacion> daoBuscarEmpleado(String id_reservacion, String id_habitacion, String id_huesped, String f_entrada, String f_salida) {
+    public List<Reservacion> daoBuscarReservacion(String id_reservacion, String id_habitacion, String id_huesped, String f_entrada, String f_salida) {
         
         return repReservacion.search(id_reservacion, id_habitacion, id_huesped, f_entrada, f_salida);
     }
 
-    public boolean daoEliminarEmpleado(Reservacion reservacion){
+    public boolean daoEliminarReservacion(Reservacion reservacion){
         return repReservacion.delete(reservacion);
     }
     
-    public boolean daoAgregarEmpleado(Reservacion reservacion){
+    public boolean daoAgregarReservacion(Reservacion reservacion){
         return repReservacion.insert(reservacion);
     }
     
-    public boolean daoModificarEmpleado(Reservacion reservacion){
+    public boolean daoModificarReservacion(Reservacion reservacion){
         return repReservacion.update(reservacion);
     }
 }
