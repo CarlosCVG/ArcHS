@@ -39,10 +39,11 @@ public class Usuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
+        Header.setBackground(new java.awt.Color(1, 74, 173));
+        Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Usuario");
-        Header.add(jLabel1);
+        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, -1, -1));
 
         getContentPane().add(Header, java.awt.BorderLayout.NORTH);
 
@@ -58,7 +59,7 @@ public class Usuario extends javax.swing.JFrame {
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
-        Rigth.setBackground(new java.awt.Color(51, 51, 51));
+        Rigth.setBackground(new java.awt.Color(1, 74, 173));
         Rigth.setLayout(new java.awt.CardLayout());
         getContentPane().add(Rigth, java.awt.BorderLayout.CENTER);
 
