@@ -4,6 +4,8 @@
  */
 package componentes;
 
+import java.awt.BorderLayout;
+import static java.awt.PageAttributes.MediaType.B;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -38,6 +40,11 @@ public class B extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(651, 472));
 
         panelCarrusel1.setForeground(new java.awt.Color(1, 74, 173));
+        panelCarrusel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelCarrusel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,6 +57,13 @@ public class B extends javax.swing.JPanel {
             .addComponent(panelCarrusel1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void panelCarrusel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCarrusel1MouseClicked
+     
+        B.add(Habitacion_1,BorderLayout.CENTER);
+        
+        Habitacion_1 Inicio= new Habitacion_1();
+    }//GEN-LAST:event_panelCarrusel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
