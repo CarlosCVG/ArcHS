@@ -18,11 +18,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-              <Component id="roundedButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="LoginAdmin" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-              <Component id="roundedButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="LoginEmpleado" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="116" max="32767" attributes="0"/>
-              <Component id="roundedButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="LoginHuesped" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
@@ -39,9 +39,9 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="260" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="roundedButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="roundedButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="roundedButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LoginAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LoginEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LoginHuesped" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
           </Group>
@@ -49,11 +49,14 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="componentes.RoundedButton" name="roundedButton1">
+    <Component class="componentes.RoundedButton" name="LoginAdmin">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginAdminActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="componentes.RoundedButton" name="roundedButton2">
+    <Component class="componentes.RoundedButton" name="LoginEmpleado">
     </Component>
-    <Component class="componentes.RoundedButton" name="roundedButton3">
+    <Component class="componentes.RoundedButton" name="LoginHuesped">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
