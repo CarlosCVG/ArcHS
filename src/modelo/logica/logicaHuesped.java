@@ -9,7 +9,6 @@ package modelo.logica;
  * @author edwin
  */
 public class logicaHuesped {
-    private 
     
     public void logicaAgregarHuesped(){
     
@@ -19,9 +18,9 @@ public class logicaHuesped {
     
     }
 
-    public Huesped logicaBuscarHuesped(int id){
-        
-    }
+//    public Huesped logicaBuscarHuesped(int id){
+//        
+//    }
             
     
 }
