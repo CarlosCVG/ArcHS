@@ -25,6 +25,48 @@ public class RepHuespedes {
         return listaHuespedes.remove(huesped);
     }
 
+    public static Huesped search(int id) {
+        for (Huesped h : listaHuespedes) {
+            if (h.getId_huesped()== id) {
+                return h;
+            }
+        }
+        return null;
+    }
+
+    public static List<Huesped> search(String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) {
+        List<Huesped> coincidencias = new ArrayList<>();
+
+        for (Huesped a : listaHuespedes) {
+            boolean coincide = true;
+
+            if (!nombre.isEmpty() && a.getNombre().equalsIgnoreCase(nombre)) {
+                coincide = false;
+            }
+            if (!ap1.isEmpty() && a.getAp1().equalsIgnoreCase(ap1)) {
+                coincide = false;
+            }
+            if (!ap2.isEmpty() && !a.getAp2().equalsIgnoreCase(ap2)) {
+                coincide = false;
+            }
+            if (!num_tarjeta.isEmpty() && !a.getNum_tarjeta().equalsIgnoreCase(num_tarjeta)) {
+                coincide = false;
+            }
+            if (!idioma.isEmpty() && !a.getIdioma().equalsIgnoreCase(idioma)) {
+                coincide = false;
+            }
+            if (!correo.isEmpty() && !a.getCorreo().equalsIgnoreCase(correo)) {
+                coincide = false;
+            }
+
+            if (coincide) {
+                coincidencias.add(a);
+            }
+        }
+
+        return coincidencias;
+    }
+    
     public static List<Huesped> getListaHuespedes() {
         return listaHuespedes;
     }

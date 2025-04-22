@@ -25,6 +25,42 @@ public class RepHabitaciones {
         return listaHabitaciones.remove(habitacion);
     }
 
+    public static Habitacion search(int id) {
+        for (Habitacion h : listaHabitaciones) {
+            if (h.getId_habitacion()== id) {
+                return h;
+            }
+        }
+        return null;
+    }
+
+    public static List<Habitacion> search(String precio, String tamano, String num_camas, String descripcion) {
+        List<Habitacion> coincidencias = new ArrayList<>();
+
+        for (Habitacion a : listaHabitaciones) {
+            boolean coincide = true;
+
+            if (!precio.isEmpty() && a.getPrecio() != Double.parseDouble(precio)) {
+                coincide = false;
+            }
+            if (!tamano.isEmpty() && a.getTamaño() != Double.parseDouble(tamano)) {
+                coincide = false;
+            }
+            if (!num_camas.isEmpty() && a.getNum_camas() != Integer.parseInt(num_camas)) {
+                coincide = false;
+            }
+            if (!descripcion.isEmpty() && !a.getDescripcion().equalsIgnoreCase(descripcion)) {
+                coincide = false;
+            }
+            
+            if (coincide) {
+                coincidencias.add(a);
+            }
+        }
+
+        return coincidencias;
+    }
+    
     public static List<Habitacion> getListaHabitaciones() {
         return listaHabitaciones;
     }
