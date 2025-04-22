@@ -28,10 +28,11 @@ public class Empleado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
+        Header.setLayout(new java.awt.BorderLayout());
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Empleados");
-        Header.add(jLabel1);
+        Header.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(Header, java.awt.BorderLayout.NORTH);
 
