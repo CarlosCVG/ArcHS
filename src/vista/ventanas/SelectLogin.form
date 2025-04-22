@@ -24,12 +24,12 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-              <Component id="roundedButton1" min="-2" pref="80" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-              <Component id="roundedButton2" min="-2" pref="80" max="-2" attributes="0"/>
-              <EmptySpace pref="115" max="32767" attributes="0"/>
-              <Component id="roundedButton3" min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="btnAdministrador" min="-2" pref="159" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+              <Component id="btnEmpleado" min="-2" pref="142" max="-2" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <Component id="btnHuesped" min="-2" pref="154" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -46,9 +46,9 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="269" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="roundedButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="roundedButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="roundedButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAdministrador" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnHuesped" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
           </Group>
@@ -56,11 +56,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="componentes.RoundedButton" name="roundedButton1">
+    <Component class="componentes.RoundedButton" name="btnAdministrador">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Adminsitrador"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdministradorActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="componentes.RoundedButton" name="roundedButton2">
+    <Component class="componentes.RoundedButton" name="btnEmpleado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Empleado"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmpleadoActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="componentes.RoundedButton" name="roundedButton3">
+    <Component class="componentes.RoundedButton" name="btnHuesped">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Huesped"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHuespedActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

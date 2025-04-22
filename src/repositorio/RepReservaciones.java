@@ -25,7 +25,47 @@ public class RepReservaciones {
         return listaReservaciones.remove(reservacion);
     }
 
-    public static List<Reservacion> getListaReservaciones() {
+    public static Reservacion search(int id) {
+        for (Reservacion r : listaReservaciones) {
+            if (r.getId_reservacion() == id) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public static List<Reservacion> search(String id_reservacion, String id_habitacion, String id_huesped, String f_entrada, String f_salida) {
+        List<Reservacion> coincidencias = new ArrayList<>();
+
+        for (Reservacion r : listaReservaciones) {
+            boolean coincide = true;
+
+            if (!id_reservacion.isEmpty() && r.getId_reservacion()!= Integer.parseInt(id_reservacion)) {
+                coincide = false;
+            }
+            if (!id_habitacion.isEmpty() && r.getId_habitacion()!= Integer.parseInt(id_habitacion)) {
+                coincide = false;
+            }
+            if (!id_huesped.isEmpty() && r.getId_huesped()!= Integer.parseInt(id_huesped)) {
+                coincide = false;
+            }
+            if (!f_entrada.isEmpty() && !r.getF_entrada().toString().equals(f_entrada)) {
+                coincide = false;
+            }
+            if (!f_salida.isEmpty() && !r.getF_salida().toString().equals(f_salida)) {
+                coincide = false;
+            }
+            
+
+            if (coincide) {
+                coincidencias.add(r);
+            }
+        }
+
+        return coincidencias;
+    }
+    
+    public static List<Reservacion> getReservaciones() {
         return listaReservaciones;
     }
 

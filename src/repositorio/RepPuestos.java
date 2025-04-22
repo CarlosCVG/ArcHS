@@ -2,6 +2,7 @@ package repositorio;
 
 import java.util.List;
 import java.util.ArrayList;
+import modelo.vo.Habitacion;
 import modelo.vo.Puesto;
 
 public class RepPuestos {
@@ -41,6 +42,33 @@ public class RepPuestos {
             }
         }
         return null;
+    }
+    
+    public static List<Puesto> search(String idEmpleado, String nombre, String sueldo, String turno) {
+        List<Puesto> coincidencias = new ArrayList<>();
+
+        for (Puesto p : puestos) {
+            boolean coincide = true;
+
+            if (!idEmpleado.isEmpty() && p.getId_empleado() != Integer.parseInt(idEmpleado)) {
+                coincide = false;
+            }
+            if (!nombre.isEmpty() && p.getNombre_puesto().equalsIgnoreCase(nombre)) {
+                coincide = false;
+            }
+            if (!sueldo.isEmpty() && p.getSueldo() != Double.parseDouble(sueldo)) {
+                coincide = false;
+            }
+            if (!turno.isEmpty() && !p.getTurno().equalsIgnoreCase(turno)) {
+                coincide = false;
+            }
+            
+            if (coincide) {
+                coincidencias.add(p);
+            }
+        }
+
+        return coincidencias;
     }
 
     public static List<Puesto> getPuestos() {

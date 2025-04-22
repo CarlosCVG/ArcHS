@@ -4,10 +4,35 @@
  */
 package modelo.dao;
 
+import java.util.List;
+import modelo.vo.Huesped;
+import repositorio.RepHuespedes;
+
 /**
  *
  * @author edwin
  */
 public class DAOHuesped {
-    
+
+    RepHuespedes repHuesped = new RepHuespedes();
+
+    public Huesped daobuscarPorId(int id) {
+        return repHuesped.search(id);
+    }
+
+    public List<Huesped> daoBuscarHuesped(String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) {
+        return repHuesped.search(nombre, ap1, ap2, num_tarjeta, idioma, correo);
+    }
+
+    public boolean daoEliminarHuesped(Huesped huesped) {
+        return repHuesped.delete(huesped);
+    }
+
+    public boolean daoAgregarHuesped(Huesped huesped) {
+        return repHuesped.insert(huesped);
+    }
+
+    public boolean daoModificarHuesped(Huesped huesped) {
+        return repHuesped.update(huesped);
+    }
 }

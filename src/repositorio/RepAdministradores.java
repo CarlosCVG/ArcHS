@@ -45,6 +45,15 @@ public class RepAdministradores {
         }
         return null;
     }
+    
+    public static Administrador search(String usuario, String pass) {
+        for (Administrador a : administradores) {
+            if (a.getUsuario().equalsIgnoreCase(usuario) && a.getPass().equalsIgnoreCase(pass)) {
+                return a;
+            }
+        }
+        return null;
+    }
 
     public static List<Administrador> getAdministradores() {
         return administradores;

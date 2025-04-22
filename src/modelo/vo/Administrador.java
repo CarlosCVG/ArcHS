@@ -71,6 +71,14 @@ public class Administrador {
         return curp;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
     public LocalDate getFnac() {
         return fnac;
     }
@@ -122,6 +130,18 @@ public class Administrador {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    
+    
+    
 
     @Override
     public String toString() {
