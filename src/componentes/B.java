@@ -9,6 +9,7 @@ import static java.awt.PageAttributes.MediaType.B;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import modelo.vo.Habitacion;
 
 /**
  *
@@ -21,10 +22,18 @@ public class B extends javax.swing.JPanel {
      */
     public B() {
         initComponents();
-    List<JPanel> ListaPaneles = new ArrayList<>();
-        
+        List<Habitacion> ListaHabitacion = new ArrayList<>();
+        for (Habitacion habitacion : ListaHabitacion) {
+            PanelCarrusel.agregarPanel(new Habitacion_Panel(habitacion));
+            //Hechenme paro al rato para que se actualize cada que agrego un panel de habitacion
+            
+        }
+       
     }
-
+    
+    
+    
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,39 +43,33 @@ public class B extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelCarrusel1 = new componentes.PanelCarrusel();
+        PanelCarrusel = new componentes.PanelCarrusel();
 
         setBackground(new java.awt.Color(1, 74, 173));
         setPreferredSize(new java.awt.Dimension(651, 472));
-
-        panelCarrusel1.setForeground(new java.awt.Color(1, 74, 173));
-        panelCarrusel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelCarrusel1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCarrusel1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelCarrusel, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCarrusel1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(PanelCarrusel, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void panelCarrusel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCarrusel1MouseClicked
-     
-        B.add(Habitacion_1,BorderLayout.CENTER);
-        
-        Habitacion_1 Inicio= new Habitacion_1();
-    }//GEN-LAST:event_panelCarrusel1MouseClicked
 
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private componentes.PanelCarrusel panelCarrusel1;
+    private componentes.PanelCarrusel PanelCarrusel;
     // End of variables declaration//GEN-END:variables
 }
