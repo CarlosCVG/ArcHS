@@ -59,7 +59,7 @@ public class B extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelCarrusel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCarrusel1MouseClicked
-     JPanel Habitacion_1 = new JPanel();
+     
         B.add(Habitacion_1,BorderLayout.CENTER);
         
         Habitacion_1 Inicio= new Habitacion_1();
