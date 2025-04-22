@@ -16,7 +16,9 @@ public class DAOLogin {
         RepEmpleados re = new RepEmpleados();
     }
     public void initHuespedes(){
-        RepHuespedes rh = new RepHuespedes();
+        
+        repositorio.RepHuespedes.cargarDatosInicialesHuespedes();
+        
     }
     
     public List<Administrador> getListaAdministradores(){

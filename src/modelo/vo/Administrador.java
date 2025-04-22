@@ -18,6 +18,8 @@ public class Administrador {
     private String direccion;
 
     public Administrador(String usuario, String pass, int id_admin, String nombre, String ap1, String ap2, String correo, String telefono, String rfc, String nss, String curp, LocalDate fnac, String direccion) {
+        this.usuario = usuario;
+        this.pass = pass;
         this.id_admin = id_admin;
         this.nombre = nombre;
         this.ap1 = ap1;

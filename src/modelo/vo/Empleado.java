@@ -22,6 +22,8 @@ public class Empleado {
     private String ap2;
 
     public Empleado(String usuario, String pass, int id_empleado, int id_admin, int nss, String curp, String telefono, String email, String rfc, int id_puesto, String sueldo, LocalDate fecha_nac, String direccion, LocalDate fecha_contrat, String nombre, String ap1, String ap2) {
+        this.usuario = usuario;
+        this.pass = pass;
         this.id_empleado = id_empleado;
         this.id_admin = id_admin;
         this.nss = nss;

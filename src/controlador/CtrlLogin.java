@@ -37,23 +37,28 @@ public class CtrlLogin {
     public Administrador adminLogged(String usuario, String password) {
         List<Administrador> administradores = getListaAdministradores();
         for (Administrador admin : administradores) {
-            if(admin.get){
-                
-            }
-            if (admin.getUsuario().equals(usuario) && admin.getPassword().equals(password)) {
+            if(admin.getUsuario().equals(usuario) && admin.getPass().equals(password)){
                 return admin;
             }
         }
         return null;
     }
-
     public Empleado empleadoLogged(String usuario, String password) {
-        getListaEmpleados();
-        return 
+        List<Empleado> empleados = getListaEmpleados();
+        for (Empleado empleado : empleados) {
+            if(empleado.getUsuario().equals(usuario) && empleado.getPass().equals(password)){
+                return empleado;
+            }
+        }
+        return null;
     }
-
     public Huesped huespedLogged(String usuario, String password) {
-        getListaHuespedes();
-        return 
+        List<Huesped> huespedes = getListaHuespedes();
+        for (Huesped huesped : huespedes) {
+            if(huesped.getUsuario().equals(usuario) && huesped.getPass().equals(password)){
+                return huesped;
+            }
+        }
+        return null;
     }
 }

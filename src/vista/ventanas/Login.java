@@ -1,6 +1,10 @@
 package vista.ventanas;
 
 import controlador.CtrlLogin;
+import javax.swing.JOptionPane;
+import modelo.vo.Administrador;
+import modelo.vo.Empleado;
+import modelo.vo.Huesped;
 
 public class Login extends javax.swing.JFrame {
 
@@ -95,16 +99,34 @@ public class Login extends javax.swing.JFrame {
         password = custom_textfield1.getText();
         switch (loginselected) {
             case 1:
+                Administrador administrador = new Administrador();
                 ctrll.initAdministradores();
-                ctrll.adminLogged(usuario, password);
+                if(ctrll.adminLogged(usuario, password)!=null){
+                    administrador = ctrll.adminLogged(usuario, password);
+                    JOptionPane.showMessageDialog(null, administrador.getNombre());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario invalido");
+                }
                 break;
             case 2:
+                Empleado empleado = new Empleado();
                 ctrll.initEmpleados();
-                ctrll.empleadoLogged(usuario, password);
+                if(ctrll.empleadoLogged(usuario, password)!=null){
+                    empleado = ctrll.empleadoLogged(usuario, password);
+                    JOptionPane.showMessageDialog(null, empleado.getNombre());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario invalido");
+                }
                 break;
             case 3:
+                Huesped huesped = new Huesped();
                 ctrll.initHuespedes();
-                ctrll.huespedLogged(usuario, password);
+                if(ctrll.huespedLogged(usuario, password)!=null){
+                    huesped = ctrll.huespedLogged(usuario, password);
+                    JOptionPane.showMessageDialog(null, huesped.getNombre());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario invalido");
+                }
                 break;
         }
 

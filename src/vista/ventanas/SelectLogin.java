@@ -90,7 +90,7 @@ public class SelectLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmpleadoActionPerformed
 
     private void btnHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuespedActionPerformed
-        seleccion = 2;
+        seleccion = 3;
         ctrlls.openLogin(seleccion);
         this.dispose();
     }//GEN-LAST:event_btnHuespedActionPerformed
