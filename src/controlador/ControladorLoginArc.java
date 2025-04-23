@@ -12,7 +12,6 @@ public class ControladorLoginArc {
     int yo_si_rifo_soy_del_tec_2 = 23550323;
     
     int fer_es_peruano = 010;//me lleva
-    //ya?
-    //puta madre
+    
     
 }
