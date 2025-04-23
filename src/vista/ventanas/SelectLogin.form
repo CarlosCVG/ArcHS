@@ -24,12 +24,21 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+<<<<<<< Updated upstream
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="btnAdministrador" min="-2" pref="159" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Component id="btnEmpleado" min="-2" pref="142" max="-2" attributes="0"/>
               <EmptySpace pref="41" max="32767" attributes="0"/>
               <Component id="btnHuesped" min="-2" pref="154" max="-2" attributes="0"/>
+=======
+              <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+              <Component id="btnAdmin" min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+              <Component id="btnEmpleado" min="-2" pref="80" max="-2" attributes="0"/>
+              <EmptySpace pref="115" max="32767" attributes="0"/>
+              <Component id="btnUsuario" min="-2" pref="80" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -46,9 +55,15 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="269" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+<<<<<<< Updated upstream
                   <Component id="btnAdministrador" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnHuesped" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                  <Component id="btnAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Stashed changes
               </Group>
               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
           </Group>
@@ -56,12 +71,21 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
+<<<<<<< Updated upstream
     <Component class="componentes.RoundedButton" name="btnAdministrador">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adminsitrador"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdministradorActionPerformed"/>
+=======
+    <Component class="componentes.RoundedButton" name="btnAdmin">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Administrador"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdminActionPerformed"/>
+>>>>>>> Stashed changes
       </Events>
     </Component>
     <Component class="componentes.RoundedButton" name="btnEmpleado">
@@ -72,12 +96,21 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmpleadoActionPerformed"/>
       </Events>
     </Component>
+<<<<<<< Updated upstream
     <Component class="componentes.RoundedButton" name="btnHuesped">
       <Properties>
         <Property name="text" type="java.lang.String" value="Huesped"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHuespedActionPerformed"/>
+=======
+    <Component class="componentes.RoundedButton" name="btnUsuario">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Usuario"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuarioActionPerformed"/>
+>>>>>>> Stashed changes
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
