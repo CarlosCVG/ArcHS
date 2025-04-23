@@ -23,15 +23,12 @@ public class Login extends javax.swing.JFrame {
 
         Left = new javax.swing.JPanel();
         Right = new javax.swing.JPanel();
-<<<<<<< HEAD
         btnIngresar = new componentes.RoundedButton();
         jLabel1 = new javax.swing.JLabel();
         custom_textfield1 = new componentes.custom_textfield();
         custom_textfield2 = new componentes.custom_textfield();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-=======
->>>>>>> 3ec7d5fdcf29f07d33fdd9edcc79287f1e100ef1
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(10, 10));
@@ -40,7 +37,6 @@ public class Login extends javax.swing.JFrame {
         Left.setLayout(new java.awt.CardLayout());
         getContentPane().add(Left);
 
-<<<<<<< HEAD
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,13 +50,10 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setText("Usuario");
 
-=======
->>>>>>> 3ec7d5fdcf29f07d33fdd9edcc79287f1e100ef1
         javax.swing.GroupLayout RightLayout = new javax.swing.GroupLayout(Right);
         Right.setLayout(RightLayout);
         RightLayout.setHorizontalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGroup(RightLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,13 +87,6 @@ public class Login extends javax.swing.JFrame {
                 .addGap(84, 84, 84)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(115, 115, 115))
-=======
-            .addGap(0, 751, Short.MAX_VALUE)
-        );
-        RightLayout.setVerticalGroup(
-            RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
->>>>>>> 3ec7d5fdcf29f07d33fdd9edcc79287f1e100ef1
         );
 
         getContentPane().add(Right);
@@ -149,14 +135,11 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Right;
-<<<<<<< HEAD
     private componentes.RoundedButton btnIngresar;
     private componentes.custom_textfield custom_textfield1;
     private componentes.custom_textfield custom_textfield2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-=======
->>>>>>> 3ec7d5fdcf29f07d33fdd9edcc79287f1e100ef1
     // End of variables declaration//GEN-END:variables
 }
