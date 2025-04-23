@@ -39,7 +39,7 @@ public class reservadoUI extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Num.Habitacion", "Calidad", "Precio", "Uusario"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
