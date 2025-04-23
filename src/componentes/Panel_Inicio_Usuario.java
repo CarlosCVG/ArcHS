@@ -8,12 +8,12 @@ package componentes;
  *
  * @author feriv
  */
-public class A extends javax.swing.JPanel {
+public class Panel_Inicio_Usuario extends javax.swing.JPanel {
 
     /**
      * Creates new form A
      */
-    public A() {
+    public Panel_Inicio_Usuario() {
         initComponents();
     }
 

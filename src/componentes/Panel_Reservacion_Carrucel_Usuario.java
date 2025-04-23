@@ -15,12 +15,12 @@ import modelo.vo.Habitacion;
  *
  * @author feriv
  */
-public class B extends javax.swing.JPanel {
+public class Panel_Reservacion_Carrucel_Usuario extends javax.swing.JPanel {
 
     /**
      * Creates new form B
      */
-    public B() {
+    public Panel_Reservacion_Carrucel_Usuario() {
         initComponents();
         List<Habitacion> ListaHabitacion = new ArrayList<>();
         for (Habitacion habitacion : ListaHabitacion) {

@@ -1,8 +1,8 @@
 
 package vista.ventanas;
 
-import componentes.A;
-import componentes.B;
+import componentes.Panel_Inicio_Usuario;
+import componentes.Panel_Reservacion_Carrucel_Usuario;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -20,6 +20,7 @@ public class Usuario extends javax.swing.JFrame {
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         Left = new javax.swing.JPanel();
         panel_btn1 = new componentes.panel_btn();
         panel_btn2 = new componentes.panel_btn();
@@ -33,14 +34,20 @@ public class Usuario extends javax.swing.JFrame {
         Header.setBackground(new java.awt.Color(1, 74, 173));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/TAP2 (1).png"))); // NOI18N
-        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 470, 120));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP2 (1).png"))); // NOI18N
+        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 470, 120));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/TAP3 (1).png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         Header.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, -1, -1));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP3 (1).png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        Header.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, -1, -1));
 
         getContentPane().add(Header, java.awt.BorderLayout.NORTH);
 
@@ -89,14 +96,14 @@ public class Usuario extends javax.swing.JFrame {
         JPanel A = new JPanel();
         Rigth.add(A,BorderLayout.CENTER);
         
-        A Inicio= new A();
+        Panel_Inicio_Usuario Inicio= new Panel_Inicio_Usuario();
     }//GEN-LAST:event_panel_btn1MouseClicked
 
     private void panel_btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_btn2MouseClicked
       JPanel B = new JPanel();
         Rigth.add(B,BorderLayout.CENTER);
         
-        B Inicio= new B();
+        Panel_Reservacion_Carrucel_Usuario Inicio= new Panel_Reservacion_Carrucel_Usuario();
         
     }//GEN-LAST:event_panel_btn2MouseClicked
 
@@ -106,6 +113,7 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Rigth;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private componentes.panel_btn panel_btn1;
