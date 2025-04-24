@@ -62,7 +62,7 @@ public class ingresoUI extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Lorem ipsum dolor sit amet, \nconsectetur adipiscing elit, \nsed do eiusmod tempor incididunt ut \nlabore et dolore magna aliqua.\nUt enim ad minim veniam,\nquis nostrud exercitation ullamco \nlaboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in \nreprehenderit in voluptate velit esse \ncillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia \ndeserunt \nmollit anim id est laborum.");
+        jTextArea1.setText("no mames y esta cosa para que es jsjsjsjsjs un saludo a mi compa el pusi\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         northBody.add(jScrollPane1);

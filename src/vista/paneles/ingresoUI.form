@@ -82,7 +82,7 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Lorem ipsum dolor sit amet, &#xa;consectetur adipiscing elit, &#xa;sed do eiusmod tempor incididunt ut &#xa;labore et dolore magna aliqua.&#xa;Ut enim ad minim veniam,&#xa;quis nostrud exercitation ullamco &#xa;laboris nisi ut aliquip ex ea commodo&#xa;consequat. Duis aute irure dolor in &#xa;reprehenderit in voluptate velit esse &#xa;cillum dolore eu fugiat nulla pariatur.&#xa;Excepteur sint occaecat cupidatat non&#xa;proident, sunt in culpa qui officia &#xa;deserunt &#xa;mollit anim id est laborum."/>
+                    <Property name="text" type="java.lang.String" value="no mames y esta cosa para que es jsjsjsjsjs un saludo a mi compa el pusi&#xa;"/>
                   </Properties>
                 </Component>
               </SubComponents>
