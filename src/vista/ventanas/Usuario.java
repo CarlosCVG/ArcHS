@@ -1,8 +1,6 @@
 
 package vista.ventanas;
 
-import componentes.Panel_Inicio_Usuario;
-import componentes.Panel_Reservacion_Carrucel_Usuario;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -96,15 +94,14 @@ public class Usuario extends javax.swing.JFrame {
         JPanel A = new JPanel();
         Rigth.add(A,BorderLayout.CENTER);
         
-        Panel_Inicio_Usuario Inicio= new Panel_Inicio_Usuario();
+
     }//GEN-LAST:event_panel_btn1MouseClicked
 
     private void panel_btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_btn2MouseClicked
       JPanel B = new JPanel();
         Rigth.add(B,BorderLayout.CENTER);
         
-        Panel_Reservacion_Carrucel_Usuario Inicio= new Panel_Reservacion_Carrucel_Usuario();
-        
+ 
     }//GEN-LAST:event_panel_btn2MouseClicked
 
 
