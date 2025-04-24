@@ -1,18 +1,11 @@
 package vista.ventanas;
 
 public class Login extends javax.swing.JFrame {
-
+private int loginselected;
     public Login(int loginselected) {
         initComponents();
-        switch (loginselected){
-            case 1:
-                
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-        }
+        this.loginselected = loginselected;
+        this.loginUI1.setSeleccion(loginselected);
     }
 
     @SuppressWarnings("unchecked")
