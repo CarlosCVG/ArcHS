@@ -55,7 +55,7 @@ public class Empleado extends javax.swing.JFrame {
 
         panel_btn2.setBackground(new java.awt.Color(1, 74, 173));
         panel_btn2.setText("");
-        panel_btn2.setUrl("vista/images/Registro.png");
+        panel_btn2.setUrl("vista/images/descargar (48) (1).png");
         Left.add(panel_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
