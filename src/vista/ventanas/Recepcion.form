@@ -53,7 +53,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/vista/images/TAP1 (1).png"/>
+              <Image iconType="3" name="/vista/images/58d6e5991e6fec0b436e4be6daa8ed01 (1).png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -100,8 +100,11 @@
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="false"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+        <Property name="columns" type="int" value="0"/>
+        <Property name="horizontalGap" type="int" value="20"/>
+        <Property name="rows" type="int" value="3"/>
+        <Property name="verticalGap" type="int" value="20"/>
       </Layout>
       <SubComponents>
         <Component class="componentes.panel_btn" name="panel_btn1">
@@ -115,11 +118,6 @@
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
           </AccessibilityProperties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="80" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="componentes.panel_btn" name="panel_btn2">
           <Properties>
@@ -129,11 +127,15 @@
             <Property name="text" type="java.lang.String" value=""/>
             <Property name="url" type="java.lang.String" value="vista/images/Registro.png"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="330" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
+        </Component>
+        <Component class="componentes.panel_btn" name="panel_btn3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ad" green="4a" red="1" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=""/>
+            <Property name="url" type="java.lang.String" value="vista/images/reservado.png"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
