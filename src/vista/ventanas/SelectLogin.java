@@ -4,6 +4,9 @@
  */
 package vista.ventanas;
 
+import com.sun.tools.javac.Main;
+import java.net.URL;
+
 /**
  *
  * @author feriv
@@ -14,6 +17,7 @@ public class SelectLogin extends javax.swing.JFrame {
      * Creates new form SelectLogin
      */
     public SelectLogin() {
+
         initComponents();
     }
 
