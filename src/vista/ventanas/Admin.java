@@ -27,7 +27,9 @@ public class Admin extends javax.swing.JFrame {
         custom_textfield1 = new componentes.custom_textfield();
         roundedButton1 = new componentes.RoundedButton();
         jPanel6 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         padding = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,17 +74,36 @@ public class Admin extends javax.swing.JFrame {
         });
         Left.add(roundedButton2);
 
+        roundedButton3.setBackground(new java.awt.Color(1, 74, 173));
+        roundedButton3.setForeground(new java.awt.Color(1, 74, 173));
         roundedButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/nuevo_btn (1).png"))); // NOI18N
         roundedButton3.setText("");
         roundedButton3.setBorderPainted(false);
+        roundedButton3.setContentAreaFilled(true);
         roundedButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roundedButton3ActionPerformed(evt);
             }
         });
         Left.add(roundedButton3);
+
+        roundedButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_modificacion.png"))); // NOI18N
+        roundedButton4.setText("");
         Left.add(roundedButton4);
+
+        roundedButton5.setBackground(new java.awt.Color(1, 74, 173));
+        roundedButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_Dar_Baja.png"))); // NOI18N
+        roundedButton5.setText("");
+        roundedButton5.setBorderPainted(false);
+        roundedButton5.setContentAreaFilled(true);
         Left.add(roundedButton5);
+
+        roundedButton6.setBackground(new java.awt.Color(1, 74, 173));
+        roundedButton6.setBorder(null);
+        roundedButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_modificar_datos.png"))); // NOI18N
+        roundedButton6.setText("");
+        roundedButton6.setBorderPainted(false);
+        roundedButton6.setContentAreaFilled(true);
         Left.add(roundedButton6);
 
         body.add(Left, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 449));
@@ -101,15 +122,26 @@ public class Admin extends javax.swing.JFrame {
         footer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         down.setBackground(new java.awt.Color(1, 74, 173));
-        down.setLayout(new java.awt.BorderLayout(25, 30));
-        down.add(custom_textfield1, java.awt.BorderLayout.CENTER);
-        down.add(roundedButton1, java.awt.BorderLayout.EAST);
+        down.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        down.add(custom_textfield1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 670, 40));
+
+        roundedButton1.setBackground(new java.awt.Color(1, 74, 173));
+        roundedButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/flecha.png"))); // NOI18N
+        roundedButton1.setText("");
+        roundedButton1.setBorderPainted(false);
+        roundedButton1.setContentAreaFilled(true);
+        down.add(roundedButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, -20, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(1, 74, 173));
         jPanel6.setForeground(new java.awt.Color(1, 74, 173));
         jPanel6.setMinimumSize(new java.awt.Dimension(30, 10));
         jPanel6.setPreferredSize(new java.awt.Dimension(30, 30));
-        down.add(jPanel6, java.awt.BorderLayout.WEST);
+        down.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 40));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel1.setText("ID:");
+        down.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 70, 40));
 
         footer.add(down, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, -1));
 
@@ -117,6 +149,9 @@ public class Admin extends javax.swing.JFrame {
         padding.setMinimumSize(new java.awt.Dimension(30, 30));
         padding.setPreferredSize(new java.awt.Dimension(30, 30));
         footer.add(padding, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1060, -1));
+
+        jPanel1.setBackground(new java.awt.Color(1, 74, 173));
+        footer.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, 130, 40));
 
         getContentPane().add(footer, java.awt.BorderLayout.PAGE_END);
 
@@ -148,6 +183,8 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel down;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
