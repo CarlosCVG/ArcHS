@@ -10,6 +10,8 @@ public class Huesped {
     }
 
     public Huesped(String usuario, String pass, int id_huesped, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) {
+        this.usuario = usuario;
+        this.pass = pass;
         this.id_huesped = id_huesped;
         this.nombre = nombre;
         this.ap1 = ap1;
@@ -91,4 +93,22 @@ public class Huesped {
         strArrHuesped[6] = this.correo;
         return strArrHuesped;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+    
+    
 }

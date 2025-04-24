@@ -18,6 +18,8 @@ public class Administrador {
     private String direccion;
 
     public Administrador(String usuario, String pass, int id_admin, String nombre, String ap1, String ap2, String correo, String telefono, String rfc, String nss, String curp, LocalDate fnac, String direccion) {
+        this.usuario = usuario;
+        this.pass = pass;
         this.id_admin = id_admin;
         this.nombre = nombre;
         this.ap1 = ap1;
@@ -126,6 +128,22 @@ public class Administrador {
     @Override
     public String toString() {
         return "Administrador{" + "id_admin=" + id_admin + ", nombre=" + nombre + ", ap1=" + ap1 + ", ap2=" + ap2 + ", correo=" + correo + ", telefono=" + telefono + ", rfc=" + rfc + ", nss=" + nss + ", curp=" + curp + ", fnac=" + fnac + ", direccion=" + direccion + '}';
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
     
     

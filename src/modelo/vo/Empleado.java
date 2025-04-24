@@ -22,6 +22,8 @@ public class Empleado {
     private String ap2;
 
     public Empleado(String usuario, String pass, int id_empleado, int id_admin, int nss, String curp, String telefono, String email, String rfc, int id_puesto, String sueldo, LocalDate fecha_nac, String direccion, LocalDate fecha_contrat, String nombre, String ap1, String ap2) {
+        this.usuario = usuario;
+        this.pass = pass;
         this.id_empleado = id_empleado;
         this.id_admin = id_admin;
         this.nss = nss;
@@ -166,6 +168,22 @@ public class Empleado {
     @Override
     public String toString() {
         return "Empleado{" + "id_empleado=" + id_empleado + ", id_admin=" + id_admin + ", nss=" + nss + ", curp=" + curp + ", telefono=" + telefono + ", email=" + email + ", rfc=" + rfc + ", id_puesto=" + id_puesto + ", sueldo=" + sueldo + ", fecha_nac=" + fecha_nac + ", direccion=" + direccion + ", fecha_contrat=" + fecha_contrat + ", nombre=" + nombre + ", ap1=" + ap1 + ", ap2=" + ap2 + '}';
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
     
     

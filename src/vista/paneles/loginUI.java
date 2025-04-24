@@ -139,40 +139,40 @@ public class loginUI extends javax.swing.JPanel {
     }//GEN-LAST:event_roundedButton1ActionPerformed
 
     private void roundedButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton2ActionPerformed
-//        usuario = custom_textfield3.getText();
-//        password = custom_textfield4.getText();
-//        switch (loginselected) {
-//            case 1:
-//                Administrador administrador = new Administrador();
-//                ctrll.initAdministradores();
-//                if(ctrll.adminLogged(usuario, password)!=null){
-//                    administrador = ctrll.adminLogged(usuario, password);
-//                    JOptionPane.showMessageDialog(null, administrador.getNombre());
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Usuario invalido");
-//                }
-//                break;
-//            case 2:
-//                Empleado empleado = new Empleado();
-//                ctrll.initEmpleados();
-//                if(ctrll.empleadoLogged(usuario, password)!=null){
-//                    empleado = ctrll.empleadoLogged(usuario, password);
-//                    JOptionPane.showMessageDialog(null, empleado.getNombre());
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Usuario invalido");
-//                }
-//                break;
-//            case 3:
-//                Huesped huesped = new Huesped();
-//                ctrll.initHuespedes();
-//                if(ctrll.huespedLogged(usuario, password)!=null){
-//                    huesped = ctrll.huespedLogged(usuario, password);
-//                    JOptionPane.showMessageDialog(null, huesped.getNombre());
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Usuario invalido");
-//                }
-//                break;
-//        }
+        usuario = custom_textfield3.getText();
+        password = custom_textfield4.getText();
+        switch (loginselected) {
+            case 1:
+                Administrador administrador = new Administrador();
+                ctrll.initAdministradores();
+                if(ctrll.adminLogged(usuario, password)!=null){
+                    administrador = ctrll.adminLogged(usuario, password);
+                    JOptionPane.showMessageDialog(null, administrador.getNombre());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario invalido");
+                }
+                break;
+            case 2:
+                Empleado empleado = new Empleado();
+                ctrll.initEmpleados();
+                if(ctrll.empleadoLogged(usuario, password)!=null){
+                    empleado = ctrll.empleadoLogged(usuario, password);
+                    JOptionPane.showMessageDialog(null, empleado.getNombre());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario invalido");
+                }
+                break;
+            case 3:
+                Huesped huesped = new Huesped();
+                ctrll.initHuespedes();
+                if(ctrll.huespedLogged(usuario, password)!=null){
+                    huesped = ctrll.huespedLogged(usuario, password);
+                    JOptionPane.showMessageDialog(null, huesped.getNombre());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario invalido");
+                }
+                break;
+        }
     }//GEN-LAST:event_roundedButton2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
