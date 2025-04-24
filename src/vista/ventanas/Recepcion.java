@@ -1,9 +1,9 @@
 
 package vista.ventanas;
 
-public class Empleado extends javax.swing.JFrame {
+public class Recepcion extends javax.swing.JFrame {
 
-    public Empleado() {
+    public Recepcion() {
         initComponents();
     }
 
@@ -18,6 +18,7 @@ public class Empleado extends javax.swing.JFrame {
         Left = new javax.swing.JPanel();
         panel_btn1 = new componentes.panel_btn();
         panel_btn2 = new componentes.panel_btn();
+        panel_btn3 = new componentes.panel_btn();
         Rigth = new javax.swing.JPanel();
         Footer = new javax.swing.JPanel();
 
@@ -30,7 +31,7 @@ public class Empleado extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(1, 74, 173));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP1 (1).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/58d6e5991e6fec0b436e4be6daa8ed01 (1).png"))); // NOI18N
         Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 580, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP3 (1).png"))); // NOI18N
@@ -45,18 +46,23 @@ public class Empleado extends javax.swing.JFrame {
         Left.setMinimumSize(new java.awt.Dimension(190, 0));
         Left.setPreferredSize(new java.awt.Dimension(190, 0));
         Left.setRequestFocusEnabled(false);
-        Left.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Left.setLayout(new java.awt.GridLayout(3, 0, 20, 20));
 
         panel_btn1.setBackground(new java.awt.Color(1, 74, 173));
         panel_btn1.setText("");
         panel_btn1.setUrl("vista/images/Inicio (1).png");
-        Left.add(panel_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        Left.add(panel_btn1);
         panel_btn1.getAccessibleContext().setAccessibleDescription("");
 
         panel_btn2.setBackground(new java.awt.Color(1, 74, 173));
         panel_btn2.setText("");
-        panel_btn2.setUrl("vista/images/descargar (48) (1).png");
-        Left.add(panel_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+        panel_btn2.setUrl("vista/images/Registro.png");
+        Left.add(panel_btn2);
+
+        panel_btn3.setBackground(new java.awt.Color(1, 74, 173));
+        panel_btn3.setText("");
+        panel_btn3.setUrl("vista/images/reservado.png");
+        Left.add(panel_btn3);
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
@@ -81,5 +87,6 @@ public class Empleado extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private componentes.panel_btn panel_btn1;
     private componentes.panel_btn panel_btn2;
+    private componentes.panel_btn panel_btn3;
     // End of variables declaration//GEN-END:variables
 }
