@@ -3,6 +3,7 @@ package componentes;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -15,10 +16,11 @@ public class panel_btn extends JLayeredPane implements MouseListener {
     private JLabel imageLabel;
     private JLabel textLabel;
 
+
     // properties
-    private Color isNormal = new Color(100, 10, 100);
-    private Color isHover = new Color(10, 10, 10);
-    private Color isClicked = new Color(100, 100, 200);
+    private Color isNormal = new Color(100, 10, 100); //
+    private Color isHover = new Color(10, 10, 10); //
+    private Color isClicked = new Color(100, 100, 200); //
     //defaults
     private String url = "vista/images/default.png";
     private String text = "box";
@@ -69,7 +71,10 @@ public class panel_btn extends JLayeredPane implements MouseListener {
     public void setUrl(String url) {
         this.url = url;
         if (imageLabel != null) {
-            imageLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource(url)));
+            ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource(url));
+            Image imagen = icon.getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH);
+            ImageIcon iconEscalado = new ImageIcon(imagen);
+            imageLabel.setIcon(iconEscalado);
         }
     }
     
