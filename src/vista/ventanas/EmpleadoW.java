@@ -1,9 +1,9 @@
 
 package vista.ventanas;
 
-public class Empleado extends javax.swing.JFrame {
+public class EmpleadoW extends javax.swing.JFrame {
 
-    public Empleado() {
+    public EmpleadoW() {
         initComponents();
     }
 

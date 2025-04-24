@@ -7,7 +7,10 @@ import javax.swing.SwingUtilities;
 import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 import modelo.vo.Huesped;
+import vista.ventanas.Admin;
+import vista.ventanas.EmpleadoW;
 import vista.ventanas.SelectLogin;
+import vista.ventanas.Usuario;
 
 public class loginUI extends javax.swing.JPanel {
 
@@ -18,8 +21,8 @@ public class loginUI extends javax.swing.JPanel {
     public loginUI() {
         initComponents();
     }
-    
-    public void setSeleccion(int loginselected){
+
+    public void setSeleccion(int loginselected) {
         this.loginselected = loginselected;
     }
 
@@ -145,9 +148,13 @@ public class loginUI extends javax.swing.JPanel {
             case 1:
                 Administrador administrador = new Administrador();
                 ctrll.initAdministradores();
-                if(ctrll.adminLogged(usuario, password)!=null){
+                if (ctrll.adminLogged(usuario, password) != null) {
                     administrador = ctrll.adminLogged(usuario, password);
-                    JOptionPane.showMessageDialog(null, administrador.getNombre());
+                    //JOptionPane.showMessageDialog(null, administrador.getNombre());
+                    Admin adminWindow = new Admin();
+                    adminWindow.setVisible(true);
+                    Window framePadre = SwingUtilities.getWindowAncestor(this);
+                    framePadre.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario invalido");
                 }
@@ -155,9 +162,14 @@ public class loginUI extends javax.swing.JPanel {
             case 2:
                 Empleado empleado = new Empleado();
                 ctrll.initEmpleados();
-                if(ctrll.empleadoLogged(usuario, password)!=null){
+                if (ctrll.empleadoLogged(usuario, password) != null) {
                     empleado = ctrll.empleadoLogged(usuario, password);
-                    JOptionPane.showMessageDialog(null, empleado.getNombre());
+//                    JOptionPane.showMessageDialog(null, empleado.getNombre());
+                    
+                    EmpleadoW empleadoWindow = new EmpleadoW();
+                    empleadoWindow.setVisible(true);
+                    Window framePadre = SwingUtilities.getWindowAncestor(this);
+                    framePadre.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario invalido");
                 }
@@ -165,9 +177,13 @@ public class loginUI extends javax.swing.JPanel {
             case 3:
                 Huesped huesped = new Huesped();
                 ctrll.initHuespedes();
-                if(ctrll.huespedLogged(usuario, password)!=null){
+                if (ctrll.huespedLogged(usuario, password) != null) {
                     huesped = ctrll.huespedLogged(usuario, password);
-                    JOptionPane.showMessageDialog(null, huesped.getNombre());
+//                    JOptionPane.showMessageDialog(null, huesped.getNombre());
+                    Usuario usuarioWindow = new Usuario(huesped);
+                    usuarioWindow.setVisible(true);
+                    Window framePadre = SwingUtilities.getWindowAncestor(this);
+                    framePadre.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario invalido");
                 }

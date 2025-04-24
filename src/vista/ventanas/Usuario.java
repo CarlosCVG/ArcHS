@@ -3,10 +3,11 @@ package vista.ventanas;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import modelo.vo.Huesped;
 
 public class Usuario extends javax.swing.JFrame {
 
-    public Usuario() {
+    public Usuario(Huesped huesped) {
         initComponents();
     }
 //xd
