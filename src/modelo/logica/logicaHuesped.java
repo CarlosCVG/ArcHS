@@ -17,9 +17,9 @@ public class logicaHuesped {
     
     }
 
-    public Huesped logicaBuscarHuesped(){
+//    public Huesped logicaBuscarHuesped(){
     
-    }
+//    }
             
     
 }
