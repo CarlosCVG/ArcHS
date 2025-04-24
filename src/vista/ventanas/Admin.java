@@ -23,8 +23,6 @@ public class Admin extends javax.swing.JFrame {
         header = new javax.swing.JPanel();
         usuarioLabel = new javax.swing.JLabel();
         footer = new javax.swing.JPanel();
-        up = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         down = new javax.swing.JPanel();
         custom_textfield1 = new componentes.custom_textfield();
         roundedButton1 = new componentes.RoundedButton();
@@ -34,7 +32,7 @@ public class Admin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         body.setInheritsPopupMenu(true);
-        body.setLayout(new java.awt.BorderLayout(20, 20));
+        body.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Rigth.setLayout(new java.awt.BorderLayout());
 
@@ -53,7 +51,7 @@ public class Admin extends javax.swing.JFrame {
 
         Rigth.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        body.add(Rigth, java.awt.BorderLayout.CENTER);
+        body.add(Rigth, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 753, 449));
 
         Left.setMinimumSize(new java.awt.Dimension(250, 10));
         Left.setPreferredSize(new java.awt.Dimension(250, 10));
@@ -64,25 +62,18 @@ public class Admin extends javax.swing.JFrame {
         Left.add(roundedButton5);
         Left.add(roundedButton6);
 
-        body.add(Left, java.awt.BorderLayout.WEST);
+        body.add(Left, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 449));
 
         getContentPane().add(body, java.awt.BorderLayout.CENTER);
 
-        header.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 50, 10));
+        header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        usuarioLabel.setText("Admin");
-        header.add(usuarioLabel);
+        usuarioLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/ADMIN_TITULO.png"))); // NOI18N
+        header.add(usuarioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
 
         footer.setLayout(new java.awt.BorderLayout());
-
-        up.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 55, 15));
-
-        jLabel2.setText("jLabel2");
-        up.add(jLabel2);
-
-        footer.add(up, java.awt.BorderLayout.PAGE_START);
 
         down.setLayout(new java.awt.BorderLayout(25, 30));
 
@@ -122,7 +113,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel down;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -133,7 +123,6 @@ public class Admin extends javax.swing.JFrame {
     private componentes.RoundedButton roundedButton4;
     private componentes.RoundedButton roundedButton5;
     private componentes.RoundedButton roundedButton6;
-    private javax.swing.JPanel up;
     private javax.swing.JLabel usuarioLabel;
     // End of variables declaration//GEN-END:variables
 }
