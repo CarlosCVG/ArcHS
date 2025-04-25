@@ -48,11 +48,16 @@ public class RepPuestos {
     }
 
     public static void initPuestos() {
-        puestos.add(new Puesto(contadorId++, 1, "Gerente", 15000.0, "Matutino"));
-        puestos.add(new Puesto(contadorId++, 2, "Asistente", 9000.0, "Vespertino"));
-        puestos.add(new Puesto(contadorId++, 3, "Recepcionista", 8000.0, "Mixto"));
-        puestos.add(new Puesto(contadorId++, 4, "Contador", 12000.0, "Matutino"));
-        puestos.add(new Puesto(contadorId++, 5, "Soporte Técnico", 10000.0, "Vespertino"));
+        puestos.add(new Puesto(contadorId++, 1, "Recepcionista", 15000.0, "Matutino"));
+        puestos.add(new Puesto(contadorId++, 2, "Limpieza", 9000.0, "Vespertino"));
+        puestos.add(new Puesto(contadorId++, 3, "Camarero", 8000.0, "Mixto"));
+        puestos.add(new Puesto(contadorId++, 4, "Recepcionista", 12000.0, "Matutino"));
+        puestos.add(new Puesto(contadorId++, 5, "Recepcionista", 12000.0, "Matutino"));
+        puestos.add(new Puesto(contadorId++, 6, "Recepcionista", 12000.0, "Matutino"));
+        puestos.add(new Puesto(contadorId++, 7, "Recepcionista", 12000.0, "Matutino"));
+        puestos.add(new Puesto(contadorId++, 8, "Recepcionista", 12000.0, "Matutino"));
+        puestos.add(new Puesto(contadorId++, 9, "Recepcionista", 12000.0, "Matutino"));
+        puestos.add(new Puesto(contadorId++, 10, "Recepcionista", 12000.0, "Matutino"));
     }
 
 }

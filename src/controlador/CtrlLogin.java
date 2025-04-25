@@ -5,6 +5,7 @@ import modelo.logica.LogicLogin;
 import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 import modelo.vo.Huesped;
+import modelo.vo.Puesto;
 
 public class CtrlLogin {
 
@@ -21,6 +22,10 @@ public class CtrlLogin {
     public void initHuespedes() {
         ll.initHuespedes();
     }
+    
+    public void initPuestos(){
+        ll.initPuestos();
+    }
 
     public List<Administrador> getListaAdministradores() {
         return ll.getListaAdministradores();
@@ -32,6 +37,9 @@ public class CtrlLogin {
 
     public List<Huesped> getListaHuespedes() {
         return ll.getListaHuespedes();
+    }
+    public List<Puesto> getListaPuestos() {
+        return ll.getListaPuestos();
     }
 
     public Administrador adminLogged(String usuario, String password) {
@@ -62,6 +70,17 @@ public class CtrlLogin {
             }
         }
         return null;
+    }
+    
+    public String searchPuesto(Empleado emp){
+        List<Puesto> listaPuestos = getListaPuestos();
+        for (Puesto p : listaPuestos) {
+            
+            if(p.getId_empleado() == emp.getId_empleado()){
+                return p.getNombre_puesto();
+            }
+        }
+        return "no";
     }
 
 }
