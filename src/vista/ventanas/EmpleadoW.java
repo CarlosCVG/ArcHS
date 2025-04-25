@@ -2,11 +2,17 @@
 package vista.ventanas;
 
 import modelo.vo.Empleado;
+import vista.paneles.Empleado_Info;
 
 public class EmpleadoW extends javax.swing.JFrame {
-
+    private Empleado_Info info;
+    private Empleado empleado;
     public EmpleadoW(Empleado empleado) {
+        this.empleado = empleado;
         initComponents();
+        System.out.println("Ancho: "  + this.Rigth.getWidth() + "Alto: " + this.Rigth.getHeight());
+        info = new Empleado_Info(empleado);
+        this.Rigth.add(info);
     }
 
     @SuppressWarnings("unchecked")
@@ -39,6 +45,11 @@ public class EmpleadoW extends javax.swing.JFrame {
         jButton2.setBorder(null);
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         Header.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
         getContentPane().add(Header, java.awt.BorderLayout.NORTH);
@@ -52,6 +63,11 @@ public class EmpleadoW extends javax.swing.JFrame {
         panel_btn1.setBackground(new java.awt.Color(1, 74, 173));
         panel_btn1.setText("");
         panel_btn1.setUrl("vista/images/Inicio (1).png");
+        panel_btn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_btn1MouseClicked(evt);
+            }
+        });
         Left.add(panel_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
         panel_btn1.getAccessibleContext().setAccessibleDescription("");
 
@@ -71,6 +87,18 @@ public class EmpleadoW extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SelectLogin selectlogin = new SelectLogin();
+        selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
+        selectlogin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void panel_btn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_btn1MouseClicked
+        info = new Empleado_Info(empleado);
+        this.Rigth.add(info);
+    }//GEN-LAST:event_panel_btn1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
