@@ -21,6 +21,8 @@ public class panel_btn extends JLayeredPane implements MouseListener {
     private Color isNormal = new Color(100, 10, 100); //
     private Color isHover = new Color(10, 10, 10); //
     private Color isClicked = new Color(100, 100, 200); //
+    private Color isPressed = new Color(100, 100, 200);
+    
     //defaults
     private String url = "vista/images/default.png";
     private String text = "box";
@@ -99,6 +101,10 @@ public class panel_btn extends JLayeredPane implements MouseListener {
         this.isClicked = color;
     }
 
+    public void setPressedColor(Color isPressed) {
+        this.isPressed = isPressed;
+    }
+
     // MouseListeners
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -106,7 +112,9 @@ public class panel_btn extends JLayeredPane implements MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+        setBackground(isPressed);
+    }
 
     @Override
     public void mouseReleased(MouseEvent e) {
