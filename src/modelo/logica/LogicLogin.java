@@ -6,6 +6,7 @@ import modelo.dao.DAOLogin;
 import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 import modelo.vo.Huesped;
+import modelo.vo.Puesto;
 
 public class LogicLogin {
     DAOLogin daologin = new DAOLogin();
@@ -18,6 +19,9 @@ public class LogicLogin {
     public void initHuespedes(){
         daologin.initHuespedes();
     }
+    public void initPuestos(){
+        daologin.initPuestos();
+    }
     
     public List<Administrador> getListaAdministradores() {
         return daologin.getListaAdministradores();
@@ -27,5 +31,8 @@ public class LogicLogin {
     }
     public List<Huesped> getListaHuespedes() {
         return daologin.getListaHuespedes();
+    }
+    public List<Puesto> getListaPuestos() {
+        return daologin.getListaPuestos();
     }
 }

@@ -7,8 +7,10 @@ import javax.swing.SwingUtilities;
 import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 import modelo.vo.Huesped;
+import modelo.vo.Puesto;
 import vista.ventanas.Admin;
 import vista.ventanas.EmpleadoW;
+import vista.ventanas.Recepcion;
 import vista.ventanas.SelectLogin;
 import vista.ventanas.Usuario;
 
@@ -160,16 +162,39 @@ public class loginUI extends javax.swing.JPanel {
                 }
                 break;
             case 2:
-                Empleado empleado = new Empleado();
+                Empleado empleado;
                 ctrll.initEmpleados();
+                ctrll.initPuestos();
+                String puestoid;
                 if (ctrll.empleadoLogged(usuario, password) != null) {
                     empleado = ctrll.empleadoLogged(usuario, password);
 //                    JOptionPane.showMessageDialog(null, empleado.getNombre());
-                    
-                    EmpleadoW empleadoWindow = new EmpleadoW();
-                    empleadoWindow.setVisible(true);
-                    Window framePadre = SwingUtilities.getWindowAncestor(this);
-                    framePadre.dispose();
+                    puestoid = ctrll.searchPuesto(empleado);
+                    if (puestoid.equals("Recepcionista")) {
+                        JOptionPane.showMessageDialog(null, "Recep");
+                        Recepcion empleadoWindow = new Recepcion(empleado);
+                        empleadoWindow.setBounds(100, 10, 1000, 700);
+                        empleadoWindow.setVisible(true);
+                        Window framePadre = SwingUtilities.getWindowAncestor(this);
+                        framePadre.dispose();
+                    } else if (puestoid.equals("Limpieza")) {
+                        JOptionPane.showMessageDialog(null, "Limpieza");
+                        EmpleadoW empleadoWindow = new EmpleadoW(empleado);
+                        empleadoWindow.setBounds(100, 10, 1000, 700);
+                        empleadoWindow.setVisible(true);
+                        Window framePadre = SwingUtilities.getWindowAncestor(this);
+                        framePadre.dispose();
+                    } else if (puestoid.equals("Camarero")) {
+                        JOptionPane.showMessageDialog(null, "Camarero");
+                        EmpleadoW empleadoWindow = new EmpleadoW(empleado);
+                        empleadoWindow.setBounds(10, 50, 1000, 700);
+                        empleadoWindow.setVisible(true);
+                        Window framePadre = SwingUtilities.getWindowAncestor(this);
+                        framePadre.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Puesto no asignado");
+                    }
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario invalido");
                 }

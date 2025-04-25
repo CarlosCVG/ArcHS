@@ -1,9 +1,11 @@
 
 package vista.ventanas;
 
+import modelo.vo.Empleado;
+
 public class Recepcion extends javax.swing.JFrame {
 
-    public Recepcion() {
+    public Recepcion(Empleado empleado) {
         initComponents();
     }
 

@@ -1,9 +1,11 @@
 
 package vista.ventanas;
 
+import modelo.vo.Empleado;
+
 public class EmpleadoW extends javax.swing.JFrame {
 
-    public EmpleadoW() {
+    public EmpleadoW(Empleado empleado) {
         initComponents();
     }
 
@@ -50,13 +52,13 @@ public class EmpleadoW extends javax.swing.JFrame {
         panel_btn1.setBackground(new java.awt.Color(1, 74, 173));
         panel_btn1.setText("");
         panel_btn1.setUrl("vista/images/Inicio (1).png");
-        Left.add(panel_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        Left.add(panel_btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
         panel_btn1.getAccessibleContext().setAccessibleDescription("");
 
         panel_btn2.setBackground(new java.awt.Color(1, 74, 173));
         panel_btn2.setText("");
         panel_btn2.setUrl("vista/images/descargar (48) (1).png");
-        Left.add(panel_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+        Left.add(panel_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
