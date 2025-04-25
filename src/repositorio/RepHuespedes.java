@@ -8,6 +8,10 @@ public class RepHuespedes {
 
     private final static List<Huesped> listaHuespedes = new ArrayList<>();
 
+    static {
+        cargarDatosInicialesHuespedes();
+    }
+    
     public static boolean insert(Huesped huesped) {
         return listaHuespedes.add(huesped);
     }
