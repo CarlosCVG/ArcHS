@@ -5,7 +5,7 @@ import modelo.vo.Empleado;
 
 public class Recepcion extends javax.swing.JFrame {
 
-    public Recepcion(Empleado empleado) {
+    public Recepcion(Empleado empleado, String nombrePuesto) {
         initComponents();
     }
 

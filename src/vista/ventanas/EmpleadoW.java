@@ -1,18 +1,39 @@
-
 package vista.ventanas;
 
+import componentes.panel_btn;
+import java.awt.Color;
 import modelo.vo.Empleado;
 import vista.paneles.Empleado_Info;
+import vista.paneles.Tareas_Empleados;
 
 public class EmpleadoW extends javax.swing.JFrame {
+
     private Empleado_Info info;
+    private Tareas_Empleados tareas;
     private Empleado empleado;
-    public EmpleadoW(Empleado empleado) {
+    private String nombrePuesto;
+
+    public EmpleadoW(Empleado empleado, String nombrePuesto) {
         this.empleado = empleado;
+        this.nombrePuesto = nombrePuesto;
+
         initComponents();
-        System.out.println("Ancho: "  + this.Rigth.getWidth() + "Alto: " + this.Rigth.getHeight());
-        info = new Empleado_Info(empleado);
-        this.Rigth.add(info);
+        configurarComponentes(panel_btn1);
+        configurarComponentes(panel_btn2);
+        info = new Empleado_Info(empleado, nombrePuesto);
+        Rigth.add(info);
+    }
+
+    private void configurarComponentes(panel_btn pnl_btn) {
+        Color clickedColor = new Color(1, 74, 173);
+        Color hoverColor = Color.WHITE;
+        Color normalColor = new Color(1, 74, 173);
+        Color pressedColor = Color.WHITE;
+
+        pnl_btn.setClickedColor(clickedColor);
+        pnl_btn.setHoverColor(hoverColor);
+        pnl_btn.setNormalColor(normalColor);
+        pnl_btn.setPressedColor(pressedColor);
     }
 
     @SuppressWarnings("unchecked")
@@ -74,6 +95,11 @@ public class EmpleadoW extends javax.swing.JFrame {
         panel_btn2.setBackground(new java.awt.Color(1, 74, 173));
         panel_btn2.setText("");
         panel_btn2.setUrl("vista/images/descargar (48) (1).png");
+        panel_btn2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_btn2MouseClicked(evt);
+            }
+        });
         Left.add(panel_btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
@@ -96,9 +122,22 @@ public class EmpleadoW extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void panel_btn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_btn1MouseClicked
-        info = new Empleado_Info(empleado);
-        this.Rigth.add(info);
+        info = new Empleado_Info(empleado, nombrePuesto);
+        Rigth.removeAll();
+        Rigth.add(info);
+        Rigth.revalidate();
+        Rigth.repaint();
+
+
     }//GEN-LAST:event_panel_btn1MouseClicked
+
+    private void panel_btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_btn2MouseClicked
+        tareas = new Tareas_Empleados(empleado, nombrePuesto);
+        Rigth.removeAll();
+        Rigth.add(tareas);
+        Rigth.revalidate();
+        Rigth.repaint();
+    }//GEN-LAST:event_panel_btn2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

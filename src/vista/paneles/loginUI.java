@@ -165,28 +165,28 @@ public class loginUI extends javax.swing.JPanel {
                 Empleado empleado;
                 ctrll.initEmpleados();
                 ctrll.initPuestos();
-                String puestoid;
+                String nombrePuesto;
                 if (ctrll.empleadoLogged(usuario, password) != null) {
                     empleado = ctrll.empleadoLogged(usuario, password);
 //                    JOptionPane.showMessageDialog(null, empleado.getNombre());
-                    puestoid = ctrll.searchPuesto(empleado);
-                    if (puestoid.equals("Recepcionista")) {
+                    nombrePuesto = ctrll.searchPuesto(empleado);
+                    if (nombrePuesto.equals("Recepcionista")) {
                         JOptionPane.showMessageDialog(null, "Recep");
-                        Recepcion empleadoWindow = new Recepcion(empleado);
+                        Recepcion empleadoWindow = new Recepcion(empleado, nombrePuesto);
                         empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
-                    } else if (puestoid.equals("Limpieza")) {
+                    } else if (nombrePuesto.equals("Limpieza")) {
                         JOptionPane.showMessageDialog(null, "Limpieza");
-                        EmpleadoW empleadoWindow = new EmpleadoW(empleado);
+                        EmpleadoW empleadoWindow = new EmpleadoW(empleado, nombrePuesto);
                         empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
-                    } else if (puestoid.equals("Camarero")) {
+                    } else if (nombrePuesto.equals("Camarero")) {
                         JOptionPane.showMessageDialog(null, "Camarero");
-                        EmpleadoW empleadoWindow = new EmpleadoW(empleado);
+                        EmpleadoW empleadoWindow = new EmpleadoW(empleado, nombrePuesto);
                         empleadoWindow.setBounds(10, 50, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
@@ -199,6 +199,7 @@ public class loginUI extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Usuario invalido");
                 }
                 break;
+
             case 3:
                 Huesped huesped = new Huesped();
                 ctrll.initHuespedes();
