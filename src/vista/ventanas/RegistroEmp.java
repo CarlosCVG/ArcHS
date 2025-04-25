@@ -64,8 +64,10 @@ public class RegistroEmp extends javax.swing.JFrame {
         txtSegApe = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(1, 74, 173));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -202,6 +204,11 @@ public class RegistroEmp extends javax.swing.JFrame {
         jLabel16.setText("Primer apellido:");
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, -1));
 
+        Fondo.setBackground(new java.awt.Color(1, 74, 173));
+        Fondo.setForeground(new java.awt.Color(1, 74, 173));
+        Fondo.setOpaque(true);
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 530));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -329,6 +336,7 @@ public class RegistroEmp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_Agregar;
