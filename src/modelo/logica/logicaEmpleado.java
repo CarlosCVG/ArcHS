@@ -138,7 +138,7 @@ public class logicaEmpleado {
             throw new BusinessException("Email no vacio");
         }
 
-        // Validar telefono (10 digitos)
+        // Validar telefono 
         if (empleado.getTelefono() == null ) {
             throw new BusinessException("Telefono es inaceptable ");
         }

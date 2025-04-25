@@ -1,9 +1,14 @@
 package vista.ventanas;
 
+import controlador.ctrlAdmin;
+
 public class Admin extends javax.swing.JFrame {
+
+    ctrlAdmin objetocAdmin;
 
     public Admin() {
         initComponents();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -96,6 +101,11 @@ public class Admin extends javax.swing.JFrame {
         roundedButton5.setText("");
         roundedButton5.setBorderPainted(false);
         roundedButton5.setContentAreaFilled(true);
+        roundedButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roundedButton5ActionPerformed(evt);
+            }
+        });
         Left.add(roundedButton5);
 
         roundedButton6.setBackground(new java.awt.Color(1, 74, 173));
@@ -114,7 +124,7 @@ public class Admin extends javax.swing.JFrame {
         header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         usuarioLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/ADMIN_TITULO.png"))); // NOI18N
-        header.add(usuarioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
+        header.add(usuarioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, -1, -1));
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
 
@@ -159,12 +169,22 @@ public class Admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void roundedButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton2ActionPerformed
-        // TODO add your handling code here:
+        SelectLogin selectlogin = new SelectLogin();
+        selectlogin.setVisible(true);
+        dispose();
     }//GEN-LAST:event_roundedButton2ActionPerformed
 
     private void roundedButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton3ActionPerformed
-        // TODO add your handling code here:
+        RegistroEmp re = new RegistroEmp();
+        re.setVisible(true);
+        dispose();
     }//GEN-LAST:event_roundedButton3ActionPerformed
+
+    private void roundedButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton5ActionPerformed
+        RegistroEmp re = new RegistroEmp();
+        re.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_roundedButton5ActionPerformed
 
     public static void main(String args[]) {
 

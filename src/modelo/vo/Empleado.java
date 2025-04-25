@@ -5,20 +5,20 @@ import java.time.LocalDate;
 public class Empleado {
     private String usuario;
     private String pass;
-    private int id_empleado;
+    private int id_empleado;//esta
     private int id_admin;
     private int nss;
-    private String curp;
-    private String telefono;
-    private String email;
+    private String curp;//esta
+    private String telefono;//esta
+    private String email;//esta
     private String rfc;
-    private int id_puesto;
+    private int id_puesto;//esta
     private String sueldo;
     private LocalDate fecha_nac;
     private String direccion;
     private LocalDate fecha_contrat;
-    private String nombre;
-    private String ap1;
+    private String nombre;//esta 
+    private String ap1;//esta
     private String ap2;
 
     public Empleado(String usuario, String pass, int id_empleado, int id_admin, int nss, String curp, String telefono, String email, String rfc, int id_puesto, String sueldo, LocalDate fecha_nac, String direccion, LocalDate fecha_contrat, String nombre, String ap1, String ap2) {
