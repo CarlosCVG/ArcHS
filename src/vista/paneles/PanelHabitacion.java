@@ -45,6 +45,10 @@ public class PanelHabitacion extends JPanel {
         setImageRandom(lblIMG3, 250, 150);
     }
 
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
     /**
      * Asigna una imagen aleatoria escalada al JLabel recibido.
      */

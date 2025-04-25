@@ -67,7 +67,7 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     private void mostrarReservacion() {
-        Center.add(new reservaUI());
+        Center.add(new reservaUI(huesped));
     }
 
     private void mostrarInicio() {

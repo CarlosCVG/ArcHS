@@ -17,4 +17,12 @@ public class DAOReservacion {
     public Reservacion daoBuscarPorHabitacion(int numHabitacion){
         return repReserva.search(numHabitacion);
     }
+    
+    public Reservacion daoBuscarPorID(int idReservacion){
+        return repReserva.searchByID(idReservacion);
+    }
+    
+    public boolean daoAgregarReservacion(Reservacion reservacion){
+        return repReserva.insert(reservacion);
+    }
 }

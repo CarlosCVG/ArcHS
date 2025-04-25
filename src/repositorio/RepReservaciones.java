@@ -7,9 +7,11 @@ import modelo.vo.Reservacion;
 
 public class RepReservaciones {
     private final static List<Reservacion> listaReservaciones = new ArrayList<>();
-
+    private static int contadorId = 1;
+    
+    //Si van a hacer reservaciones, creen un objeto de tipo reservacion con idReservacion 0, en este metodo insert, ya se le asigna el id de autoincremento, por lo que nunca se repitira
     public static boolean insert(Reservacion reservacion) {
-        return listaReservaciones.add(reservacion);
+        return listaReservaciones.add(new Reservacion(contadorId++, reservacion.getId_habitacion(), reservacion.getId_huesped(), reservacion.getF_entrada(), reservacion.getF_salida()));
     }
     
     static {
@@ -34,6 +36,15 @@ public class RepReservaciones {
         return null;
     }
     
+    public static Reservacion searchByID(int idReservacion){
+        for (Reservacion e : listaReservaciones) {
+            if (e.getId_reservacion() == idReservacion) {
+                return e;
+            }
+        }
+        return null;
+    }
+    
     public static boolean delete(Reservacion reservacion) {
         return listaReservaciones.remove(reservacion);
     }
@@ -44,11 +55,11 @@ public class RepReservaciones {
 
     //int id_reservacion, int id_habitacion, int id_huesped, LocalDate f_entrada, LocalDate f_salida
     public static List<Reservacion> cargarDatosInicialesReservaciones() {
-        listaReservaciones.add(new Reservacion(1, 1, 1, LocalDate.of(2025, 4, 10), LocalDate.of(2025, 4, 15)));
-        listaReservaciones.add(new Reservacion(2, 2, 2, LocalDate.of(2025, 5, 1), LocalDate.of(2025, 5, 5)));
-        listaReservaciones.add(new Reservacion(3, 3, 3, LocalDate.of(2025, 4, 20), LocalDate.of(2025, 4, 25)));
-        listaReservaciones.add(new Reservacion(4, 4, 4, LocalDate.of(2025, 6, 10), LocalDate.of(2025, 6, 12)));
-        listaReservaciones.add(new Reservacion(5, 5, 5, LocalDate.of(2025, 4, 18), LocalDate.of(2025, 4, 22)));
+        listaReservaciones.add(new Reservacion(contadorId++, 1, 1, LocalDate.of(2025, 4, 10), LocalDate.of(2025, 4, 15)));
+        listaReservaciones.add(new Reservacion(contadorId++, 2, 2, LocalDate.of(2025, 5, 1), LocalDate.of(2025, 5, 5)));
+        listaReservaciones.add(new Reservacion(contadorId++, 3, 3, LocalDate.of(2025, 4, 20), LocalDate.of(2025, 4, 25)));
+        listaReservaciones.add(new Reservacion(contadorId++, 4, 4, LocalDate.of(2025, 6, 10), LocalDate.of(2025, 6, 12)));
+        listaReservaciones.add(new Reservacion(contadorId++, 5, 5, LocalDate.of(2025, 4, 18), LocalDate.of(2025, 4, 22)));
         return listaReservaciones;
     }
 }
