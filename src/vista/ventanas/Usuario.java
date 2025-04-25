@@ -18,7 +18,7 @@ public class Usuario extends javax.swing.JFrame {
         mostrarPanel("inicio");
         configurarComponentes();
     }
-//xd
+//xda
 
     private void configurarComponentes() {
         Color clickedColor = new Color(1, 74, 173);
