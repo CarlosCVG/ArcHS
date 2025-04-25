@@ -6,6 +6,7 @@ package vista.paneles;
 
 import controlador.CtrReservaUI;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -26,7 +27,6 @@ public class reservaUI extends javax.swing.JPanel {
     public reservaUI() {
         initComponents();
         habitaciones = ctrReservaUI.ctrHabitacionesDisponibles();
-        System.out.println(habitaciones.size());
         configurarComponentes();
     }
 
@@ -50,6 +50,16 @@ public class reservaUI extends javax.swing.JPanel {
 
         carrusel.setBtnImage(new ImageIcon(scaledR), new ImageIcon(scaledL));
 
+        btnReservar.setPreferredSize(new Dimension(240, 40));
+        ImageIcon iconReservar = new ImageIcon("src/vista/images/btnReservar.png");
+        Image scaledReservar = iconReservar.getImage().getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+        btnReservar.setIcon(new ImageIcon(scaledReservar));
+
+        btnFiltrar.setPreferredSize(new Dimension(240, 40));
+        ImageIcon iconFiltros = new ImageIcon("src/vista/images/btnFiltros.png");
+        Image scaledFiltros = iconFiltros.getImage().getScaledInstance(240, 40, Image.SCALE_SMOOTH);
+        btnFiltrar.setIcon(new ImageIcon(scaledFiltros));
+
     }
 
     @SuppressWarnings("unchecked")
@@ -59,8 +69,8 @@ public class reservaUI extends javax.swing.JPanel {
         body = new javax.swing.JPanel();
         carrusel = new componentes.PanelCarrusel();
         footer = new javax.swing.JPanel();
-        roundedButton1 = new componentes.RoundedButton();
-        roundedButton2 = new componentes.RoundedButton();
+        btnReservar = new componentes.RoundedButton();
+        btnFiltrar = new componentes.RoundedButton();
 
         setPreferredSize(new java.awt.Dimension(760, 580));
         setLayout(new java.awt.BorderLayout());
@@ -80,18 +90,70 @@ public class reservaUI extends javax.swing.JPanel {
         footer.setMinimumSize(new java.awt.Dimension(310, 22));
         footer.setPreferredSize(new java.awt.Dimension(310, 50));
         footer.setLayout(new java.awt.GridBagLayout());
-        footer.add(roundedButton1, new java.awt.GridBagConstraints());
-        footer.add(roundedButton2, new java.awt.GridBagConstraints());
+
+        btnReservar.setBackground(new java.awt.Color(1, 74, 173));
+        btnReservar.setText("");
+        btnReservar.setOpaque(true);
+        btnReservar.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnReservar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReservarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReservarMouseExited(evt);
+            }
+        });
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservarActionPerformed(evt);
+            }
+        });
+        footer.add(btnReservar, new java.awt.GridBagConstraints());
+
+        btnFiltrar.setBackground(new java.awt.Color(1, 74, 173));
+        btnFiltrar.setText("");
+        btnFiltrar.setOpaque(true);
+        btnFiltrar.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFiltrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFiltrarMouseExited(evt);
+            }
+        });
+        footer.add(btnFiltrar, new java.awt.GridBagConstraints());
 
         add(footer, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+
+
+    }//GEN-LAST:event_btnReservarActionPerformed
+
+    private void btnReservarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservarMouseEntered
+        btnReservar.setBackground(new Color(1,90,211));
+    }//GEN-LAST:event_btnReservarMouseEntered
+
+    private void btnReservarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservarMouseExited
+        btnReservar.setBackground(new Color(1, 74, 174));
+    }//GEN-LAST:event_btnReservarMouseExited
+
+    private void btnFiltrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseEntered
+        btnFiltrar.setBackground(new Color(1,90,211));
+    }//GEN-LAST:event_btnFiltrarMouseEntered
+
+    private void btnFiltrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseExited
+        btnFiltrar.setBackground(new Color(1, 74, 174));
+    }//GEN-LAST:event_btnFiltrarMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
+    private componentes.RoundedButton btnFiltrar;
+    private componentes.RoundedButton btnReservar;
     private componentes.PanelCarrusel carrusel;
     private javax.swing.JPanel footer;
-    private componentes.RoundedButton roundedButton1;
-    private componentes.RoundedButton roundedButton2;
     // End of variables declaration//GEN-END:variables
 }

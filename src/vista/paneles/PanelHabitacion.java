@@ -37,6 +37,7 @@ public class PanelHabitacion extends JPanel {
         lblIDHabitacion.setText("Habitación #" + habitacion.getId_habitacion() + ".");
         lblPrecio.setText("Precio: " + habitacion.getPrecio() + "$.");
         lblSize.setText("Tamaño: " + habitacion.getTamaño() + "m².");
+        lblNumCamas.setText("Numero de camas: " + habitacion.getNum_camas()+ ".");
         lblDescripcion.setText("Descripción:\n" + habitacion.getDescripcion());
 
         setImageRandom(lblIMG1, 280, 300);
@@ -49,7 +50,6 @@ public class PanelHabitacion extends JPanel {
      */
     private void setImageRandom(JLabel label, int height, int width) {
         int imageCount = countFilesInFolder(IMAGE_FOLDER_PATH);
-        System.out.println(imageCount);
         if (imageCount == 0) {
             label.setText("Sin imagen");
             return;
