@@ -8,6 +8,10 @@ public class RepHabitaciones {
 
     private final static List<Habitacion> listaHabitaciones = new ArrayList<>();
 
+    static {
+        cargarDatosInicialesHabitaciones();
+    }
+    
     public static boolean insert(Habitacion habitacion) {
         return listaHabitaciones.add(habitacion);
     }
@@ -29,7 +33,7 @@ public class RepHabitaciones {
         return listaHabitaciones;
     }
 
-    public static List<Habitacion> cargarDatosInicialesAlumnos() {
+    public static List<Habitacion> cargarDatosInicialesHabitaciones() {
         listaHabitaciones.add(new Habitacion(1, 1200.50, 23.4, 2, "Habitacion tamaño promedio con 2 camas y vista al mar"));
         listaHabitaciones.add(new Habitacion(2, 950.00, 18.0, 1, "Habitacion sencilla con cama individual y baño privado"));
         listaHabitaciones.add(new Habitacion(3, 1500.75, 30.0, 2, "Suite con sala de estar, minibar y balcón"));

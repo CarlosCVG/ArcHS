@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import modelo.vo.Huesped;
 import vista.paneles.Inicio_usuario;
+import vista.paneles.reservaUI;
 
 public class Usuario extends javax.swing.JFrame {
 
@@ -36,10 +37,10 @@ public class Usuario extends javax.swing.JFrame {
         btnReservacion.setNormalColor(normalColor);
         btnReservacion.setPressedColor(pressedColor);
 
-        logo.setClickedColor(clickedColor);
-        logo.setHoverColor(hoverColor);
+        logo.setClickedColor(normalColor);
+        logo.setHoverColor(normalColor);
         logo.setNormalColor(normalColor);
-        logo.setPressedColor(pressedColor);
+        logo.setPressedColor(normalColor);
     }
 
     private void mostrarPanel(String state) {
@@ -66,7 +67,7 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     private void mostrarReservacion() {
-
+        Center.add(new reservaUI());
     }
 
     private void mostrarInicio() {
@@ -149,14 +150,16 @@ public class Usuario extends javax.swing.JFrame {
 
         Center.setBackground(new java.awt.Color(1, 74, 173));
         Center.setMinimumSize(new java.awt.Dimension(760, 580));
-        Center.setPreferredSize(new java.awt.Dimension(760, 580));
+        Center.setPreferredSize(new java.awt.Dimension(800, 570));
         Center.setLayout(new java.awt.BorderLayout());
         Right.add(Center, java.awt.BorderLayout.CENTER);
 
         Header.setBackground(new java.awt.Color(1, 74, 173));
+        Header.setPreferredSize(new java.awt.Dimension(800, 130));
         Header.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP2 (1).png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(462, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -191,20 +194,17 @@ public class Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
-        JPanel A = new JPanel();
-        Center.add(A, BorderLayout.CENTER);
-
-
+        mostrarPanel("inicio");
     }//GEN-LAST:event_btnInicioMouseClicked
 
     private void btnReservacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservacionMouseClicked
-        JPanel B = new JPanel();
-        Center.add(B, BorderLayout.CENTER);
-
-
+        mostrarPanel("reservacion");
     }//GEN-LAST:event_btnReservacionMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SelectLogin selectlogin = new SelectLogin();
+        selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
+        selectlogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

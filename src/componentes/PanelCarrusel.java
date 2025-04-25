@@ -50,6 +50,8 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
     private Color btnColorForMouseExit = Color.WHITE;
     private Color btnColorForMousePressed = Color.GRAY;
     private Color btnColorForMouseReleased = Color.BLACK;
+    
+    private Color colorVelo = Color.WHITE;
 
     // === CONSTRUCTOR PREDETERMINADO ===
     public PanelCarrusel() {
@@ -85,7 +87,7 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
                 super.paintComponent(g);
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-                g2.setColor(Color.WHITE);
+                g2.setColor(colorVelo);
                 g2.fillRect(0, 0, getWidth(), getHeight());
                 g2.dispose();
             }
@@ -326,6 +328,10 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         refrescarEstilosBotones();
     }
 
+    public void setColorVelo(Color colorVelo) {
+        this.colorVelo = colorVelo;
+    }
+    
     private void setContenedorPanel() {
         contenedorPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -366,5 +372,12 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
     private void refrescarEstilosBotones() {
         configurarEstiloBoton(btnIzquierda);
         configurarEstiloBoton(btnDerecha);
+    }
+    
+    public void setBtnImage(ImageIcon iconRight, ImageIcon iconLeft){
+        btnDerecha.setIcon(iconRight);
+        btnIzquierda.setIcon(iconLeft);
+        btnDerecha.setText("");
+        btnIzquierda.setText("");
     }
 }
