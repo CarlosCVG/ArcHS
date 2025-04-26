@@ -7,6 +7,7 @@ package modelo.logica;
 import excepciones.ExConsulta;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import modelo.dao.DAOHabitacion;
 import modelo.dao.DAOReservacion;
 import modelo.vo.Habitacion;
@@ -20,7 +21,7 @@ public class LogicaHabitacion {
     DAOHabitacion daoHabitacion = new DAOHabitacion();
     DAOReservacion daoReservacion = new DAOReservacion();
 
-    public List<Habitacion> logicaHabitacionesDisponibles() {
+    public List<Habitacion> logicaBuscarHabitacionesDisponibles() {
         List<Habitacion> todasLasHabitaciones = daoHabitacion.daoGetHabitaciones();
         List<Habitacion> habitacionesDisponibles = new ArrayList<>();
 
@@ -32,5 +33,39 @@ public class LogicaHabitacion {
         }
 
         return habitacionesDisponibles;
+    }
+
+    public List<Habitacion> logicaHabitacionesFiltradas(Map<String, Integer> filtros) {
+        List<Habitacion> habitacionesFiltradas = new ArrayList<>();
+        List<Habitacion> habitacionesDisponibles = logicaBuscarHabitacionesDisponibles();
+
+        int filtroId = -1;
+        int filtroCosto = 3000;
+
+        if (filtros.containsKey("id")) {
+            filtroId = filtros.get("id");
+        }
+
+        if (filtros.containsKey("costo")) {
+            filtroCosto = filtros.get("costo");
+        }
+
+        for (Habitacion habitacion : habitacionesDisponibles) {
+            if (filtroId != -1 && habitacion.getId_habitacion() != filtroId) {
+                continue;
+            }
+
+            if (habitacion.getPrecio() > filtroCosto) {
+                continue;
+            }
+
+            habitacionesFiltradas.add(habitacion);
+        }
+
+        return habitacionesFiltradas;
+    }
+    
+    public List<Habitacion> logicaBuscarHabitaciones(){
+        return daoHabitacion.daoGetHabitaciones();
     }
 }

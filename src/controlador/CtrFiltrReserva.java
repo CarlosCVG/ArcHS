@@ -5,7 +5,6 @@
 package controlador;
 
 import java.util.List;
-import java.util.Map;
 import modelo.logica.LogicaHabitacion;
 import modelo.vo.Habitacion;
 
@@ -13,15 +12,10 @@ import modelo.vo.Habitacion;
  *
  * @author edwin
  */
-public class CtrReservaUI {
+public class CtrFiltrReserva {
     LogicaHabitacion logicaHabitacion = new LogicaHabitacion();
     
-    public List<Habitacion> ctrHabitacionesDisponibles(){
-        return logicaHabitacion.logicaBuscarHabitacionesDisponibles();
+    public List<Habitacion> ctrHabitaciones(){
+        return logicaHabitacion.logicaBuscarHabitaciones();
     }
-    
-    public List<Habitacion> ctrHabitacionesConFiltros(Map<String, Integer> filtros){
-        return logicaHabitacion.logicaHabitacionesFiltradas(filtros);
-    }
-    
 }

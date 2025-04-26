@@ -4,6 +4,7 @@
  */
 package vista.paneles;
 
+import componentes.Observer;
 import controlador.CtrReservaUI;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,59 +14,63 @@ import javax.swing.ImageIcon;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
 import vista.ventanas.Fecha;
+import javax.swing.JPanel;
+import vista.ventanas.Filtros;
 
 /**
  *
  * @author karlo
  */
-public class reservaUI extends javax.swing.JPanel {
+public class reservaUI extends JPanel implements Observer {
 
     /**
      * Creates new form registroUI
      */
-    CtrReservaUI ctrReservaUI = new CtrReservaUI();
-    List<Habitacion> habitaciones;
-    Huesped huesped;
-    
+    private CtrReservaUI ctrReservaUI = new CtrReservaUI();
+    private List<Habitacion> habitaciones;
+    private Huesped huesped;
+    private Filtros panelFiltros;
+
     public reservaUI(Huesped huesped) {
+
         initComponents();
         this.huesped = huesped;
         habitaciones = ctrReservaUI.ctrHabitacionesDisponibles();
         configurarComponentes();
     }
-    
+
     private void configurarComponentes() {
         for (Habitacion habitacion : habitaciones) {
             carrusel.agregarPanel(new PanelHabitacion(habitacion));
         }
-        
+
         carrusel.setColorVelo(new Color(1, 74, 173));
         carrusel.setBtnColor(new Color(1, 74, 173));
         carrusel.setBtnColorForMouseEntered(new Color(1, 106, 249));
         carrusel.setBtnColorForMouseExit(new Color(1, 74, 173));
         carrusel.setBtnColorForMousePressed(new Color(1, 74, 173));
         carrusel.setBtnColorForMouseReleased(new Color(1, 74, 173));
-        
+
         ImageIcon iconR = new ImageIcon("src/vista/images/btnRight.png");
         Image scaledR = iconR.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        
+
         ImageIcon iconL = new ImageIcon("src/vista/images/btnLeft.png");
         Image scaledL = iconL.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        
+
         carrusel.setBtnImage(new ImageIcon(scaledR), new ImageIcon(scaledL));
-        
+
         btnReservar.setPreferredSize(new Dimension(240, 40));
         ImageIcon iconReservar = new ImageIcon("src/vista/images/btnReservar.png");
         Image scaledReservar = iconReservar.getImage().getScaledInstance(240, 40, Image.SCALE_SMOOTH);
         btnReservar.setIcon(new ImageIcon(scaledReservar));
-        
+
         btnFiltrar.setPreferredSize(new Dimension(240, 40));
         ImageIcon iconFiltros = new ImageIcon("src/vista/images/btnFiltros.png");
         Image scaledFiltros = iconFiltros.getImage().getScaledInstance(240, 40, Image.SCALE_SMOOTH);
         btnFiltrar.setIcon(new ImageIcon(scaledFiltros));
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -126,6 +131,11 @@ public class reservaUI extends javax.swing.JPanel {
                 btnFiltrarMouseExited(evt);
             }
         });
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
         footer.add(btnFiltrar, new java.awt.GridBagConstraints());
 
         add(footer, java.awt.BorderLayout.SOUTH);
@@ -134,7 +144,7 @@ public class reservaUI extends javax.swing.JPanel {
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
         carrusel.detenerAutoScroll();
         PanelHabitacion habitacion = (PanelHabitacion) carrusel.getCurrentPanel();
-        
+
         new Fecha(habitacion, huesped).setVisible(true);
 
     }//GEN-LAST:event_btnReservarActionPerformed
@@ -155,6 +165,12 @@ public class reservaUI extends javax.swing.JPanel {
         btnFiltrar.setBackground(new Color(1, 74, 174));
     }//GEN-LAST:event_btnFiltrarMouseExited
 
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        panelFiltros = new Filtros();
+        panelFiltros.addObserver(this);
+        panelFiltros.setVisible(true);
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
@@ -163,4 +179,16 @@ public class reservaUI extends javax.swing.JPanel {
     private componentes.PanelCarrusel carrusel;
     private javax.swing.JPanel footer;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update() {
+        habitaciones = ctrReservaUI.ctrHabitacionesConFiltros(panelFiltros.getFiltros());
+        System.out.println(habitaciones.size());
+        
+        carrusel.removePanels();
+
+        for (Habitacion habitacion : habitaciones) {
+            carrusel.agregarPanel(new PanelHabitacion(habitacion));
+        }
+    }
 }
