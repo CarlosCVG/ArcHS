@@ -3,6 +3,7 @@ package modelo.vo;
 import java.time.LocalDate;
 
 public class Empleado {
+
     private String usuario;
     private String pass;
     private int id_empleado;//esta
@@ -22,6 +23,14 @@ public class Empleado {
     private String ap2;
 
     public Empleado(String usuario, String pass, int id_empleado, int id_admin, int nss, String curp, String telefono, String email, String rfc, int id_puesto, String sueldo, LocalDate fecha_nac, String direccion, LocalDate fecha_contrat, String nombre, String ap1, String ap2) {
+        // Validar fechas
+        if (fecha_nac == null || fecha_contrat == null) {
+            throw new IllegalArgumentException("Las fechas no pueden ser nulas");
+        }
+
+        if (fecha_contrat.isBefore(fecha_nac)) {
+            throw new IllegalArgumentException("La fecha de contratación no puede ser anterior a la de nacimiento");
+        }
         this.usuario = usuario;
         this.pass = pass;
         this.id_empleado = id_empleado;
@@ -41,10 +50,10 @@ public class Empleado {
         this.ap2 = ap2;
     }
 
-    public Empleado(){
-    
+    public Empleado() {
+
     }
-    
+
     public int getId_empleado() {
         return id_empleado;
     }
@@ -185,7 +194,5 @@ public class Empleado {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
-    
-    
+
 }

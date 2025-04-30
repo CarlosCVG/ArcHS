@@ -4,10 +4,9 @@
  */
 package vista.ventanas;
 
-
+import controlador.CtrAdministrador;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import vista.ventanas.Admin;
 
 /**
  *
@@ -15,13 +14,16 @@ import vista.ventanas.Admin;
  */
 public class RegistroEmp extends javax.swing.JFrame {
 
-//    ControladorAlumno objetoControladorAlumno;
+    private CtrAdministrador controlador;
 
     public RegistroEmp() {
         initComponents();
+        // Para fecha de nacimiento
+        txtFechaNac.setToolTipText("Formato: YYYY-MM-DD");
+// Para fecha de contratación
+        txtFechCon.setToolTipText("Formato: YYYY-MM-DD");
+        this.controlador = new CtrAdministrador(this);
         this.setLocationRelativeTo(null);
-//        LogicaAlumno logi = new LogicaAlumno();
-//        objetoControladorAlumno = new ControladorAlumno(logi, this);
     }
 
     /**
@@ -43,7 +45,6 @@ public class RegistroEmp extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         txtEmail = new javax.swing.JTextField();
         txtRFC = new javax.swing.JTextField();
         txtPuesto = new javax.swing.JTextField();
@@ -120,17 +121,6 @@ public class RegistroEmp extends javax.swing.JFrame {
         jLabel6.setText("Curp:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
         getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 280, -1));
-
-        jButton2.setBackground(new java.awt.Color(0, 0, 153));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, -1, -1));
         getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 280, -1));
 
         txtRFC.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +136,12 @@ public class RegistroEmp extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 280, -1));
+
+        txtSueldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSueldoActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 280, -1));
         getContentPane().add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 280, -1));
         getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 280, -1));
@@ -220,7 +216,6 @@ public class RegistroEmp extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AgregarActionPerformed
-//        objetoControladorAlumno.agregarAlumno(); // Llama al método del controlador
         // Opcional: Mostrar mensaje de éxito
         JOptionPane.showMessageDialog(this, "Alumno registrado correctamente");
         // TODO add your handling code here:
@@ -230,13 +225,6 @@ public class RegistroEmp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_AgregarMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        objetoControladorAlumno.eliminarAlumno(getNumeroCont()); 
-//        JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
-        // TODO add your handling code here:        
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void txtRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRFCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRFCActionPerformed
@@ -244,6 +232,10 @@ public class RegistroEmp extends javax.swing.JFrame {
     private void txtPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuestoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPuestoActionPerformed
+
+    private void txtSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSueldoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSueldoActionPerformed
 
     public JTextField getTxtCurp() {
         return txtCurp;
@@ -273,10 +265,6 @@ public class RegistroEmp extends javax.swing.JFrame {
         return txtNombre;
     }
 
-//    public JTextField getTxtPass() {
-//        return txtPass;
-//    }
-
     public JTextField getTxtPrimerApe() {
         return txtPrimerApe;
     }
@@ -285,19 +273,25 @@ public class RegistroEmp extends javax.swing.JFrame {
         return txtPuesto;
     }
 
+    public JTextField getTxtRFC() {
+        return txtRFC;
+    }
+
     public JTextField getTxtSegApe() {
         return txtSegApe;
     }
 
-//    public JTextField getTxtUsuario() {
-//        return txtUsuario;
-//    }
+    public JTextField getTxtSueldo() {
+        return txtSueldo;
+    }
+
+    public JTextField getTxtTelefono() {
+        return txtTelefono;
+    }
 
     public JTextField getTxtid_admin() {
         return txtid_admin;
     }
-
-    
 
     /**
      * @param args the command line arguments
@@ -338,8 +332,7 @@ public class RegistroEmp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton_Agregar;
+    public javax.swing.JButton jButton_Agregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -354,19 +347,19 @@ public class RegistroEmp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField txtCurp;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFechCon;
-    private javax.swing.JTextField txtFechaNac;
-    private javax.swing.JTextField txtNSS;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPrimerApe;
-    private javax.swing.JTextField txtPuesto;
-    private javax.swing.JTextField txtRFC;
-    private javax.swing.JTextField txtSegApe;
-    private javax.swing.JTextField txtSueldo;
-    private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtid_admin;
+    public javax.swing.JTextField txtCurp;
+    public javax.swing.JTextField txtDireccion;
+    public javax.swing.JTextField txtEmail;
+    public javax.swing.JTextField txtFechCon;
+    public javax.swing.JTextField txtFechaNac;
+    public javax.swing.JTextField txtNSS;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtPrimerApe;
+    public javax.swing.JTextField txtPuesto;
+    public javax.swing.JTextField txtRFC;
+    public javax.swing.JTextField txtSegApe;
+    public javax.swing.JTextField txtSueldo;
+    public javax.swing.JTextField txtTelefono;
+    public javax.swing.JTextField txtid_admin;
     // End of variables declaration//GEN-END:variables
 }

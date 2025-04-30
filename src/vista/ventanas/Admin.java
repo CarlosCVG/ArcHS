@@ -1,14 +1,14 @@
 package vista.ventanas;
 
-import controlador.ctrlAdmin;
+import controlador.CtrAdministrador;
 
 public class Admin extends javax.swing.JFrame {
-
-    ctrlAdmin objetocAdmin;
+    private CtrAdministrador controlador;
 
     public Admin() {
         initComponents();
-
+        this.controlador = new CtrAdministrador(this);
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -18,19 +18,19 @@ public class Admin extends javax.swing.JFrame {
         body = new javax.swing.JPanel();
         Rigth = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabDatosEmp = new javax.swing.JTable();
         Left = new javax.swing.JPanel();
-        roundedButton2 = new componentes.RoundedButton();
-        roundedButton3 = new componentes.RoundedButton();
-        roundedButton4 = new componentes.RoundedButton();
-        roundedButton5 = new componentes.RoundedButton();
-        roundedButton6 = new componentes.RoundedButton();
+        btnVolver = new componentes.RoundedButton();
+        btnNewEmpleado = new componentes.RoundedButton();
+        btnModifOcupa = new componentes.RoundedButton();
+        btnEliminarEmp = new componentes.RoundedButton();
+        btnModiEmplea = new componentes.RoundedButton();
         header = new javax.swing.JPanel();
         usuarioLabel = new javax.swing.JLabel();
         footer = new javax.swing.JPanel();
         down = new javax.swing.JPanel();
-        custom_textfield1 = new componentes.custom_textfield();
-        roundedButton1 = new componentes.RoundedButton();
+        txtBuscaEmple = new componentes.custom_textfield();
+        btnBuscar = new componentes.RoundedButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         padding = new javax.swing.JPanel();
@@ -44,18 +44,15 @@ public class Admin extends javax.swing.JFrame {
 
         Rigth.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabDatosEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id empleado", "curp", "telefono", "email", "id_puesto", "nombre", "ap1"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabDatosEmp);
 
         Rigth.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -66,55 +63,60 @@ public class Admin extends javax.swing.JFrame {
         Left.setPreferredSize(new java.awt.Dimension(250, 10));
         Left.setLayout(new java.awt.GridLayout(5, 0, 30, 10));
 
-        roundedButton2.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton2.setBorder(null);
-        roundedButton2.setForeground(new java.awt.Color(1, 74, 173));
-        roundedButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Screenshot 2025-04-23 211513 (1).png"))); // NOI18N
-        roundedButton2.setText("");
-        roundedButton2.setBorderPainted(false);
-        roundedButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setBackground(new java.awt.Color(1, 74, 173));
+        btnVolver.setBorder(null);
+        btnVolver.setForeground(new java.awt.Color(1, 74, 173));
+        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Screenshot 2025-04-23 211513 (1).png"))); // NOI18N
+        btnVolver.setText("");
+        btnVolver.setBorderPainted(false);
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roundedButton2ActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
-        Left.add(roundedButton2);
+        Left.add(btnVolver);
 
-        roundedButton3.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton3.setForeground(new java.awt.Color(1, 74, 173));
-        roundedButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/nuevo_btn (1).png"))); // NOI18N
-        roundedButton3.setText("");
-        roundedButton3.setBorderPainted(false);
-        roundedButton3.setContentAreaFilled(true);
-        roundedButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnNewEmpleado.setBackground(new java.awt.Color(1, 74, 173));
+        btnNewEmpleado.setForeground(new java.awt.Color(1, 74, 173));
+        btnNewEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/nuevo_btn (1).png"))); // NOI18N
+        btnNewEmpleado.setText("");
+        btnNewEmpleado.setBorderPainted(false);
+        btnNewEmpleado.setContentAreaFilled(true);
+        btnNewEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roundedButton3ActionPerformed(evt);
+                btnNewEmpleadoActionPerformed(evt);
             }
         });
-        Left.add(roundedButton3);
+        Left.add(btnNewEmpleado);
 
-        roundedButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_modificacion.png"))); // NOI18N
-        roundedButton4.setText("");
-        Left.add(roundedButton4);
+        btnModifOcupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_modificacion.png"))); // NOI18N
+        btnModifOcupa.setText("");
+        Left.add(btnModifOcupa);
 
-        roundedButton5.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_Dar_Baja.png"))); // NOI18N
-        roundedButton5.setText("");
-        roundedButton5.setBorderPainted(false);
-        roundedButton5.setContentAreaFilled(true);
-        roundedButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarEmp.setBackground(new java.awt.Color(1, 74, 173));
+        btnEliminarEmp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_Dar_Baja.png"))); // NOI18N
+        btnEliminarEmp.setText("");
+        btnEliminarEmp.setBorderPainted(false);
+        btnEliminarEmp.setContentAreaFilled(true);
+        btnEliminarEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roundedButton5ActionPerformed(evt);
+                btnEliminarEmpActionPerformed(evt);
             }
         });
-        Left.add(roundedButton5);
+        Left.add(btnEliminarEmp);
 
-        roundedButton6.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton6.setBorder(null);
-        roundedButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_modificar_datos.png"))); // NOI18N
-        roundedButton6.setText("");
-        roundedButton6.setBorderPainted(false);
-        roundedButton6.setContentAreaFilled(true);
-        Left.add(roundedButton6);
+        btnModiEmplea.setBackground(new java.awt.Color(1, 74, 173));
+        btnModiEmplea.setBorder(null);
+        btnModiEmplea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/btn_modificar_datos.png"))); // NOI18N
+        btnModiEmplea.setText("");
+        btnModiEmplea.setBorderPainted(false);
+        btnModiEmplea.setContentAreaFilled(true);
+        btnModiEmplea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModiEmpleaActionPerformed(evt);
+            }
+        });
+        Left.add(btnModiEmplea);
 
         body.add(Left, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 449));
 
@@ -133,14 +135,14 @@ public class Admin extends javax.swing.JFrame {
 
         down.setBackground(new java.awt.Color(1, 74, 173));
         down.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        down.add(custom_textfield1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 670, 40));
+        down.add(txtBuscaEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 670, 40));
 
-        roundedButton1.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/flecha.png"))); // NOI18N
-        roundedButton1.setText("");
-        roundedButton1.setBorderPainted(false);
-        roundedButton1.setContentAreaFilled(true);
-        down.add(roundedButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, -20, -1, -1));
+        btnBuscar.setBackground(new java.awt.Color(1, 74, 173));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/flecha.png"))); // NOI18N
+        btnBuscar.setText("");
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.setContentAreaFilled(true);
+        down.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, -20, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(1, 74, 173));
         jPanel6.setForeground(new java.awt.Color(1, 74, 173));
@@ -168,23 +170,25 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void roundedButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton2ActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         SelectLogin selectlogin = new SelectLogin();
         selectlogin.setVisible(true);
         dispose();
-    }//GEN-LAST:event_roundedButton2ActionPerformed
+    }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void roundedButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton3ActionPerformed
+    private void btnNewEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEmpleadoActionPerformed
         RegistroEmp re = new RegistroEmp();
         re.setVisible(true);
         dispose();
-    }//GEN-LAST:event_roundedButton3ActionPerformed
+    }//GEN-LAST:event_btnNewEmpleadoActionPerformed
 
-    private void roundedButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton5ActionPerformed
-        RegistroEmp re = new RegistroEmp();
-        re.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_roundedButton5ActionPerformed
+    private void btnEliminarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarEmpActionPerformed
+
+    private void btnModiEmpleaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModiEmpleaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModiEmpleaActionPerformed
 
     public static void main(String args[]) {
 
@@ -199,7 +203,12 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Rigth;
     private javax.swing.JPanel body;
-    private componentes.custom_textfield custom_textfield1;
+    public componentes.RoundedButton btnBuscar;
+    public componentes.RoundedButton btnEliminarEmp;
+    public componentes.RoundedButton btnModiEmplea;
+    public componentes.RoundedButton btnModifOcupa;
+    public componentes.RoundedButton btnNewEmpleado;
+    public componentes.RoundedButton btnVolver;
     private javax.swing.JPanel down;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
@@ -207,14 +216,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel padding;
-    private componentes.RoundedButton roundedButton1;
-    private componentes.RoundedButton roundedButton2;
-    private componentes.RoundedButton roundedButton3;
-    private componentes.RoundedButton roundedButton4;
-    private componentes.RoundedButton roundedButton5;
-    private componentes.RoundedButton roundedButton6;
+    public javax.swing.JTable tabDatosEmp;
+    public componentes.custom_textfield txtBuscaEmple;
     private javax.swing.JLabel usuarioLabel;
     // End of variables declaration//GEN-END:variables
 }
