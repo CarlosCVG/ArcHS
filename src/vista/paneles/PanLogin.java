@@ -187,7 +187,7 @@ public class PanLogin extends javax.swing.JPanel {
                     } else if (nombrePuesto.equals("Camarero")) {
 //                        JOptionPane.showMessageDialog(null, "Camarero");
                         WinEmpleado empleadoWindow = new WinEmpleado(empleado, nombrePuesto);
-                        empleadoWindow.setBounds(10, 50, 1000, 700);
+                        empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
