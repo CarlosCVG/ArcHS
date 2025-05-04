@@ -1,6 +1,6 @@
 package vista.ventanas;
 
-import controlador.CtrFechaReservacion;
+import controlador.CtrlFechaReservacion;
 import excepciones.ExAgregar;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import vista.paneles.PanelHabitacion;
 
 public class Fecha extends javax.swing.JFrame {
 
-    private CtrFechaReservacion controlador = new CtrFechaReservacion();
+    private CtrlFechaReservacion controlador = new CtrlFechaReservacion();
     private Habitacion habitacion;
     private Huesped huesped;
 

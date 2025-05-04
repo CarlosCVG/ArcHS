@@ -1,35 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controlador;
 
 import vista.ventanas.Admin;
 import vista.ventanas.RegistroEmp;
 import modelo.vo.Empleado;
 import modelo.logica.logicaEmpleado;
-import excepciones.BusinessException;
+import excepciones.ExBusiness;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CtrAdministrador {
+public class CtrlAdministrador {
 
     private Admin vistaAdmin;
     private RegistroEmp vistaRegistro;
     private logicaEmpleado logica;
     private Empleado empleadoSeleccionado;
 
-    public CtrAdministrador(Admin vista) {
+    public CtrlAdministrador(Admin vista) {
         this.vistaAdmin = vista;
         this.logica = new logicaEmpleado();
         configurarListeners();
         cargarTablaEmpleados();
     }
 
-    public CtrAdministrador(RegistroEmp vista) {
+    public CtrlAdministrador(RegistroEmp vista) {
         this.vistaRegistro = vista;
         this.logica = new logicaEmpleado();
         configurarListenersRegistro();
@@ -57,17 +54,17 @@ public class CtrAdministrador {
             // Validación de fecha de nacimiento (mayor de 18 años)
             LocalDate fechaMinimaNacimiento = LocalDate.now().minusYears(18);
             if (nuevo.getFecha_nac().isAfter(fechaMinimaNacimiento)) {
-                throw new BusinessException("El empleado debe ser mayor de edad (18+ años)");
+                throw new ExBusiness("El empleado debe ser mayor de edad (18+ años)");
             }
 
             // Validación de fecha de contratación (no puede ser futura)
             if (nuevo.getFecha_contrat().isAfter(LocalDate.now())) {
-                throw new BusinessException("La fecha de contratación no puede ser futura");
+                throw new ExBusiness("La fecha de contratación no puede ser futura");
             }
 
             // Validación que fecha contratación no sea anterior a fecha nacimiento
             if (nuevo.getFecha_contrat().isBefore(nuevo.getFecha_nac())) {
-                throw new BusinessException("La fecha de contratación no puede ser anterior a la fecha de nacimiento");
+                throw new ExBusiness("La fecha de contratación no puede ser anterior a la fecha de nacimiento");
             }
 
             Empleado empleadoCreado = logica.agregarEmpleado(nuevo);
@@ -77,7 +74,7 @@ public class CtrAdministrador {
                     JOptionPane.INFORMATION_MESSAGE);
 
             volverAVentanaAdmin();
-        } catch (BusinessException ex) {
+        } catch (ExBusiness ex) {
             JOptionPane.showMessageDialog(vistaRegistro, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(vistaRegistro,
@@ -101,7 +98,7 @@ public class CtrAdministrador {
     private void actualizarEmpleado() {
         try {
             if (empleadoSeleccionado == null) {
-                throw new BusinessException("No se ha seleccionado ningún empleado para actualizar");
+                throw new ExBusiness("No se ha seleccionado ningún empleado para actualizar");
             }
 
             Empleado actualizado = construirEmpleadoDesdeVista(vistaRegistro, empleadoSeleccionado.getId_empleado());
@@ -114,7 +111,7 @@ public class CtrAdministrador {
             // Regresar a la ventana principal
             volverAVentanaAdmin();
 
-        } catch (BusinessException ex) {
+        } catch (ExBusiness ex) {
             JOptionPane.showMessageDialog(vistaRegistro, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(vistaRegistro, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -134,15 +131,15 @@ public class CtrAdministrador {
     }
 
     // parseFecha
-    private LocalDate parseFecha(String fechaStr, String campo) throws BusinessException {
+    private LocalDate parseFecha(String fechaStr, String campo) throws ExBusiness {
         try {
             return LocalDate.parse(fechaStr);
         } catch (DateTimeParseException e) {
-            throw new BusinessException("Formato de fecha incorrecto para " + campo + ". Use formato YYYY-MM-DD");
+            throw new ExBusiness("Formato de fecha incorrecto para " + campo + ". Use formato YYYY-MM-DD");
         }
     }
 
-    private Empleado construirEmpleadoDesdeVista(RegistroEmp vista, Integer idExistente) throws BusinessException {
+    private Empleado construirEmpleadoDesdeVista(RegistroEmp vista, Integer idExistente) throws ExBusiness {
         Empleado emp = new Empleado();
         try {
             
@@ -167,12 +164,12 @@ public class CtrAdministrador {
 
             return emp;
         } catch (NumberFormatException e) {
-            throw new BusinessException("Formato numérico inválido en algún campo");
+            throw new ExBusiness("Formato numérico inválido en algún campo");
         }
     }
 
 // Versión simplificada para cuando no necesitas el ID
-    private Empleado construirEmpleadoDesdeVista(RegistroEmp vista) throws BusinessException {
+    private Empleado construirEmpleadoDesdeVista(RegistroEmp vista) throws ExBusiness {
         return construirEmpleadoDesdeVista(vista, null);
     }
     // 2. Eliminar un empleado
@@ -198,7 +195,7 @@ public class CtrAdministrador {
                     cargarTablaEmpleados();
                     empleadoSeleccionado = null;
                 }
-            } catch (BusinessException ex) {
+            } catch (ExBusiness ex) {
                 JOptionPane.showMessageDialog(vistaAdmin, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -243,7 +240,7 @@ public class CtrAdministrador {
                     "Ingrese un número válido para el puesto",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } catch (BusinessException e) {
+        } catch (ExBusiness e) {
             JOptionPane.showMessageDialog(vistaAdmin,
                     e.getMessage(),
                     "Error",
@@ -299,7 +296,7 @@ public class CtrAdministrador {
 
                 // Verificar si hay cambios reales
                 if (!hayCambiosSignificativos(empleadoSeleccionado, cambios)) {
-                    throw new BusinessException("No se detectaron cambios para guardar");
+                    throw new ExBusiness("No se detectaron cambios para guardar");
                 }
 
                 // Aplicar cambios al empleado existente
@@ -312,7 +309,7 @@ public class CtrAdministrador {
                 mostrarConfirmacionActualizacion(actualizado);
                 volverAVentanaAdmin();
 
-            } catch (BusinessException ex) {
+            } catch (ExBusiness ex) {
                 mostrarErrorActualizacion(ex);
             }
         });
@@ -382,7 +379,7 @@ public class CtrAdministrador {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void mostrarErrorActualizacion(BusinessException ex) {
+    private void mostrarErrorActualizacion(ExBusiness ex) {
         JOptionPane.showMessageDialog(null,
                 "Error al actualizar empleado:\n" + ex.getMessage(),
                 "Error en Actualización",
@@ -436,7 +433,7 @@ public class CtrAdministrador {
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(vistaAdmin, "Ingrese un ID numérico válido", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (BusinessException ex) {
+        } catch (ExBusiness ex) {
             JOptionPane.showMessageDialog(vistaAdmin, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -456,7 +453,7 @@ public class CtrAdministrador {
         RegistroEmp registro = new RegistroEmp();
         registro.setVisible(true);
         vistaAdmin.dispose();
-        new CtrAdministrador(registro);
+        new CtrlAdministrador(registro);
     }
 
     private void cargarTablaEmpleados() {
@@ -495,7 +492,7 @@ public class CtrAdministrador {
                     int id = (int) vistaAdmin.tabDatosEmp.getValueAt(selectedRow, 0);
                     try {
                         empleadoSeleccionado = logica.consultarEmpleado(id);
-                    } catch (BusinessException ex) {
+                    } catch (ExBusiness ex) {
                         JOptionPane.showMessageDialog(vistaAdmin, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }

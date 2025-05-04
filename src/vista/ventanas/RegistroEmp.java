@@ -4,7 +4,7 @@
  */
 package vista.ventanas;
 
-import controlador.CtrAdministrador;
+import controlador.CtrlAdministrador;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  */
 public class RegistroEmp extends javax.swing.JFrame {
 
-    private CtrAdministrador controlador;
+    private CtrlAdministrador controlador;
 
     public RegistroEmp() {
         initComponents();
@@ -22,7 +22,7 @@ public class RegistroEmp extends javax.swing.JFrame {
         txtFechaNac.setToolTipText("Formato: YYYY-MM-DD");
 // Para fecha de contratación
         txtFechCon.setToolTipText("Formato: YYYY-MM-DD");
-        this.controlador = new CtrAdministrador(this);
+        this.controlador = new CtrlAdministrador(this);
         this.setLocationRelativeTo(null);
     }
 

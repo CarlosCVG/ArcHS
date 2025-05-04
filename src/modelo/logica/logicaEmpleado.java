@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import modelo.vo.Empleado;
 import repositorio.RepEmpleados;
-import excepciones.BusinessException;
+import excepciones.ExBusiness;
 
 public class logicaEmpleado {
 
@@ -16,17 +16,17 @@ public class logicaEmpleado {
     }
 
     // Agregar empleado
-    public Empleado agregarEmpleado(Empleado nuevoEmpleado) throws BusinessException {
+    public Empleado agregarEmpleado(Empleado nuevoEmpleado) throws ExBusiness {
         validarEmpleado(nuevoEmpleado);
 
         // Verificar que el NSS no este duplicado
         if (RepEmpleados.getEmpleados().stream().anyMatch(e -> e.getNss() == nuevoEmpleado.getNss())) {
-            throw new BusinessException("El NSS ya esta registrado");
+            throw new ExBusiness("El NSS ya esta registrado");
         }
 
         // Verificar que el RFC no este duplicado
         if (RepEmpleados.getEmpleados().stream().anyMatch(e -> e.getRfc().equalsIgnoreCase(nuevoEmpleado.getRfc()))) {
-            throw new BusinessException("El RFC ya esta registrado");
+            throw new ExBusiness("El RFC ya esta registrado");
         }
 
         Empleado empleadoCreado = RepEmpleados.insert(
@@ -47,52 +47,52 @@ public class logicaEmpleado {
         );
 
         if (empleadoCreado == null) {
-            throw new BusinessException("Error al agregar empleado");
+            throw new ExBusiness("Error al agregar empleado");
         }
 
         return empleadoCreado;
     }
 
     //  Eliminar empleado
-    public boolean eliminarEmpleado(int idEmpleado) throws BusinessException {
+    public boolean eliminarEmpleado(int idEmpleado) throws ExBusiness {
         Empleado empleado = RepEmpleados.search(idEmpleado);
 
         if (empleado == null) {
-            throw new BusinessException("Empleado no encontrado");
+            throw new ExBusiness("Empleado no encontrado");
         }
 
         // Validar que el empleado no tenga registros asociados 
         return RepEmpleados.delete(empleado);
     }
 
-    public void modificarSoloPuesto(Empleado empleado) throws BusinessException {
+    public void modificarSoloPuesto(Empleado empleado) throws ExBusiness {
         // Validación específica para cambio de puesto
         if (empleado.getId_puesto() <= 0) {
-            throw new BusinessException("El ID de puesto debe ser positivo");
+            throw new ExBusiness("El ID de puesto debe ser positivo");
         }
 
         Empleado existente = RepEmpleados.search(empleado.getId_empleado());
         if (existente == null) {
-            throw new BusinessException("Empleado no encontrado");
+            throw new ExBusiness("Empleado no encontrado");
         }
 
         // Solo actualiza el puesto, manteniendo los demás valores
         existente.setId_puesto(empleado.getId_puesto());
 
         if (!RepEmpleados.update(existente)) {
-            throw new BusinessException("Error al actualizar el puesto");
+            throw new ExBusiness("Error al actualizar el puesto");
         }
     }
 
     // Modificar datos de empleados
-    public Empleado modificarEmpleado(Empleado empleadoActualizado) throws BusinessException {
+    public Empleado modificarEmpleado(Empleado empleadoActualizado) throws ExBusiness {
         // Validar campos obligatorios
         validarEmpleado(empleadoActualizado);
 
         // Obtener empleado actual antes de los cambios
         Empleado empleadoOriginal = RepEmpleados.search(empleadoActualizado.getId_empleado());
         if (empleadoOriginal == null) {
-            throw new BusinessException("Empleado no encontrado");
+            throw new ExBusiness("Empleado no encontrado");
         }
 
         // Validar NSS solo si ha cambiado
@@ -112,40 +112,40 @@ public class logicaEmpleado {
 
         // Realizar la actualización
         if (!RepEmpleados.update(empleadoActualizado)) {
-            throw new BusinessException("Error al guardar los cambios");
+            throw new ExBusiness("Error al guardar los cambios");
         }
 
         return empleadoActualizado;
     }
 
 // Métodos de validación específicos
-    private void validarNSSUnico(int nss, int idEmpleadoActual) throws BusinessException {
+    private void validarNSSUnico(int nss, int idEmpleadoActual) throws ExBusiness {
         boolean existe = RepEmpleados.getEmpleados().stream()
                 .filter(e -> e.getId_empleado() != idEmpleadoActual)
                 .anyMatch(e -> e.getNss() == nss);
 
         if (existe) {
-            throw new BusinessException("El NSS " + nss + " ya pertenece a otro empleado");
+            throw new ExBusiness("El NSS " + nss + " ya pertenece a otro empleado");
         }
     }
 
-    private void validarCURPUnica(String curp, int idEmpleadoActual) throws BusinessException {
+    private void validarCURPUnica(String curp, int idEmpleadoActual) throws ExBusiness {
         boolean existe = RepEmpleados.getEmpleados().stream()
                 .filter(e -> e.getId_empleado() != idEmpleadoActual)
                 .anyMatch(e -> e.getCurp().equalsIgnoreCase(curp));
 
         if (existe) {
-            throw new BusinessException("La CURP " + curp + " ya pertenece a otro empleado");
+            throw new ExBusiness("La CURP " + curp + " ya pertenece a otro empleado");
         }
     }
 
-    private void validarRFCUnico(String rfc, int idEmpleadoActual) throws BusinessException {
+    private void validarRFCUnico(String rfc, int idEmpleadoActual) throws ExBusiness {
         boolean existe = RepEmpleados.getEmpleados().stream()
                 .filter(e -> e.getId_empleado() != idEmpleadoActual)
                 .anyMatch(e -> e.getRfc().equalsIgnoreCase(rfc));
 
         if (existe) {
-            throw new BusinessException("El RFC " + rfc + " ya pertenece a otro empleado");
+            throw new ExBusiness("El RFC " + rfc + " ya pertenece a otro empleado");
         }
     }
 
@@ -155,60 +155,60 @@ public class logicaEmpleado {
     }
 
     // Consultar empleado por ID
-    public Empleado consultarEmpleado(int idEmpleado) throws BusinessException {
+    public Empleado consultarEmpleado(int idEmpleado) throws ExBusiness {
         Empleado empleado = RepEmpleados.search(idEmpleado);
 
         if (empleado == null) {
-            throw new BusinessException("Empleado no encontrado");
+            throw new ExBusiness("Empleado no encontrado");
         }
 
         return empleado;
     }
 
     // Metodo de validacion 
-    public void validarEmpleado(Empleado empleado) throws BusinessException {
+    public void validarEmpleado(Empleado empleado) throws ExBusiness {
         if (empleado.getNombre() == null || empleado.getNombre().trim().isEmpty()) {
-            throw new BusinessException("El nombre es requerido");
+            throw new ExBusiness("El nombre es requerido");
         }
 
         if (empleado.getAp1() == null || empleado.getAp1().trim().isEmpty()) {
-            throw new BusinessException("El primer apellido es requerido");
+            throw new ExBusiness("El primer apellido es requerido");
         }
 
         if (empleado.getNss() <= 0) {
-            throw new BusinessException("NSS no valido");
+            throw new ExBusiness("NSS no valido");
         }
 
         if (empleado.getRfc() == null || empleado.getRfc().trim().isEmpty()) {
-            throw new BusinessException("RFC es requerido");
+            throw new ExBusiness("RFC es requerido");
         }
 
 //        if (empleado.getFecha_nac() == null || empleado.getFecha_nac().isAfter(LocalDate.now().minusYears(18))) {
 //            throw new BusinessException("Fecha de nacimiento no valida");
 //        }
         if (empleado.getFecha_nac() == null) {
-            throw new BusinessException("Fecha de nacimiento es requerida");
+            throw new ExBusiness("Fecha de nacimiento es requerida");
         }
 
         LocalDate fechaActual = LocalDate.now();
         LocalDate fechaMinima = fechaActual.minusYears(18);
 
         if (empleado.getFecha_nac().isAfter(fechaMinima)) {
-            throw new BusinessException("El empleado debe ser mayor de edad (18+ años)");
+            throw new ExBusiness("El empleado debe ser mayor de edad (18+ años)");
         }
 
         if (empleado.getFecha_contrat() == null || empleado.getFecha_contrat().isAfter(LocalDate.now())) {
-            throw new BusinessException("Fecha de contratacion no valida");
+            throw new ExBusiness("Fecha de contratacion no valida");
         }
 
         // Validar formato de email
         if (empleado.getEmail() == null) {
-            throw new BusinessException("Email no vacio");
+            throw new ExBusiness("Email no vacio");
         }
 
         // Validar telefono 
         if (empleado.getTelefono() == null) {
-            throw new BusinessException("Telefono es inaceptable ");
+            throw new ExBusiness("Telefono es inaceptable ");
         }
     }
 }

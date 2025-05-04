@@ -1,13 +1,13 @@
 package vista.ventanas;
 
-import controlador.CtrAdministrador;
+import controlador.CtrlAdministrador;
 
 public class Admin extends javax.swing.JFrame {
-    private CtrAdministrador controlador;
+    private CtrlAdministrador controlador;
 
     public Admin() {
         initComponents();
-        this.controlador = new CtrAdministrador(this);
+        this.controlador = new CtrlAdministrador(this);
         this.setLocationRelativeTo(null);
     }
 

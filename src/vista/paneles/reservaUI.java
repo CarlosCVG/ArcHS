@@ -5,7 +5,7 @@
 package vista.paneles;
 
 import componentes.Observer;
-import controlador.CtrReservaUI;
+import controlador.CtrlReservaUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -26,7 +26,7 @@ public class reservaUI extends JPanel implements Observer {
     /**
      * Creates new form registroUI
      */
-    private CtrReservaUI ctrReservaUI = new CtrReservaUI();
+    private CtrlReservaUI ctrReservaUI = new CtrlReservaUI();
     private List<Habitacion> habitaciones;
     private Huesped huesped;
     private Filtros panelFiltros;

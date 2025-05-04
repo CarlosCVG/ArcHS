@@ -6,7 +6,7 @@ package vista.ventanas;
 
 import componentes.Observable;
 import componentes.Observer;
-import controlador.CtrFiltrReserva;
+import controlador.CtrlFiltroReserva;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class Filtros extends JFrame implements Observable {
 
     private List<Observer> observadores = new ArrayList<>();
     private Map<String, Integer> filtros = new HashMap<>();
-    private CtrFiltrReserva controlador = new CtrFiltrReserva();
+    private CtrlFiltroReserva controlador = new CtrlFiltroReserva();
 
     public Filtros() {
         initComponents();
