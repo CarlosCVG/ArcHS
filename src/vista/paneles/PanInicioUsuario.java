@@ -8,12 +8,12 @@ package vista.paneles;
  *
  * @author feriv
  */
-public class Inicio_usuario extends javax.swing.JPanel {
+public class PanInicioUsuario extends javax.swing.JPanel {
 
     /**
      * Creates new form Inicio_usuario
      */
-    public Inicio_usuario() {
+    public PanInicioUsuario() {
         initComponents();
     }
 

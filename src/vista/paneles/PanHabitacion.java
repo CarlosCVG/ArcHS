@@ -20,14 +20,14 @@ import modelo.vo.Habitacion;
  *
  * @author edwin
  */
-public class PanelHabitacion extends JPanel {
+public class PanHabitacion extends JPanel {
 
     private static final String IMAGE_FOLDER_PATH = "src/vista/images/habitacionIMG/";
     private static final String IMAGE_PREFIX = "habitacion";
 
     private Habitacion habitacion;
 
-    public PanelHabitacion(Habitacion habitacion) {
+    public PanHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
         initComponents();
         configurarComponentes();
@@ -91,7 +91,6 @@ public class PanelHabitacion extends JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         PanelIMG = new javax.swing.JPanel();
         lblIMG1 = new javax.swing.JLabel();

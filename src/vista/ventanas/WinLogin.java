@@ -1,8 +1,9 @@
 package vista.ventanas;
 
-public class Login extends javax.swing.JFrame {
+public class WinLogin extends javax.swing.JFrame {
 private int loginselected;
-    public Login(int loginselected) {
+    public WinLogin(int loginselected) {
+        this.setUndecorated(true);
         initComponents();
         this.loginselected = loginselected;
         this.loginUI1.setSeleccion(loginselected);
@@ -14,7 +15,7 @@ private int loginselected;
 
         Left = new javax.swing.JPanel();
         Right = new javax.swing.JPanel();
-        loginUI1 = new vista.paneles.loginUI();
+        loginUI1 = new vista.paneles.PanLogin();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(10, 10));
@@ -44,6 +45,6 @@ private int loginselected;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Right;
-    private vista.paneles.loginUI loginUI1;
+    private vista.paneles.PanLogin loginUI1;
     // End of variables declaration//GEN-END:variables
 }

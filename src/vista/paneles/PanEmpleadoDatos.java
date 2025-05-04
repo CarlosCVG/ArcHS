@@ -9,11 +9,11 @@ import javax.swing.border.EmptyBorder;
 import modelo.vo.Empleado;
 import modelo.vo.Puesto;
 
-public class Empleado_Info extends javax.swing.JPanel {
+public class PanEmpleadoDatos extends javax.swing.JPanel {
     private String data;
     private Empleado empleado;
     private String nombrePuesto;
-    public Empleado_Info(Empleado empleado, String nombrePuesto) {
+    public PanEmpleadoDatos(Empleado empleado, String nombrePuesto) {
         this.empleado = empleado;
         this.nombrePuesto = nombrePuesto;
         initComponents();

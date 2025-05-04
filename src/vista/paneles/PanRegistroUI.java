@@ -8,12 +8,12 @@ package vista.paneles;
  *
  * @author karlo
  */
-public class registroUI extends javax.swing.JPanel {
+public class PanRegistroUI extends javax.swing.JPanel {
 
     /**
      * Creates new form reservaUI
      */
-    public registroUI() {
+    public PanRegistroUI() {
         initComponents();
     }
 
@@ -25,7 +25,6 @@ public class registroUI extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();

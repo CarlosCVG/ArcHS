@@ -2,11 +2,11 @@
 package controlador;
 
 import excepciones.ExAgregar;
-import modelo.logica.LogicaReservacion;
+import modelo.logica.LogicReservacion;
 import modelo.vo.Reservacion;
 
 public class CtrlFechaReservacion {
-    LogicaReservacion logicaReservacion = new LogicaReservacion();
+    LogicReservacion logicaReservacion = new LogicReservacion();
     
     public boolean ctrAgregarReservacion(Reservacion reservacion) throws ExAgregar{
         return logicaReservacion.logicaAgregarReservacion(reservacion);

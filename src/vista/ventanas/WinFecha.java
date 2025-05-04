@@ -9,15 +9,15 @@ import javax.swing.JOptionPane;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
-import vista.paneles.PanelHabitacion;
+import vista.paneles.PanHabitacion;
 
-public class Fecha extends javax.swing.JFrame {
+public class WinFecha extends javax.swing.JFrame {
 
     private CtrlFechaReservacion controlador = new CtrlFechaReservacion();
     private Habitacion habitacion;
     private Huesped huesped;
 
-    public Fecha(PanelHabitacion Phabitacion, Huesped huesped) {
+    public WinFecha(PanHabitacion Phabitacion, Huesped huesped) {
         initComponents();
         setLocationRelativeTo(null);
         this.habitacion = Phabitacion.getHabitacion();

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package modelo.logica;
 
 import excepciones.ExConsulta;
@@ -12,11 +9,7 @@ import modelo.dao.DAOHabitacion;
 import modelo.dao.DAOReservacion;
 import modelo.vo.Habitacion;
 
-/**
- *
- * @author edwin
- */
-public class LogicaHabitacion {
+public class LogicHabitacion {
 
     DAOHabitacion daoHabitacion = new DAOHabitacion();
     DAOReservacion daoReservacion = new DAOReservacion();

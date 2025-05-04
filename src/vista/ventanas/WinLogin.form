@@ -48,7 +48,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="vista.paneles.loginUI" name="loginUI1">
+        <Component class="vista.paneles.PanLogin" name="loginUI1">
         </Component>
       </SubComponents>
     </Container>

@@ -23,13 +23,13 @@ import modelo.vo.Habitacion;
  *
  * @author feriv
  */
-public class Filtros extends JFrame implements Observable {
+public class WinFiltros extends JFrame implements Observable {
 
     private List<Observer> observadores = new ArrayList<>();
     private Map<String, Integer> filtros = new HashMap<>();
     private CtrlFiltroReserva controlador = new CtrlFiltroReserva();
 
-    public Filtros() {
+    public WinFiltros() {
         initComponents();
         setLocationRelativeTo(null);
         inicializarComponentes();

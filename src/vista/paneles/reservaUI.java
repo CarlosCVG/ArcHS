@@ -13,9 +13,9 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
-import vista.ventanas.Fecha;
+import vista.ventanas.WinFecha;
 import javax.swing.JPanel;
-import vista.ventanas.Filtros;
+import vista.ventanas.WinFiltros;
 
 /**
  *
@@ -29,7 +29,7 @@ public class reservaUI extends JPanel implements Observer {
     private CtrlReservaUI ctrReservaUI = new CtrlReservaUI();
     private List<Habitacion> habitaciones;
     private Huesped huesped;
-    private Filtros panelFiltros;
+    private WinFiltros panelFiltros;
 
     public reservaUI(Huesped huesped) {
 
@@ -41,7 +41,7 @@ public class reservaUI extends JPanel implements Observer {
 
     private void configurarComponentes() {
         for (Habitacion habitacion : habitaciones) {
-            carrusel.agregarPanel(new PanelHabitacion(habitacion));
+            carrusel.agregarPanel(new PanHabitacion(habitacion));
         }
 
         carrusel.setColorVelo(new Color(1, 74, 173));
@@ -143,9 +143,9 @@ public class reservaUI extends JPanel implements Observer {
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
         carrusel.detenerAutoScroll();
-        PanelHabitacion habitacion = (PanelHabitacion) carrusel.getCurrentPanel();
+        PanHabitacion habitacion = (PanHabitacion) carrusel.getCurrentPanel();
 
-        new Fecha(habitacion, huesped).setVisible(true);
+        new WinFecha(habitacion, huesped).setVisible(true);
 
     }//GEN-LAST:event_btnReservarActionPerformed
 
@@ -166,7 +166,7 @@ public class reservaUI extends JPanel implements Observer {
     }//GEN-LAST:event_btnFiltrarMouseExited
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        panelFiltros = new Filtros();
+        panelFiltros = new WinFiltros();
         panelFiltros.addObserver(this);
         panelFiltros.setVisible(true);
     }//GEN-LAST:event_btnFiltrarActionPerformed
@@ -188,7 +188,7 @@ public class reservaUI extends JPanel implements Observer {
         carrusel.removePanels();
 
         for (Habitacion habitacion : habitaciones) {
-            carrusel.agregarPanel(new PanelHabitacion(habitacion));
+            carrusel.agregarPanel(new PanHabitacion(habitacion));
         }
     }
 }

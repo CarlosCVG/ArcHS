@@ -2,10 +2,11 @@ package vista.ventanas;
 
 import controlador.CtrlAdministrador;
 
-public class Admin extends javax.swing.JFrame {
+public class WinAdministrador extends javax.swing.JFrame {
     private CtrlAdministrador controlador;
 
-    public Admin() {
+    public WinAdministrador() {
+        this.setUndecorated(true);
         initComponents();
         this.controlador = new CtrlAdministrador(this);
         this.setLocationRelativeTo(null);
@@ -171,13 +172,14 @@ public class Admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        SelectLogin selectlogin = new SelectLogin();
+        WinSelectLogin selectlogin = new WinSelectLogin();
+        selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
         selectlogin.setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnNewEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEmpleadoActionPerformed
-        RegistroEmp re = new RegistroEmp();
+        WinRegistroEmp re = new WinRegistroEmp();
         re.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNewEmpleadoActionPerformed
@@ -190,14 +192,6 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModiEmpleaActionPerformed
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Admin().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Left;

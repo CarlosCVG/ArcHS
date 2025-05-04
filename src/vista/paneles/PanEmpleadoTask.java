@@ -10,13 +10,13 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import modelo.vo.Empleado;
 
-public class Tareas_Empleados extends javax.swing.JPanel {
+public class PanEmpleadoTask extends javax.swing.JPanel {
 
     private String data;
     private Empleado empleado;
     private String nombrePuesto;
 
-    public Tareas_Empleados(Empleado empleado, String nombrePuesto) {
+    public PanEmpleadoTask(Empleado empleado, String nombrePuesto) {
         this.empleado = empleado;
         this.nombrePuesto = nombrePuesto;
         initComponents();

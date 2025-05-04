@@ -3,11 +3,11 @@ package controlador;
 
 import java.util.List;
 import java.util.Map;
-import modelo.logica.LogicaHabitacion;
+import modelo.logica.LogicHabitacion;
 import modelo.vo.Habitacion;
 
 public class CtrlReservaUI {
-    LogicaHabitacion logicaHabitacion = new LogicaHabitacion();
+    LogicHabitacion logicaHabitacion = new LogicHabitacion();
     
     public List<Habitacion> ctrHabitacionesDisponibles(){
         return logicaHabitacion.logicaBuscarHabitacionesDisponibles();

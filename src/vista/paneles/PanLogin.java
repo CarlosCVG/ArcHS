@@ -8,19 +8,19 @@ import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 import modelo.vo.Huesped;
 import modelo.vo.Puesto;
-import vista.ventanas.Admin;
-import vista.ventanas.EmpleadoW;
-import vista.ventanas.Recepcion;
-import vista.ventanas.SelectLogin;
-import vista.ventanas.Usuario;
+import vista.ventanas.WinAdministrador;
+import vista.ventanas.WinEmpleado;
+import vista.ventanas.WinRecepcion;
+import vista.ventanas.WinSelectLogin;
+import vista.ventanas.WinUsuario;
 
-public class loginUI extends javax.swing.JPanel {
+public class PanLogin extends javax.swing.JPanel {
 
     private CtrlLogin ctrll = new CtrlLogin();
     private String usuario, password;
     private int loginselected;
 
-    public loginUI() {
+    public PanLogin() {
         initComponents();
     }
 
@@ -153,7 +153,7 @@ public class loginUI extends javax.swing.JPanel {
                 if (ctrll.adminLogged(usuario, password) != null) {
                     administrador = ctrll.adminLogged(usuario, password);
                     //JOptionPane.showMessageDialog(null, administrador.getNombre());
-                    Admin adminWindow = new Admin();
+                    WinAdministrador adminWindow = new WinAdministrador();
                     adminWindow.setVisible(true);
                     Window framePadre = SwingUtilities.getWindowAncestor(this);
                     framePadre.dispose();
@@ -171,22 +171,22 @@ public class loginUI extends javax.swing.JPanel {
 //                    JOptionPane.showMessageDialog(null, empleado.getNombre());
                     nombrePuesto = ctrll.searchPuesto(empleado);
                     if (nombrePuesto.equals("Recepcionista")) {
-                        JOptionPane.showMessageDialog(null, "Recep");
-                        Recepcion empleadoWindow = new Recepcion(empleado, nombrePuesto);
+//                        JOptionPane.showMessageDialog(null, "Recep");
+                        WinRecepcion empleadoWindow = new WinRecepcion(empleado, nombrePuesto);
                         empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
                     } else if (nombrePuesto.equals("Limpieza")) {
-                        JOptionPane.showMessageDialog(null, "Limpieza");
-                        EmpleadoW empleadoWindow = new EmpleadoW(empleado, nombrePuesto);
+//                        JOptionPane.showMessageDialog(null, "Limpieza");
+                        WinEmpleado empleadoWindow = new WinEmpleado(empleado, nombrePuesto);
                         empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
                     } else if (nombrePuesto.equals("Camarero")) {
-                        JOptionPane.showMessageDialog(null, "Camarero");
-                        EmpleadoW empleadoWindow = new EmpleadoW(empleado, nombrePuesto);
+//                        JOptionPane.showMessageDialog(null, "Camarero");
+                        WinEmpleado empleadoWindow = new WinEmpleado(empleado, nombrePuesto);
                         empleadoWindow.setBounds(10, 50, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
@@ -206,7 +206,7 @@ public class loginUI extends javax.swing.JPanel {
                 if (ctrll.huespedLogged(usuario, password) != null) {
                     huesped = ctrll.huespedLogged(usuario, password);
 //                    JOptionPane.showMessageDialog(null, huesped.getNombre());
-                    Usuario usuarioWindow = new Usuario(huesped);
+                    WinUsuario usuarioWindow = new WinUsuario(huesped);
                     usuarioWindow.setVisible(true);
                     Window framePadre = SwingUtilities.getWindowAncestor(this);
                     framePadre.dispose();
@@ -218,7 +218,7 @@ public class loginUI extends javax.swing.JPanel {
     }//GEN-LAST:event_roundedButton2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        SelectLogin selectlogin = new SelectLogin();
+        WinSelectLogin selectlogin = new WinSelectLogin();
         selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
         selectlogin.setVisible(true);
         Window framePadre = SwingUtilities.getWindowAncestor(this);

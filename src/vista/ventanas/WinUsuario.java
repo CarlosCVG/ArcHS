@@ -4,15 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
 import modelo.vo.Huesped;
-import vista.paneles.Inicio_usuario;
+import vista.paneles.PanInicioUsuario;
 import vista.paneles.reservaUI;
 
-public class Usuario extends javax.swing.JFrame {
+public class WinUsuario extends javax.swing.JFrame {
 
     private Huesped huesped;
     private String previousState = "";
 
-    public Usuario(Huesped huesped) {
+    public WinUsuario(Huesped huesped) {
         initComponents();
         this.huesped = huesped;
         setLocationRelativeTo(null);
@@ -71,7 +71,7 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     private void mostrarInicio() {
-        Center.add(new Inicio_usuario());
+        Center.add(new PanInicioUsuario());
     }
 
     @SuppressWarnings("unchecked")
@@ -95,7 +95,6 @@ public class Usuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Usuario"); // NOI18N
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         Left.setBackground(new java.awt.Color(1, 74, 173));
         Left.setMinimumSize(new java.awt.Dimension(190, 1800));
@@ -202,7 +201,7 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReservacionMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        SelectLogin selectlogin = new SelectLogin();
+        WinSelectLogin selectlogin = new WinSelectLogin();
         selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
         selectlogin.setVisible(true);
         this.dispose();

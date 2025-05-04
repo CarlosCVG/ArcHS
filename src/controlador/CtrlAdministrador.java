@@ -1,10 +1,10 @@
 
 package controlador;
 
-import vista.ventanas.Admin;
-import vista.ventanas.RegistroEmp;
+import vista.ventanas.WinAdministrador;
+import vista.ventanas.WinRegistroEmp;
 import modelo.vo.Empleado;
-import modelo.logica.logicaEmpleado;
+import modelo.logica.LogicEmpleado;
 import excepciones.ExBusiness;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -14,21 +14,21 @@ import javax.swing.table.DefaultTableModel;
 
 public class CtrlAdministrador {
 
-    private Admin vistaAdmin;
-    private RegistroEmp vistaRegistro;
-    private logicaEmpleado logica;
+    private WinAdministrador vistaAdmin;
+    private WinRegistroEmp vistaRegistro;
+    private LogicEmpleado logica;
     private Empleado empleadoSeleccionado;
 
-    public CtrlAdministrador(Admin vista) {
+    public CtrlAdministrador(WinAdministrador vista) {
         this.vistaAdmin = vista;
-        this.logica = new logicaEmpleado();
+        this.logica = new LogicEmpleado();
         configurarListeners();
         cargarTablaEmpleados();
     }
 
-    public CtrlAdministrador(RegistroEmp vista) {
+    public CtrlAdministrador(WinRegistroEmp vista) {
         this.vistaRegistro = vista;
-        this.logica = new logicaEmpleado();
+        this.logica = new LogicEmpleado();
         configurarListenersRegistro();
     }
 
@@ -120,7 +120,7 @@ public class CtrlAdministrador {
 
 // Método auxiliar para volver a Admin
     private void volverAVentanaAdmin() {
-        Admin admin = new Admin();
+        WinAdministrador admin = new WinAdministrador();
         admin.setVisible(true);
         if (vistaRegistro != null) {
             vistaRegistro.dispose();
@@ -139,7 +139,7 @@ public class CtrlAdministrador {
         }
     }
 
-    private Empleado construirEmpleadoDesdeVista(RegistroEmp vista, Integer idExistente) throws ExBusiness {
+    private Empleado construirEmpleadoDesdeVista(WinRegistroEmp vista, Integer idExistente) throws ExBusiness {
         Empleado emp = new Empleado();
         try {
             
@@ -169,7 +169,7 @@ public class CtrlAdministrador {
     }
 
 // Versión simplificada para cuando no necesitas el ID
-    private Empleado construirEmpleadoDesdeVista(RegistroEmp vista) throws ExBusiness {
+    private Empleado construirEmpleadoDesdeVista(WinRegistroEmp vista) throws ExBusiness {
         return construirEmpleadoDesdeVista(vista, null);
     }
     // 2. Eliminar un empleado
@@ -281,7 +281,7 @@ public class CtrlAdministrador {
             return;
         }
 
-        RegistroEmp registro = new RegistroEmp();
+        WinRegistroEmp registro = new WinRegistroEmp();
         registro.setVisible(true);
         vistaAdmin.dispose();
 
@@ -316,7 +316,7 @@ public class CtrlAdministrador {
     }
 
 // Métodos auxiliares
-    private void llenarFormulario(RegistroEmp vista, Empleado empleado) {
+    private void llenarFormulario(WinRegistroEmp vista, Empleado empleado) {
         vista.getTxtid_admin().setText(String.valueOf(empleado.getId_admin()));
         vista.getTxtNSS().setText(String.valueOf(empleado.getNss()));
         vista.getTxtCurp().setText(empleado.getCurp());
@@ -450,7 +450,7 @@ public class CtrlAdministrador {
     }
 
     private void abrirRegistroEmpleado() {
-        RegistroEmp registro = new RegistroEmp();
+        WinRegistroEmp registro = new WinRegistroEmp();
         registro.setVisible(true);
         vistaAdmin.dispose();
         new CtrlAdministrador(registro);

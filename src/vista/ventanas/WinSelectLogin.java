@@ -2,12 +2,13 @@ package vista.ventanas;
 
 import controlador.CtrlLoginSelect;
 
-public class SelectLogin extends javax.swing.JFrame {
+public class WinSelectLogin extends javax.swing.JFrame {
 
     private CtrlLoginSelect ctrlls = new CtrlLoginSelect();
     private int seleccion;
 
-    public SelectLogin() {
+    public WinSelectLogin() {
+        this.setUndecorated(true);
         initComponents();
     }
 

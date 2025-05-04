@@ -1,12 +1,12 @@
 
 package controlador;
 
-import vista.ventanas.Login;
+import vista.ventanas.WinLogin;
 
 public class CtrlLoginSelect {
-    private Login login;
+    private WinLogin login;
     public void openLogin(int seleccion){
-        login = new Login(seleccion);
+        login = new WinLogin(seleccion);
         login.setBounds(250, 25, login.getWidth(), login.getHeight());
         login.setVisible(true);
     }

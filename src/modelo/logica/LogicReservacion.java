@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package modelo.logica;
 
 import excepciones.ExAgregar;
@@ -9,11 +6,7 @@ import java.time.LocalDate;
 import modelo.dao.DAOReservacion;
 import modelo.vo.Reservacion;
 
-/**
- *
- * @author edwin
- */
-public class LogicaReservacion {
+public class LogicReservacion {
     DAOReservacion daoReservacion = new DAOReservacion();
 
     public boolean logicaAgregarReservacion(Reservacion reservacion) throws ExAgregar {
