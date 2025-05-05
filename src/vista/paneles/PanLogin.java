@@ -2,6 +2,7 @@ package vista.paneles;
 
 import controlador.CtrlLogin;
 import java.awt.Window;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import modelo.vo.Administrador;
@@ -11,6 +12,7 @@ import modelo.vo.Puesto;
 import vista.ventanas.WinAdministrador;
 import vista.ventanas.WinEmpleado;
 import vista.ventanas.WinRecepcion;
+import vista.ventanas.WinRegistroUV;
 import vista.ventanas.WinSelectLogin;
 import vista.ventanas.WinUsuario;
 
@@ -19,8 +21,14 @@ public class PanLogin extends javax.swing.JPanel {
     private CtrlLogin ctrll = new CtrlLogin();
     private String usuario, password;
     private int loginselected;
+    private JFrame ventanaAnterior;
 
     public PanLogin() {
+        initComponents();
+    }
+
+    public PanLogin(JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
     }
 
@@ -140,7 +148,15 @@ public class PanLogin extends javax.swing.JPanel {
     }//GEN-LAST:event_custom_textfield4ActionPerformed
 
     private void roundedButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton1ActionPerformed
-        // TODO add your handling code here:
+        if (loginselected == 1 || loginselected == 3) {
+            JOptionPane.showMessageDialog(null, "Opcion deshabilitada para Administradores y Empleados");
+        } else {
+            ventanaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
+            ventanaAnterior.setVisible(false);
+            WinRegistroUV wruv = new WinRegistroUV(ventanaAnterior);
+            wruv.setBounds(200, 100, wruv.getWidth(), wruv.getHeight());
+            wruv.setVisible(true);
+        }
     }//GEN-LAST:event_roundedButton1ActionPerformed
 
     private void roundedButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton2ActionPerformed

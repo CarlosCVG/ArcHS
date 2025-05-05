@@ -149,7 +149,7 @@ public class WinRecepcion extends javax.swing.JFrame {
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
         tmSelector = 1;
         mrth = new mtRegistroHab(tmSelector);
-        registro = new PanRegistro(mrth);
+        registro = new PanRegistro(mrth, this);
         Rigth.removeAll();
         Rigth.add(registro);
         Rigth.revalidate();

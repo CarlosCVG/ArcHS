@@ -1,5 +1,6 @@
 package modelo.logica;
 
+import excepciones.ExRegistroHab;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dao.DAORegistroHab;
@@ -18,14 +19,42 @@ public class LogicRegistroHab {
     public List<Reservacion> getListaReservaciones() {
         return daorh.getListaReservaciones();
     }
-    
+
     public boolean revisarDisponible(int HabToR, List<Habitacion> habitaciones) {
-        for (Habitacion hab: habitaciones){
-            if(hab.getId_habitacion() == HabToR){
+        for (Habitacion hab : habitaciones) {
+            if (hab.getId_habitacion() == HabToR) {
                 return true;
             }
         }
         return false;
+    }
+
+    public int getCountHuespedes() {
+        return daorh.getCountHuespedes();
+    }
+
+    public boolean addHuesped(String usuario, String pass, int id_huesped, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) throws ExRegistroHab {
+        if (nombre.isBlank() || ap1.isBlank() || ap2.isBlank() || num_tarjeta.isBlank() || idioma.isBlank() || correo.isBlank()) {
+            throw new ExRegistroHab("Rellena todos los campos");
+        }
+        if (esNumero(nombre) || esNumero(ap1) || esNumero(ap2)) {
+            throw new ExRegistroHab("El nombre no puede contener numeros");
+        }
+        if (num_tarjeta.length() != 19){
+            throw new ExRegistroHab("Longitud de tarjeta incorrecta");
+        }
+        return true;
+    }
+
+    public boolean esNumero(String str) {
+        boolean esNumero = false;
+        for (char c : str.toCharArray()) {
+            if (Character.isDigit(c)) {
+                esNumero = true;
+                break;
+            }
+        }
+        return esNumero;
     }
 
     public List<Habitacion> filtrarListaHabitaciones(List<Reservacion> reservaciones, List<Habitacion> habitacionesNF, int tmSelector) {

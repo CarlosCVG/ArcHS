@@ -4,6 +4,7 @@ import java.util.List;
 import modelo.vo.Habitacion;
 import modelo.vo.Reservacion;
 import repositorio.RepHabitaciones;
+import repositorio.RepHuespedes;
 import repositorio.RepReservaciones;
 
 public class DAORegistroHab {
@@ -12,5 +13,8 @@ public class DAORegistroHab {
     }
     public List<Reservacion> getListaReservaciones(){
         return RepReservaciones.getListaReservaciones();
+    }
+    public int getCountHuespedes(){
+        return RepHuespedes.getListaHuespedes().size();
     }
 }

@@ -3,9 +3,11 @@ package vista.paneles;
 import controlador.CtrlRegistroHab;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.componentes.mtRegistroHab;
 import modelo.vo.Habitacion;
+import vista.ventanas.WinRegistroUF;
 
 public class PanRegistro extends javax.swing.JPanel {
 
@@ -13,12 +15,14 @@ public class PanRegistro extends javax.swing.JPanel {
     private List<Habitacion> habitaciones = new ArrayList<>();
     private mtRegistroHab mtrhLocal;
     CtrlRegistroHab ctrlrh = new CtrlRegistroHab();
+    private JFrame ventanaAnterior;
 
-    public PanRegistro(mtRegistroHab mtrh) {
+    public PanRegistro(mtRegistroHab mtrh, JFrame ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
         initComponents();
         tblRegistroFisico.setModel(mtrh);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,8 +120,11 @@ public class PanRegistro extends javax.swing.JPanel {
             mtrhLocal = new mtRegistroHab(1);
             habToR = Integer.parseInt(txtIdHab.getText());
             habitaciones = mtrhLocal.getHabitaciones();
-            if (ctrlrh.revisarDisponible(habToR, habitaciones)){
-                
+            if (ctrlrh.revisarDisponible(habToR, habitaciones)) {
+                ventanaAnterior.setVisible(false);
+                WinRegistroUF wruf = new WinRegistroUF(ventanaAnterior);
+                wruf.setBounds(200, 100, wruf.getWidth(), wruf.getHeight());
+                wruf.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "La habitacion no esta disponible para su reservacion");
             }
