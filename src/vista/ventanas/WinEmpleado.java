@@ -18,7 +18,7 @@ public class WinEmpleado extends javax.swing.JFrame {
         this.nombrePuesto = nombrePuesto;
         this.setUndecorated(true);
         initComponents();
-        configurarComponentes(bntInicio);
+        configurarComponentes(btnInicio);
         configurarComponentes(btnTask);
         info = new PanEmpleadoDatos(empleado, nombrePuesto);
         Rigth.add(info);
@@ -43,9 +43,9 @@ public class WinEmpleado extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
         Left = new javax.swing.JPanel();
-        bntInicio = new componentes.panel_btn();
+        btnInicio = new componentes.panel_btn();
         btnTask = new componentes.panel_btn();
         Rigth = new javax.swing.JPanel();
         Footer = new javax.swing.JPanel();
@@ -62,16 +62,16 @@ public class WinEmpleado extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP1 (1).png"))); // NOI18N
         Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 580, -1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP3 (1).png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP3 (1).png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setBorderPainted(false);
+        btnClose.setContentAreaFilled(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCloseActionPerformed(evt);
             }
         });
-        Header.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
+        Header.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
         getContentPane().add(Header, java.awt.BorderLayout.NORTH);
 
@@ -81,16 +81,16 @@ public class WinEmpleado extends javax.swing.JFrame {
         Left.setRequestFocusEnabled(false);
         Left.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bntInicio.setBackground(new java.awt.Color(1, 74, 173));
-        bntInicio.setText("");
-        bntInicio.setUrl("vista/images/Inicio (1).png");
-        bntInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnInicio.setBackground(new java.awt.Color(1, 74, 173));
+        btnInicio.setText("");
+        btnInicio.setUrl("vista/images/Inicio (1).png");
+        btnInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bntInicioMouseClicked(evt);
+                btnInicioMouseClicked(evt);
             }
         });
-        Left.add(bntInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
-        bntInicio.getAccessibleContext().setAccessibleDescription("");
+        Left.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        btnInicio.getAccessibleContext().setAccessibleDescription("");
 
         btnTask.setBackground(new java.awt.Color(1, 74, 173));
         btnTask.setText("");
@@ -114,14 +114,14 @@ public class WinEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         WinSelectLogin selectlogin = new WinSelectLogin();
         selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
         selectlogin.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void bntInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bntInicioMouseClicked
+    private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
         info = new PanEmpleadoDatos(empleado, nombrePuesto);
         Rigth.removeAll();
         Rigth.add(info);
@@ -129,7 +129,7 @@ public class WinEmpleado extends javax.swing.JFrame {
         Rigth.repaint();
 
 
-    }//GEN-LAST:event_bntInicioMouseClicked
+    }//GEN-LAST:event_btnInicioMouseClicked
 
     private void btnTaskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaskMouseClicked
         tareas = new PanEmpleadoTask(empleado, nombrePuesto);
@@ -145,9 +145,9 @@ public class WinEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel Header;
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Rigth;
-    private componentes.panel_btn bntInicio;
+    private javax.swing.JButton btnClose;
+    private componentes.panel_btn btnInicio;
     private componentes.panel_btn btnTask;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables

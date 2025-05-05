@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import modelo.vo.Huesped;
 import vista.paneles.PanInicioUsuario;
-import vista.paneles.reservaUI;
+import vista.paneles.PanReservaUsuario;
 
 public class WinUsuario extends javax.swing.JFrame {
 
@@ -67,7 +67,7 @@ public class WinUsuario extends javax.swing.JFrame {
     }
 
     private void mostrarReservacion() {
-        Center.add(new reservaUI(huesped));
+        Center.add(new PanReservaUsuario(huesped));
     }
 
     private void mostrarInicio() {

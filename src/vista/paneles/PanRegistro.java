@@ -8,12 +8,12 @@ package vista.paneles;
  *
  * @author karlo
  */
-public class PanRegistroUI extends javax.swing.JPanel {
+public class PanRegistro extends javax.swing.JPanel {
 
     /**
      * Creates new form reservaUI
      */
-    public PanRegistroUI() {
+    public PanRegistro() {
         initComponents();
     }
 
@@ -29,7 +29,7 @@ public class PanRegistroUI extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRegistroFisico = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         custom_textfield1 = new componentes.custom_textfield();
@@ -49,7 +49,7 @@ public class PanRegistroUI extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(1, 74, 173));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRegistroFisico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -60,9 +60,9 @@ public class PanRegistroUI extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblRegistroFisico);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 490, 340));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 490, 260));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 529, 375));
 
@@ -133,7 +133,7 @@ public class PanRegistroUI extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private componentes.RoundedButton roundedButton1;
+    private javax.swing.JTable tblRegistroFisico;
     // End of variables declaration//GEN-END:variables
 }

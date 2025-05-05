@@ -21,7 +21,7 @@ import vista.ventanas.WinFiltros;
  *
  * @author karlo
  */
-public class reservaUI extends JPanel implements Observer {
+public class PanReservaUsuario extends JPanel implements Observer {
 
     /**
      * Creates new form registroUI
@@ -31,7 +31,7 @@ public class reservaUI extends JPanel implements Observer {
     private Huesped huesped;
     private WinFiltros panelFiltros;
 
-    public reservaUI(Huesped huesped) {
+    public PanReservaUsuario(Huesped huesped) {
 
         initComponents();
         this.huesped = huesped;
