@@ -1,15 +1,24 @@
-
 package vista.paneles;
 
+import controlador.CtrlRegistroHab;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.componentes.mtRegistroHab;
+import modelo.vo.Habitacion;
 
 public class PanRegistro extends javax.swing.JPanel {
+
+    private int habToR;
+    private List<Habitacion> habitaciones = new ArrayList<>();
+    private mtRegistroHab mtrhLocal;
+    CtrlRegistroHab ctrlrh = new CtrlRegistroHab();
 
     public PanRegistro(mtRegistroHab mtrh) {
         initComponents();
         tblRegistroFisico.setModel(mtrh);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -20,13 +29,11 @@ public class PanRegistro extends javax.swing.JPanel {
         tblRegistroFisico = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        custom_textfield1 = new componentes.custom_textfield();
-        custom_textfield2 = new componentes.custom_textfield();
-        roundedButton1 = new componentes.RoundedButton();
+        txtIdHab = new componentes.custom_textfield();
+        btnReservar = new componentes.RoundedButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
@@ -60,21 +67,23 @@ public class PanRegistro extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 0));
         jLabel1.setText("Num. Habitacion:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 160, 20));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 160, 20));
 
-        custom_textfield1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(custom_textfield1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, -1));
+        txtIdHab.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(txtIdHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 170, -1));
 
-        custom_textfield2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(custom_textfield2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 170, -1));
-
-        roundedButton1.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton1.setBorder(null);
-        roundedButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Boton_Reservar_Empleado.png"))); // NOI18N
-        roundedButton1.setText("");
-        roundedButton1.setBorderPainted(false);
-        roundedButton1.setContentAreaFilled(true);
-        jPanel2.add(roundedButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+        btnReservar.setBackground(new java.awt.Color(1, 74, 173));
+        btnReservar.setBorder(null);
+        btnReservar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Boton_Reservar_Empleado.png"))); // NOI18N
+        btnReservar.setText("");
+        btnReservar.setBorderPainted(false);
+        btnReservar.setContentAreaFilled(true);
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP3 (1).png"))); // NOI18N
         jButton2.setBorder(null);
@@ -94,11 +103,6 @@ public class PanRegistro extends javax.swing.JPanel {
         jButton4.setContentAreaFilled(false);
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel4.setText("A nombre de:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, 20));
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Icono_usuario_grande.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 120, 110));
 
@@ -107,21 +111,34 @@ public class PanRegistro extends javax.swing.JPanel {
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        try {
+            mtrhLocal = new mtRegistroHab(1);
+            habToR = Integer.parseInt(txtIdHab.getText());
+            habitaciones = mtrhLocal.getHabitaciones();
+            if (ctrlrh.revisarDisponible(habToR, habitaciones)){
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "La habitacion no esta disponible para su reservacion");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingresa un numero para el Num. Habitacion");
+        }
+    }//GEN-LAST:event_btnReservarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private componentes.custom_textfield custom_textfield1;
-    private componentes.custom_textfield custom_textfield2;
+    private componentes.RoundedButton btnReservar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private componentes.RoundedButton roundedButton1;
     private javax.swing.JTable tblRegistroFisico;
+    private componentes.custom_textfield txtIdHab;
     // End of variables declaration//GEN-END:variables
 }

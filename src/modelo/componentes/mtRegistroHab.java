@@ -6,21 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import modelo.vo.Habitacion;
+import modelo.vo.Reservacion;
 import repositorio.RepHabitaciones;
+import repositorio.RepReservaciones;
 
 public class mtRegistroHab extends AbstractTableModel {
-
+    int tmSelector;
+    private static List<Habitacion> habitacionesNF = new ArrayList<>();
     private static List<Habitacion> habitaciones = new ArrayList<>();
+    private static List<Reservacion> reservaciones = new ArrayList<>();
     CtrlRegistroHab ctrlrh;
     private final String[] titulos = {
         "ID HABITACIÓN", "PRECIO", "TAMAÑO", "NÚM. CAMAS", "DESCRIPCIÓN"
     };
 
-    public mtRegistroHab() {
+    public mtRegistroHab(int tmSelector) {
+        this.tmSelector = tmSelector;
         ctrlrh = new CtrlRegistroHab();
-        //RepHabitaciones.cargarDatosInicialesAlumnos();
         RepHabitaciones rephabitaciones = new RepHabitaciones();
-        habitaciones = ctrlrh.getListaHabitaciones();
+        RepReservaciones represervaciones = new RepReservaciones();
+        reservaciones = ctrlrh.getListaReservaciones();
+        habitacionesNF = ctrlrh.getListaHabitaciones();
+        habitaciones = ctrlrh.filtrarListaHabitaciones(reservaciones, habitacionesNF, tmSelector);
+        //habitaciones = ctrlrh.getListaHabitaciones();
+    }
+
+    public List<Habitacion> getHabitaciones() {
+        return habitaciones;
     }
 
     @Override
