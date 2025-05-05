@@ -2,16 +2,20 @@ package vista.ventanas;
 
 import componentes.panel_btn;
 import java.awt.Color;
+import modelo.componentes.mtRegistroHab;
 import modelo.vo.Empleado;
 import vista.paneles.PanEmpleadoDatos;
 import vista.paneles.PanRegistro;
+import vista.paneles.PanReservado;
 
 public class WinRecepcion extends javax.swing.JFrame {
 
     private PanEmpleadoDatos info;
     private PanRegistro registro;
+    private PanReservado reservado;
     private Empleado empleado;
     private String nombrePuesto;
+    private mtRegistroHab mrth = new mtRegistroHab();
 
     public WinRecepcion(Empleado empleado, String nombrePuesto) {
         this.empleado = empleado;
@@ -107,6 +111,11 @@ public class WinRecepcion extends javax.swing.JFrame {
         btnReservado.setBackground(new java.awt.Color(1, 74, 173));
         btnReservado.setText("");
         btnReservado.setUrl("vista/images/reservado.png");
+        btnReservado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReservadoMouseClicked(evt);
+            }
+        });
         Left.add(btnReservado);
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
@@ -137,12 +146,20 @@ public class WinRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInicioMouseClicked
 
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
-        registro = new PanRegistro();
+        registro = new PanRegistro(mrth);
         Rigth.removeAll();
         Rigth.add(registro);
         Rigth.revalidate();
         Rigth.repaint();
     }//GEN-LAST:event_btnRegistroMouseClicked
+
+    private void btnReservadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservadoMouseClicked
+        reservado = new PanReservado(mrth);
+        Rigth.removeAll();
+        Rigth.add(reservado);
+        Rigth.revalidate();
+        Rigth.repaint();
+    }//GEN-LAST:event_btnReservadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
