@@ -25,6 +25,9 @@ public class CtrlRegistroHab {
         return logicarh.getCountHuespedes();
     }
     
+    public int getCountReservaciones(){
+        return logicarh.getCountReservaciones();
+    }
     public List<Habitacion> filtrarListaHabitaciones(List<Reservacion> reservaciones, List<Habitacion> habitacionesNF, int tmSelector){
         return logicarh.filtrarListaHabitaciones(reservaciones, habitacionesNF, tmSelector);
     }

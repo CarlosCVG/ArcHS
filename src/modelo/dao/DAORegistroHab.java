@@ -17,4 +17,7 @@ public class DAORegistroHab {
     public int getCountHuespedes(){
         return RepHuespedes.getListaHuespedes().size();
     }
+    public int getCountReservaciones(){
+        return RepReservaciones.getListaReservaciones().size();
+    }
 }

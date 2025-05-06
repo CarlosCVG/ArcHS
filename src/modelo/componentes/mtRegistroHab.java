@@ -11,6 +11,7 @@ import repositorio.RepHabitaciones;
 import repositorio.RepReservaciones;
 
 public class mtRegistroHab extends AbstractTableModel {
+
     int tmSelector;
     private static List<Habitacion> habitacionesNF = new ArrayList<>();
     private static List<Habitacion> habitaciones = new ArrayList<>();
@@ -55,6 +56,11 @@ public class mtRegistroHab extends AbstractTableModel {
         return false;
     }
 
+    public void recargarTabla() {
+        habitaciones = ctrlrh.filtrarListaHabitaciones(reservaciones, habitacionesNF, tmSelector);
+        fireTableDataChanged();
+    }
+
 //    public void addRow(Alumno nalumno) throws ExRegistroHab {
 //        //alumnos.add(nalumno);
 //        controladorv2.addAlumno(nalumno);
@@ -70,7 +76,6 @@ public class mtRegistroHab extends AbstractTableModel {
 //        controladorv2.bajaAlumno(idToDelete);
 //        fireTableRowsDeleted(1, 1);
 //    }
-    
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Habitacion hab = habitaciones.get(rowIndex);

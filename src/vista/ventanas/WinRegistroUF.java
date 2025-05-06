@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
 
 public class WinRegistroUF extends javax.swing.JFrame {
@@ -17,17 +19,22 @@ public class WinRegistroUF extends javax.swing.JFrame {
     private int id_huesped;
     private String nombre, ap1, ap2, num_tarjeta, idioma, correo;
     private JFrame ventanaAnterior;
+    private int nuevoNumId, habitacion;
     private List<Huesped> huespedes = new ArrayList<>();
+    private JTable tblRegistroFisico;
     CtrlRegistroHab ctrlrh = new CtrlRegistroHab();
 
-    public WinRegistroUF(JFrame ventanaAnterior) {
+    public WinRegistroUF(JFrame ventanaAnterior, int habitacion, JTable tblRegistroFisico) {
         this.setUndecorated(true);
         this.ventanaAnterior = ventanaAnterior;
+        this.habitacion = habitacion;
+        this.tblRegistroFisico = tblRegistroFisico;
         ctrlrh.getCountHuespedes();
         initComponents();
-        txt1.setText("h" + ctrlrh.getCountHuespedes() + 1);
+        nuevoNumId = ctrlrh.getCountHuespedes() + 1;
+        txt1.setText("h" + nuevoNumId);
         txt2.setText("passh");
-        txt3.setText("" + ctrlrh.getCountHuespedes() + 1);
+        txt3.setText("" + nuevoNumId);
         txt7.setForeground(Color.GRAY);
         txt7.setText("formato: XXXX-XXXX-XXXX-XXXX");
     }
@@ -100,6 +107,9 @@ public class WinRegistroUF extends javax.swing.JFrame {
         txt2.setEnabled(false);
         txt2.setFocusable(false);
         getContentPane().add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 280, -1));
+
+        txt3.setEnabled(false);
+        txt3.setFocusable(false);
         getContentPane().add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 280, -1));
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 153));
@@ -198,16 +208,17 @@ public class WinRegistroUF extends javax.swing.JFrame {
             nombre = txt4.getText();
             ap1 = txt5.getText();
             ap2 = txt6.getText();
-            num_tarjeta = txt7.getText();
+            num_tarjeta = "XXXX-XXXX-XXXX-XXXX";
             idioma = txt8.getText();
             correo = txt9.getText();
             if (ctrlrh.addHuesped(usuario, pass, id_huesped, nombre, ap1, ap2, num_tarjeta, idioma, correo)) {
                 Huesped nhuesped = new Huesped(usuario, pass, id_huesped, nombre, ap1, ap2, num_tarjeta, idioma, correo);
+                WinRegistroRF wrrf = new WinRegistroRF(ventanaAnterior, habitacion ,nhuesped, tblRegistroFisico);
+                wrrf.setBounds(200, 100, wrrf.getWidth(), wrrf.getHeight());
+                wrrf.setVisible(true);
+                this.dispose();
             }
-            if (ventanaAnterior != null) {
-                ventanaAnterior.setVisible(true);
-            }
-            dispose();
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error al procesar los datos, captura nuevamente");
         } catch (ExRegistroHab ex) {

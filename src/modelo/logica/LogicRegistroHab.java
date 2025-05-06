@@ -32,6 +32,9 @@ public class LogicRegistroHab {
     public int getCountHuespedes() {
         return daorh.getCountHuespedes();
     }
+    public int getCountReservaciones() {
+        return daorh.getCountReservaciones();
+    }
 
     public boolean addHuesped(String usuario, String pass, int id_huesped, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) throws ExRegistroHab {
         if (nombre.isBlank() || ap1.isBlank() || ap2.isBlank() || num_tarjeta.isBlank() || idioma.isBlank() || correo.isBlank()) {

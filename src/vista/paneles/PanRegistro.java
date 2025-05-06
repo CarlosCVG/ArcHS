@@ -122,14 +122,17 @@ public class PanRegistro extends javax.swing.JPanel {
             habitaciones = mtrhLocal.getHabitaciones();
             if (ctrlrh.revisarDisponible(habToR, habitaciones)) {
                 ventanaAnterior.setVisible(false);
-                WinRegistroUF wruf = new WinRegistroUF(ventanaAnterior);
+                WinRegistroUF wruf = new WinRegistroUF(ventanaAnterior, habToR, tblRegistroFisico);
                 wruf.setBounds(200, 100, wruf.getWidth(), wruf.getHeight());
                 wruf.setVisible(true);
+                txtIdHab.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "La habitacion no esta disponible para su reservacion");
+                txtIdHab.setText("");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Ingresa un numero para el Num. Habitacion");
+            txtIdHab.setText("");
         }
     }//GEN-LAST:event_btnReservarActionPerformed
 
