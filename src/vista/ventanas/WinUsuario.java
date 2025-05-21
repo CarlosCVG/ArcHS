@@ -1,8 +1,6 @@
 package vista.ventanas;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JPanel;
 import modelo.vo.Huesped;
 import vista.paneles.PanInicioUsuario;
 import vista.paneles.PanReservaUsuario;

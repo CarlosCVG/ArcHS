@@ -1,13 +1,14 @@
-
 package modelo.logica;
 
 import excepciones.ExConsulta;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import modelo.dao.DAOHabitacion;
 import modelo.dao.DAOReservacion;
 import modelo.vo.Habitacion;
+import modelo.vo.Reservacion;
 
 public class LogicHabitacion {
 
@@ -28,28 +29,43 @@ public class LogicHabitacion {
         return habitacionesDisponibles;
     }
 
-    public List<Habitacion> logicaHabitacionesFiltradas(Map<String, Integer> filtros) {
+    public List<Habitacion> logicaHabitacionesFiltradas(Map<String, Object> filtros) {
         List<Habitacion> habitacionesFiltradas = new ArrayList<>();
-        List<Habitacion> habitacionesDisponibles = logicaBuscarHabitacionesDisponibles();
+        List<Habitacion> habitaciones = daoHabitacion.daoGetHabitaciones();
 
-        int filtroId = -1;
         int filtroCosto = 3000;
+        LocalDate filtroFechaE = LocalDate.now();
+        LocalDate filtroFechaS = LocalDate.now();
 
-        if (filtros.containsKey("id")) {
-            filtroId = filtros.get("id");
-        }
-
+        // Recuperar valores del mapa de filtros
         if (filtros.containsKey("costo")) {
-            filtroCosto = filtros.get("costo");
+            filtroCosto = (int) filtros.get("costo");
+        }
+        if (filtros.containsKey("fechaE")) {
+            filtroFechaE = (LocalDate) filtros.get("fechaE");
+        }
+        if (filtros.containsKey("fechaS")) {
+            filtroFechaS = (LocalDate) filtros.get("fechaS");
         }
 
-        for (Habitacion habitacion : habitacionesDisponibles) {
-            if (filtroId != -1 && habitacion.getId_habitacion() != filtroId) {
+        for (Habitacion habitacion : habitaciones) {
+            // Filtrar por precio
+            if (habitacion.getPrecio() > filtroCosto) {
                 continue;
             }
 
-            if (habitacion.getPrecio() > filtroCosto) {
-                continue;
+            // Verificar si la habitación está reservada
+            Reservacion reserva = daoReservacion.daoBuscarPorHabitacion(habitacion.getId_habitacion());
+
+            if (reserva != null) {
+                LocalDate fechaInicioReserva = reserva.getF_entrada();
+                LocalDate fechaFinReserva = reserva.getF_salida();
+
+                // Si las fechas se solapan, la habitación no está disponible
+                boolean fechasSeSolapan = !(filtroFechaS.isBefore(fechaInicioReserva) || filtroFechaE.isAfter(fechaFinReserva));
+                if (fechasSeSolapan) {
+                    continue;
+                }
             }
 
             habitacionesFiltradas.add(habitacion);
@@ -57,8 +73,8 @@ public class LogicHabitacion {
 
         return habitacionesFiltradas;
     }
-    
-    public List<Habitacion> logicaBuscarHabitaciones(){
+
+    public List<Habitacion> logicaBuscarHabitaciones() {
         return daoHabitacion.daoGetHabitaciones();
     }
 }

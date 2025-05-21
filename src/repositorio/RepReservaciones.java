@@ -45,6 +45,17 @@ public class RepReservaciones {
         return null;
     }
     
+    public static List<Reservacion> searchByMounth(int mounth){
+        List<Reservacion> reservacion = new ArrayList<>();
+        
+        for (Reservacion e : listaReservaciones) {
+            if (e.getF_entrada().getMonthValue() == mounth || e.getF_salida().getMonthValue() == mounth) {
+                reservacion.add(e);
+            }
+        }
+        return reservacion;
+    }
+    
     public static boolean delete(Reservacion reservacion) {
         return listaReservaciones.remove(reservacion);
     }

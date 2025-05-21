@@ -1,6 +1,7 @@
 
 package modelo.dao;
 
+import java.util.List;
 import modelo.vo.Reservacion;
 import repositorio.RepReservaciones;
 
@@ -17,5 +18,9 @@ public class DAOReservacion {
     
     public boolean daoAgregarReservacion(Reservacion reservacion){
         return repReserva.insert(reservacion);
+    }
+    
+    public List<Reservacion> daoBuscarPorMes(int mes){
+        return repReserva.searchByMounth(mes);
     }
 }

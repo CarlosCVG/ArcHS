@@ -1,28 +1,63 @@
 package vista.ventanas;
 
+import componentes.ScrollPaneCustomizer;
 import controlador.CtrlFechaReservacion;
 import excepciones.ExAgregar;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.List;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
 import vista.paneles.PanHabitacion;
 
-public class WinFecha extends javax.swing.JFrame {
+public class WinReservacion extends javax.swing.JFrame {
 
     private CtrlFechaReservacion controlador = new CtrlFechaReservacion();
     private Habitacion habitacion;
     private Huesped huesped;
 
-    public WinFecha(PanHabitacion Phabitacion, Huesped huesped) {
+    public WinReservacion(List<PanHabitacion> habitacion, Huesped huesped) {
         initComponents();
         setLocationRelativeTo(null);
-        this.habitacion = Phabitacion.getHabitacion();
         this.huesped = huesped;
-        this.pnaelHabitacion.add(Phabitacion, BorderLayout.CENTER);
+
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new GridLayout(0, 1, 0, 0)); 
+        contentPanel.setPreferredSize(new Dimension(700, habitacion.size()*530 + 100));
+        contentPanel.setBackground(new Color(1, 74, 173));
+
+        for (int i = 0; i < habitacion.size(); i++) {
+            PanHabitacion panel = habitacion.get(i);
+            panel.ocultarMensaje();
+            contentPanel.add(panel);
+        }
+
+        JScrollPane jScrollPane1 = new JScrollPane(contentPanel);
+        ScrollPaneCustomizer.customizeScrollPane(jScrollPane1);
+        pnaelHabitacion.add(jScrollPane1, BorderLayout.CENTER);
+
+    }
+
+    public WinReservacion(PanHabitacion habitacion, Huesped huesped, LocalDate fechaInicio, LocalDate fechaFin) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.habitacion = habitacion.getHabitacion();
+        this.huesped = huesped;
+        System.out.println(this.huesped);
+        this.pnaelHabitacion.add(habitacion, BorderLayout.CENTER);
+        dateEntrada.setDate(fechaInicio);
+        dateSalida.setDate(fechaFin);
+        habitacion.ocultarMensaje();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,8 +71,10 @@ public class WinFecha extends javax.swing.JFrame {
         panelFechas = new javax.swing.JPanel();
         lblEntrada = new javax.swing.JLabel();
         dateEntrada = new componentes.DateSelector();
-        lblSalida = new javax.swing.JLabel();
+        lblSalida1 = new javax.swing.JLabel();
         dateSalida = new componentes.DateSelector();
+        lblNum = new javax.swing.JLabel();
+        panelNumPersona = new javax.swing.JPanel();
         pnaelHabitacion = new javax.swing.JPanel();
         header = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
@@ -60,6 +97,7 @@ public class WinFecha extends javax.swing.JFrame {
         body.setLayout(new java.awt.GridBagLayout());
 
         panelFechas.setOpaque(false);
+        panelFechas.setPreferredSize(new java.awt.Dimension(266, 460));
         panelFechas.setLayout(new java.awt.GridBagLayout());
 
         lblEntrada.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
@@ -67,12 +105,12 @@ public class WinFecha extends javax.swing.JFrame {
         lblEntrada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEntrada.setText("Fecha de llegada");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 20);
         panelFechas.add(lblEntrada, gridBagConstraints);
 
         dateEntrada.setBackground(new java.awt.Color(1, 74, 173));
@@ -80,39 +118,62 @@ public class WinFecha extends javax.swing.JFrame {
         dateEntrada.setForeground(new java.awt.Color(51, 51, 51));
         dateEntrada.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 20);
         panelFechas.add(dateEntrada, gridBagConstraints);
 
-        lblSalida.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        lblSalida.setForeground(new java.awt.Color(255, 255, 255));
-        lblSalida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSalida.setText("Fecha de salida");
+        lblSalida1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        lblSalida1.setForeground(new java.awt.Color(255, 255, 255));
+        lblSalida1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSalida1.setText("Fecha de salida");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
-        panelFechas.add(lblSalida, gridBagConstraints);
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 20);
+        panelFechas.add(lblSalida1, gridBagConstraints);
 
         dateSalida.setBackground(new java.awt.Color(1, 74, 173));
         dateSalida.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         dateSalida.setForeground(new java.awt.Color(51, 51, 51));
         dateSalida.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 20);
         panelFechas.add(dateSalida, gridBagConstraints);
+
+        lblNum.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        lblNum.setForeground(new java.awt.Color(255, 255, 255));
+        lblNum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNum.setText("Fecha de salida");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 20);
+        panelFechas.add(lblNum, gridBagConstraints);
+
+        panelNumPersona.setBackground(new java.awt.Color(1, 74, 173));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 20);
+        panelFechas.add(panelNumPersona, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -126,6 +187,7 @@ public class WinFecha extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 450;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 30);
         body.add(pnaelHabitacion, gridBagConstraints);
@@ -140,6 +202,7 @@ public class WinFecha extends javax.swing.JFrame {
         header.setPreferredSize(new java.awt.Dimension(97, 100));
         header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblTitulo.setBackground(new java.awt.Color(1, 74, 173));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/tituloReserva.png"))); // NOI18N
         lblTitulo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -224,9 +287,11 @@ public class WinFecha extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblEntrada;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JLabel lblSalida;
+    private javax.swing.JLabel lblNum;
+    private javax.swing.JLabel lblSalida1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelFechas;
+    private javax.swing.JPanel panelNumPersona;
     private javax.swing.JPanel pnaelHabitacion;
     // End of variables declaration//GEN-END:variables
 }

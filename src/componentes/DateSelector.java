@@ -3,15 +3,15 @@ package componentes;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import javax.swing.*;
 
 public class DateSelector extends JPanel {
 
-    private final JLabel dayLabel = new JLabel("01", SwingConstants.CENTER);
-    private final JLabel monthLabel = new JLabel("Jan", SwingConstants.CENTER);
-    private final JLabel yearLabel = new JLabel("2024", SwingConstants.CENTER);
+    private final JLabel dayLabel = new JLabel("", SwingConstants.CENTER);
+    private final JLabel monthLabel = new JLabel("", SwingConstants.CENTER);
+    private final JLabel yearLabel = new JLabel("", SwingConstants.CENTER);
 
-    //Arreglos de dias y meses, sin considerar años bisiestos
     private static final String[] MONTHS = {
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -34,12 +34,23 @@ public class DateSelector extends JPanel {
         add(wrapInteractiveLabel(dayLabel, "day"));
         add(wrapInteractiveLabel(monthLabel, "month"));
         add(wrapInteractiveLabel(yearLabel, "year"));
+
+        setDefaultDate();
+    }
+
+    private void setDefaultDate() {
+        LocalDate today = LocalDate.now();
+        dayLabel.setText(String.format("%02d", today.getDayOfMonth()));
+        monthLabel.setText(MONTHS[today.getMonthValue() - 1]);
+        yearLabel.setText(String.valueOf(today.getYear()));
     }
 
     private JLabel createHeaderLabel(String text) {
         JLabel label = new JLabel(text, SwingConstants.CENTER);
         label.setFont(new Font("Monospace", Font.BOLD, 18));
         label.setForeground(Color.WHITE);
+        label.setOpaque(true);
+        label.setBackground(new Color(1, 74, 173));
         return label;
     }
 
@@ -55,11 +66,14 @@ public class DateSelector extends JPanel {
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                applyOptionPaneStyle();
+
                 String newValue = JOptionPane.showInputDialog(
                         DateSelector.this,
                         "Enter " + type + ":",
                         label.getText()
                 );
+
                 if (newValue != null && !newValue.trim().isEmpty()) {
                     newValue = newValue.trim();
 
@@ -68,14 +82,8 @@ public class DateSelector extends JPanel {
                             try {
                                 int day = Integer.parseInt(newValue);
                                 int monthIndex = getMonth() - 1;
-                                int maxDay;
+                                int maxDay = (monthIndex >= 0 && monthIndex < 12) ? DAYS_IN_MONTH[monthIndex] : 31;
 
-                                if (monthIndex >= 0 && monthIndex < 12) {
-                                    maxDay = DAYS_IN_MONTH[monthIndex];
-                                } else {
-                                    maxDay = 31;
-                                }
-                                
                                 if (day >= 1 && day <= maxDay) {
                                     label.setText(String.format("%02d", day));
                                 } else {
@@ -99,12 +107,9 @@ public class DateSelector extends JPanel {
                             if (validMonth) {
                                 label.setText(monthAbbr);
                             } else {
-                                String error = "Mes invalido. Usa abreviaciones como ";
-                                for (int i = 0; i < MONTHS.length; i++) {
-                                    error+=  MONTHS[i] + ", ";
-                                }
-                                
-                                showError(error);
+                                StringBuilder error = new StringBuilder("Mes inválido. Usa abreviaciones como: ");
+                                for (String m : MONTHS) error.append(m).append(", ");
+                                showError(error.toString());
                             }
                             break;
 
@@ -126,7 +131,21 @@ public class DateSelector extends JPanel {
     }
 
     private void showError(String message) {
+        applyOptionPaneStyle();
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void applyOptionPaneStyle() {
+        Color fondo = new Color(1, 74, 173);
+        UIManager.put("OptionPane.background", fondo);
+        UIManager.put("Panel.background", fondo);
+        UIManager.put("OptionPane.messageForeground", Color.WHITE);
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 14));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.BOLD, 13));
+        UIManager.put("Button.background", new Color(255, 255, 255));
+        UIManager.put("Button.foreground", new Color(1, 74, 173));
+        UIManager.put("TextField.background", Color.WHITE);
+        UIManager.put("TextField.foreground", Color.BLACK);
     }
 
     private String capitalizeAbbr(String input) {
@@ -163,4 +182,11 @@ public class DateSelector extends JPanel {
     public String getFormattedDate() {
         return String.format("%02d-%02d-%04d", getDay(), getMonth(), getYear());
     }
+    
+    public void setDate(LocalDate date){
+        yearLabel.setText(String.valueOf(date.getYear()));
+        dayLabel.setText(String.valueOf(date.getDayOfMonth()));
+        monthLabel.setText(String.valueOf(date.getMonthValue()));
+    }   
+    
 }

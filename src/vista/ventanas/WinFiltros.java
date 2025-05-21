@@ -9,6 +9,7 @@ import componentes.Observer;
 import controlador.CtrlFiltroReserva;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ import modelo.vo.Habitacion;
 public class WinFiltros extends JFrame implements Observable {
 
     private List<Observer> observadores = new ArrayList<>();
-    private Map<String, Integer> filtros = new HashMap<>();
+    private Map<String, Object> filtros = new HashMap<>();
     private CtrlFiltroReserva controlador = new CtrlFiltroReserva();
 
     public WinFiltros() {
@@ -73,7 +74,7 @@ public class WinFiltros extends JFrame implements Observable {
         filtros.put("id", -1);
     }
 
-    public Map<String, Integer> getFiltros() {
+    public Map<String, Object> getFiltros() {
         return filtros;
     }
 
@@ -140,8 +141,10 @@ public class WinFiltros extends JFrame implements Observable {
         lblCosto = new javax.swing.JLabel();
         lblMax = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtID = new componentes.custom_textfield();
         btnAplicar = new javax.swing.JButton();
+        dateEntrada = new componentes.DateSelector();
+        dateSalida = new componentes.DateSelector();
+        jLabel6 = new javax.swing.JLabel();
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -226,36 +229,18 @@ public class WinFiltros extends JFrame implements Observable {
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(lblMax, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("STXihei", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel5.setText("NÚMERO DE HABITACIÓN:");
+        jLabel5.setFont(new java.awt.Font("STXihei", 1, 60)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("AL");
         jLabel5.setPreferredSize(new java.awt.Dimension(40, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(jLabel5, gridBagConstraints);
-
-        txtID.setForeground(new java.awt.Color(255, 255, 255));
-        txtID.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtID.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
-        txtID.setPreferredSize(new java.awt.Dimension(64, 40));
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
-        Body.add(txtID, gridBagConstraints);
 
         btnAplicar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Aplicar_btn.png"))); // NOI18N
         btnAplicar.setBorder(null);
@@ -275,6 +260,45 @@ public class WinFiltros extends JFrame implements Observable {
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(btnAplicar, gridBagConstraints);
+
+        dateEntrada.setBackground(new java.awt.Color(1, 74, 173));
+        dateEntrada.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        dateEntrada.setForeground(new java.awt.Color(51, 51, 51));
+        dateEntrada.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        Body.add(dateEntrada, gridBagConstraints);
+
+        dateSalida.setBackground(new java.awt.Color(1, 74, 173));
+        dateSalida.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        dateSalida.setForeground(new java.awt.Color(51, 51, 51));
+        dateSalida.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        Body.add(dateSalida, gridBagConstraints);
+
+        jLabel6.setFont(new java.awt.Font("STXihei", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel6.setText("PLAZO DE BUSQUEDA:");
+        jLabel6.setPreferredSize(new java.awt.Dimension(40, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        Body.add(jLabel6, gridBagConstraints);
 
         jLayeredPane1.setLayer(Body, javax.swing.JLayeredPane.PALETTE_LAYER);
         jLayeredPane1.add(Body);
@@ -305,10 +329,6 @@ public class WinFiltros extends JFrame implements Observable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-
-    }//GEN-LAST:event_txtIDActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -316,15 +336,23 @@ public class WinFiltros extends JFrame implements Observable {
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
         try {
             int costo = precios.getValue();
-            String idText = txtID.getText().trim();
+            
+            // Obtener fecha de entrada
+            int dayEntrada = dateEntrada.getDay();
+            int monthEntrada = dateEntrada.getMonth();
+            int yearEntrada = dateEntrada.getYear();
+            LocalDate fechaEntrada = LocalDate.of(yearEntrada, monthEntrada, dayEntrada);
 
-            int id = -1; // valor por defecto
-            if (!idText.isEmpty()) {
-                id = Integer.parseInt(idText);
-            }
+            // Obtener fecha de salida
+            int daySalida = dateSalida.getDay();
+            int monthSalida = dateSalida.getMonth();
+            int yearSalida = dateSalida.getYear();
+            LocalDate fechaSalida = LocalDate.of(yearSalida, monthSalida, daySalida); // <-- corregido
+
 
             filtros.put("costo", costo);
-            filtros.put("id", id);
+            filtros.put("fechaE", fechaEntrada);
+            filtros.put("fechaS", fechaSalida);
 
             notifyObservers();
 
@@ -343,17 +371,19 @@ public class WinFiltros extends JFrame implements Observable {
     private javax.swing.JPanel Body;
     private javax.swing.JPanel Header;
     private javax.swing.JButton btnAplicar;
+    private componentes.DateSelector dateEntrada;
+    private componentes.DateSelector dateSalida;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblMax;
     private javax.swing.JLabel lblMin;
     private javax.swing.JSlider precios;
-    private componentes.custom_textfield txtID;
     // End of variables declaration//GEN-END:variables
 
 }

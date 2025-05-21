@@ -3,6 +3,7 @@ package modelo.logica;
 
 import excepciones.ExAgregar;
 import java.time.LocalDate;
+import java.util.List;
 import modelo.dao.DAOReservacion;
 import modelo.vo.Reservacion;
 
@@ -28,6 +29,14 @@ public class LogicReservacion {
         }
 
         return daoReservacion.daoAgregarReservacion(reservacion);
+    }
+    
+    public Reservacion logicaBuscarPorHabitacion(int numHabitacion){
+        return daoReservacion.daoBuscarPorHabitacion(numHabitacion);
+    }
+    
+    public List<Reservacion> logicaBuscarPorMes(int mes){
+        return daoReservacion.daoBuscarPorMes(mes);
     }
 }
 

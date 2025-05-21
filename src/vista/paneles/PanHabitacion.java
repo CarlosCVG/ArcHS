@@ -4,13 +4,10 @@
  */
 package vista.paneles;
 
+import componentes.MonthsOfYear;
 import java.awt.Image;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Random;
-import java.util.stream.Stream;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,20 +21,32 @@ public class PanHabitacion extends JPanel {
 
     private static final String IMAGE_FOLDER_PATH = "src/vista/images/habitacionIMG/";
     private static final String IMAGE_PREFIX = "habitacion";
-
     private Habitacion habitacion;
+    private int mesReserva;
 
-    public PanHabitacion(Habitacion habitacion) {
+    public PanHabitacion(Habitacion habitacion) { //Constructo para cuando no se tiene un mes de reserva especifico, o cuando no se quiere mostrar dicho mes 
         this.habitacion = habitacion;
+        this.mesReserva = mesReserva;
         initComponents();
         configurarComponentes();
+        ocultarMensaje();
+        
+    }
+    
+    public PanHabitacion(Habitacion habitacion, int mesReserva, boolean favorito) { //Constructor para cuando se tiene un mes de reserva especifico
+        this.habitacion = habitacion;
+        this.mesReserva = mesReserva;
+        initComponents();
+        configurarComponentes();
+        configurarFechaReservacion(mesReserva);
+        configurarFavorito(favorito);
     }
 
     private void configurarComponentes() {
         lblIDHabitacion.setText("Habitación #" + habitacion.getId_habitacion() + ".");
         lblPrecio.setText("Precio: " + habitacion.getPrecio() + "$.");
         lblSize.setText("Tamaño: " + habitacion.getTamaño() + "m².");
-        lblNumCamas.setText("Numero de camas: " + habitacion.getNum_camas()+ ".");
+        lblNumCamas.setText("Numero de camas: " + habitacion.getNum_camas() + ".");
         lblDescripcion.setText("Descripción:\n" + habitacion.getDescripcion());
 
         setImageRandom(lblIMG1, 280, 300);
@@ -47,6 +56,24 @@ public class PanHabitacion extends JPanel {
 
     public Habitacion getHabitacion() {
         return habitacion;
+    }
+
+    public int getMesReserva() {
+        return mesReserva;
+    }
+
+    private void configurarFechaReservacion(int mesReserva) {
+        String text = "Reservada, revise calendario del mes de " + MonthsOfYear.obtenerNombreMes(mesReserva).toLowerCase();
+        lblFecha.setText(text);
+    }
+    
+    private void configurarFavorito(boolean favorito) {
+        lblFavorito.setVisible(favorito);
+    }
+
+    public void ocultarMensaje() {
+        PanelFecha.setVisible(false);
+
     }
 
     /**
@@ -92,6 +119,7 @@ public class PanHabitacion extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         PanelIMG = new javax.swing.JPanel();
         lblIMG1 = new javax.swing.JLabel();
         lblIMG2 = new javax.swing.JLabel();
@@ -102,10 +130,17 @@ public class PanHabitacion extends JPanel {
         lblSize = new javax.swing.JLabel();
         lblNumCamas = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JTextPane();
+        PanelFecha = new javax.swing.JPanel();
+        jLayeredPane2 = new javax.swing.JLayeredPane();
+        lblFondoFecha = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        lblFavorito = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(1, 74, 173));
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
         setMinimumSize(new java.awt.Dimension(397, 470));
-        setPreferredSize(new java.awt.Dimension(700, 470));
+        setPreferredSize(new java.awt.Dimension(700, 530));
         setLayout(new java.awt.BorderLayout());
 
         PanelIMG.setBackground(new java.awt.Color(255, 51, 51));
@@ -113,7 +148,6 @@ public class PanHabitacion extends JPanel {
         PanelIMG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblIMG1.setBackground(new java.awt.Color(153, 255, 51));
-        lblIMG1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/habitacionIMG/habitacion0.jpg"))); // NOI18N
         lblIMG1.setOpaque(true);
         PanelIMG.add(lblIMG1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 280));
 
@@ -125,7 +159,8 @@ public class PanHabitacion extends JPanel {
         lblIMG3.setOpaque(true);
         PanelIMG.add(lblIMG3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, 250));
 
-        add(PanelIMG, java.awt.BorderLayout.WEST);
+        jLayeredPane1.add(PanelIMG);
+        PanelIMG.setBounds(0, 0, 300, 530);
 
         PanelInfo.setBackground(new java.awt.Color(1, 74, 173));
         PanelInfo.setPreferredSize(new java.awt.Dimension(400, 470));
@@ -163,14 +198,52 @@ public class PanHabitacion extends JPanel {
         lblDescripcion.setFocusable(false);
         PanelInfo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 382, 220));
 
-        add(PanelInfo, java.awt.BorderLayout.EAST);
+        jLayeredPane1.add(PanelInfo);
+        PanelInfo.setBounds(300, 0, 400, 530);
+
+        PanelFecha.setOpaque(false);
+        PanelFecha.setLayout(new java.awt.BorderLayout());
+
+        lblFondoFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/fondoFechaInfoPanelHabitacion.png"))); // NOI18N
+        jLayeredPane2.add(lblFondoFecha);
+        lblFondoFecha.setBounds(0, 0, 660, 80);
+
+        lblFecha.setFont(new java.awt.Font("Monospaced", 0, 20)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(255, 255, 255));
+        lblFecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblFecha.setText("k");
+        lblFecha.setToolTipText("");
+        jLayeredPane2.setLayer(lblFecha, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane2.add(lblFecha);
+        lblFecha.setBounds(20, 25, 600, 27);
+
+        PanelFecha.add(jLayeredPane2, java.awt.BorderLayout.CENTER);
+
+        jLayeredPane1.setLayer(PanelFecha, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane1.add(PanelFecha);
+        PanelFecha.setBounds(20, 420, 660, 80);
+
+        lblFavorito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/fondoFavorito.png"))); // NOI18N
+        lblFavorito.setText("jLabel1");
+        lblFavorito.setPreferredSize(new java.awt.Dimension(120, 120));
+        jLayeredPane1.setLayer(lblFavorito, javax.swing.JLayeredPane.PALETTE_LAYER);
+        jLayeredPane1.add(lblFavorito);
+        lblFavorito.setBounds(10, 10, 120, 120);
+
+        add(jLayeredPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelFecha;
     private javax.swing.JPanel PanelIMG;
     private javax.swing.JPanel PanelInfo;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JTextPane lblDescripcion;
+    private javax.swing.JLabel lblFavorito;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblFondoFecha;
     private javax.swing.JLabel lblIDHabitacion;
     private javax.swing.JLabel lblIMG1;
     private javax.swing.JLabel lblIMG2;

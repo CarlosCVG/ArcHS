@@ -5,17 +5,26 @@
 package vista.paneles;
 
 import componentes.Observer;
+import componentes.SelectorMes;
 import controlador.CtrlReservaUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
-import vista.ventanas.WinFecha;
+import vista.ventanas.WinReservacion;
 import javax.swing.JPanel;
+import modelo.vo.Favotito;
+import modelo.vo.Reservacion;
 import vista.ventanas.WinFiltros;
+import vista.ventanas.WinCalendario;
 
 /**
  *
@@ -23,52 +32,69 @@ import vista.ventanas.WinFiltros;
  */
 public class PanReservaUsuario extends JPanel implements Observer {
 
-    /**
-     * Creates new form registroUI
-     */
-    private CtrlReservaUI ctrReservaUI = new CtrlReservaUI();
-    private List<Habitacion> habitaciones;
-    private Huesped huesped;
+    private CtrlReservaUI controladorReserva = new CtrlReservaUI();
+    private List<Habitacion> habitacionesDisponibles;
+    private List<Favotito> favoritos;
+    private Huesped huespedActual;
     private WinFiltros panelFiltros;
 
+    private void provisionalFavoritos(){ //Nada mas la voy a tener por ahora, en lo que generamos la base de datos
+        favoritos.add(new Favotito(1, huespedActual.getId_huesped(), 1)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
+        favoritos.add(new Favotito(2, huespedActual.getId_huesped(), 2)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
+    }
+    
     public PanReservaUsuario(Huesped huesped) {
-
         initComponents();
-        this.huesped = huesped;
-        habitaciones = ctrReservaUI.ctrHabitacionesDisponibles();
-        configurarComponentes();
+        this.huespedActual = huesped;
+        this.habitacionesDisponibles = controladorReserva.ctrHabitaciones();
+        configurarComponentesUI();
     }
 
-    private void configurarComponentes() {
-        for (Habitacion habitacion : habitaciones) {
-            carrusel.agregarPanel(new PanHabitacion(habitacion));
+    private void configurarComponentesUI() {
+        // Configuración del carrusel de habitaciones
+        for (Habitacion habitacion : habitacionesDisponibles) {
+            Reservacion reserva = controladorReserva.ctrBuscarReservacion(habitacion);
+            if (reserva == null) {
+                carrusel.agregarPanel(new PanHabitacion(habitacion));
+            } else {
+                carrusel.agregarPanel(new PanHabitacion(habitacion, reserva.getF_entrada().getMonthValue(), 
+                        true //Aqui se debe validar que tenga o no favoritos el usuario con esa habitacion
+                ));
+            }
         }
 
-        carrusel.setColorVelo(new Color(1, 74, 173));
-        carrusel.setBtnColor(new Color(1, 74, 173));
+        configurarEstilosCarrusel();
+        configurarBotones();
+    }
+
+    
+    private void configurarEstilosCarrusel() {
+        Color colorPrincipal = new Color(1, 74, 173);
+        carrusel.setColorVelo(colorPrincipal);
+        carrusel.setBtnColor(colorPrincipal);
         carrusel.setBtnColorForMouseEntered(new Color(1, 106, 249));
-        carrusel.setBtnColorForMouseExit(new Color(1, 74, 173));
-        carrusel.setBtnColorForMousePressed(new Color(1, 74, 173));
-        carrusel.setBtnColorForMouseReleased(new Color(1, 74, 173));
+        carrusel.setBtnColorForMouseExit(colorPrincipal);
+        carrusel.setBtnColorForMousePressed(colorPrincipal);
+        carrusel.setBtnColorForMouseReleased(colorPrincipal);
 
-        ImageIcon iconR = new ImageIcon("src/vista/images/btnRight.png");
-        Image scaledR = iconR.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon iconLeft = new ImageIcon("src/vista/images/btnLeft.png");
+        ImageIcon iconRight = new ImageIcon("src/vista/images/btnRight.png");
 
-        ImageIcon iconL = new ImageIcon("src/vista/images/btnLeft.png");
-        Image scaledL = iconL.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        carrusel.setBtnImage(iconRight, iconLeft);
+    }
 
-        carrusel.setBtnImage(new ImageIcon(scaledR), new ImageIcon(scaledL));
+    private void configurarBotones() {
+        configurarBoton(btnReservar, "src/vista/images/btnReservar.png", new Dimension(240, 40));
+        configurarBoton(btnFiltrar, "src/vista/images/btnFiltros.png", new Dimension(240, 40));
+        configurarBoton(btnFavoritos, "src/vista/images/btnFavoritos.png", new Dimension(40, 40));
+        configurarBoton(btnCalendario, "src/vista/images/btnCalendario.png", new Dimension(40, 40));
+    }
 
-        btnReservar.setPreferredSize(new Dimension(240, 40));
-        ImageIcon iconReservar = new ImageIcon("src/vista/images/btnReservar.png");
-        Image scaledReservar = iconReservar.getImage().getScaledInstance(240, 40, Image.SCALE_SMOOTH);
-        btnReservar.setIcon(new ImageIcon(scaledReservar));
-
-        btnFiltrar.setPreferredSize(new Dimension(240, 40));
-        ImageIcon iconFiltros = new ImageIcon("src/vista/images/btnFiltros.png");
-        Image scaledFiltros = iconFiltros.getImage().getScaledInstance(240, 40, Image.SCALE_SMOOTH);
-        btnFiltrar.setIcon(new ImageIcon(scaledFiltros));
-
+    private void configurarBoton(JButton boton, String rutaIcono, Dimension dimension) {
+        boton.setPreferredSize(dimension);
+        ImageIcon icono = new ImageIcon(rutaIcono);
+        Image imagenEscalada = icono.getImage().getScaledInstance(dimension.width, dimension.height, Image.SCALE_SMOOTH);
+        boton.setIcon(new ImageIcon(imagenEscalada));
     }
 
     @SuppressWarnings("unchecked")
@@ -78,8 +104,10 @@ public class PanReservaUsuario extends JPanel implements Observer {
         body = new javax.swing.JPanel();
         carrusel = new componentes.PanelCarrusel();
         footer = new javax.swing.JPanel();
+        btnCalendario = new componentes.RoundedButton();
         btnReservar = new componentes.RoundedButton();
         btnFiltrar = new componentes.RoundedButton();
+        btnFavoritos = new componentes.RoundedButton();
 
         setPreferredSize(new java.awt.Dimension(760, 580));
         setLayout(new java.awt.BorderLayout());
@@ -99,6 +127,25 @@ public class PanReservaUsuario extends JPanel implements Observer {
         footer.setMinimumSize(new java.awt.Dimension(310, 22));
         footer.setPreferredSize(new java.awt.Dimension(310, 50));
         footer.setLayout(new java.awt.GridBagLayout());
+
+        btnCalendario.setBackground(new java.awt.Color(1, 74, 173));
+        btnCalendario.setText("");
+        btnCalendario.setOpaque(true);
+        btnCalendario.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnCalendario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCalendarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCalendarioMouseExited(evt);
+            }
+        });
+        btnCalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalendarioActionPerformed(evt);
+            }
+        });
+        footer.add(btnCalendario, new java.awt.GridBagConstraints());
 
         btnReservar.setBackground(new java.awt.Color(1, 74, 173));
         btnReservar.setText("");
@@ -138,15 +185,26 @@ public class PanReservaUsuario extends JPanel implements Observer {
         });
         footer.add(btnFiltrar, new java.awt.GridBagConstraints());
 
+        btnFavoritos.setBackground(new java.awt.Color(1, 74, 173));
+        btnFavoritos.setText("");
+        btnFavoritos.setOpaque(true);
+        btnFavoritos.setPreferredSize(new java.awt.Dimension(40, 40));
+        footer.add(btnFavoritos, new java.awt.GridBagConstraints());
+
         add(footer, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        List<JPanel> a = carrusel.getPanelList();
+        List<PanHabitacion> b = new ArrayList<>();
+        
+        for (JPanel jPanel : a) {
+            b.add((PanHabitacion) jPanel);
+        }
+        
         carrusel.detenerAutoScroll();
-        PanHabitacion habitacion = (PanHabitacion) carrusel.getCurrentPanel();
-
-        new WinFecha(habitacion, huesped).setVisible(true);
-
+        PanHabitacion panelSeleccionado = (PanHabitacion) carrusel.getCurrentPanel();
+        new WinReservacion(b, huespedActual).setVisible(true);
     }//GEN-LAST:event_btnReservarActionPerformed
 
     private void btnReservarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservarMouseEntered
@@ -171,9 +229,54 @@ public class PanReservaUsuario extends JPanel implements Observer {
         panelFiltros.setVisible(true);
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
+    private void btnCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalendarioActionPerformed
+        // Selector de mes
+        carrusel.detenerAutoScroll();
+        PanHabitacion panelSeleccionado = (PanHabitacion) carrusel.getCurrentPanel();
+
+        SelectorMes selectorMesDialog = new SelectorMes(this);
+        selectorMesDialog.setMes(panelSeleccionado.getMesReserva());
+        selectorMesDialog.setVisible(true);
+        String mesSeleccionado = selectorMesDialog.getMesIngresado();
+
+        int mes;
+        try {
+            LocalDate hoy = LocalDate.now();
+            
+            mes = Integer.valueOf(mesSeleccionado);
+            if (mes < 1 || mes > 12) {
+                mostrarMensaje("Por favor, ingrese un mes válido (1-12).");
+                return; // Salir si el mes es inválido
+            }
+            if(mes < hoy.getMonthValue()){
+                mostrarMensaje("Por favor ingrese un mes igual o posterior al actual");
+                return; // Salir si el mes es inválido
+            }
+        } catch (NumberFormatException e) {
+            mostrarMensaje("Por favor, ingrese un número válido para el mes.");
+            return; // Salir si no es un número
+        }
+
+        List<Reservacion> reservacionesDelMes = controladorReserva.ctrBuscarReservacionPorMes(mes);
+        WinCalendario calendario = new WinCalendario(mes, panelSeleccionado, huespedActual);
+        
+        calendario.setReservaList(reservacionesDelMes);
+        calendario.setVisible(true);
+    }//GEN-LAST:event_btnCalendarioActionPerformed
+
+    private void btnCalendarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalendarioMouseExited
+        btnCalendario.setBackground(new Color(1, 74, 174));
+    }//GEN-LAST:event_btnCalendarioMouseExited
+
+    private void btnCalendarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalendarioMouseEntered
+        btnCalendario.setBackground(new Color(1, 90, 211));
+    }//GEN-LAST:event_btnCalendarioMouseEntered
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
+    private componentes.RoundedButton btnCalendario;
+    private componentes.RoundedButton btnFavoritos;
     private componentes.RoundedButton btnFiltrar;
     private componentes.RoundedButton btnReservar;
     private componentes.PanelCarrusel carrusel;
@@ -182,13 +285,40 @@ public class PanReservaUsuario extends JPanel implements Observer {
 
     @Override
     public void update() {
-        habitaciones = ctrReservaUI.ctrHabitacionesConFiltros(panelFiltros.getFiltros());
-        System.out.println(habitaciones.size());
-        
+
+        // Lógica para actualizar las habitaciones con los filtros aplicados
+        habitacionesDisponibles = controladorReserva.ctrHabitacionesConFiltros(panelFiltros.getFiltros());
+        System.out.println(habitacionesDisponibles.size());
+
         carrusel.removePanels();
 
-        for (Habitacion habitacion : habitaciones) {
-            carrusel.agregarPanel(new PanHabitacion(habitacion));
+        for (Habitacion habitacion : habitacionesDisponibles) {
+            Reservacion reserva = controladorReserva.ctrBuscarReservacion(habitacion);
+
+            if (reserva == null) {
+                carrusel.agregarPanel(new PanHabitacion(habitacion));
+            } else {
+                carrusel.agregarPanel(new PanHabitacion(habitacion, reserva.getF_entrada().getMonthValue(), true));
+            }
         }
+
     }
+    
+    private void mostrarMensaje(String mensaje) {
+        ImageIcon originalIcon = new ImageIcon("src/vista/images/LOGO.png");  // Cambia esta ruta por la de tu imagen
+
+        // Redimensionar la imagen
+        Image originalImage = originalIcon.getImage();
+        Image resizedImage = originalImage.getScaledInstance(75, 90, Image.SCALE_SMOOTH); // Ajusta el tamaño (ancho y alto)
+
+        // Crear el nuevo ImageIcon con la imagen redimensionada
+        ImageIcon customIcon = new ImageIcon(resizedImage);
+        JOptionPane optionPane = new JOptionPane(mensaje, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, customIcon);
+        JDialog dialog = optionPane.createDialog(this, "Advertencia");
+        dialog.setLocationRelativeTo(this);
+
+        dialog.setVisible(true);
+    }
+
+
 }
