@@ -189,12 +189,19 @@ public class PanReservaUsuario extends JPanel implements Observer {
         btnFavoritos.setText("");
         btnFavoritos.setOpaque(true);
         btnFavoritos.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnFavoritos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFavoritosActionPerformed(evt);
+            }
+        });
         footer.add(btnFavoritos, new java.awt.GridBagConstraints());
 
         add(footer, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        // Cambiarlo despues.
+        
         List<JPanel> a = carrusel.getPanelList();
         List<PanHabitacion> b = new ArrayList<>();
         
@@ -246,15 +253,15 @@ public class PanReservaUsuario extends JPanel implements Observer {
             mes = Integer.valueOf(mesSeleccionado);
             if (mes < 1 || mes > 12) {
                 mostrarMensaje("Por favor, ingrese un mes válido (1-12).");
-                return; // Salir si el mes es inválido
+                return; // Mes invalido fuera menor que 1 y mayor que 12
             }
             if(mes < hoy.getMonthValue()){
                 mostrarMensaje("Por favor ingrese un mes igual o posterior al actual");
-                return; // Salir si el mes es inválido
+                return; // Mes antes que hoy
             }
         } catch (NumberFormatException e) {
-            mostrarMensaje("Por favor, ingrese un número válido para el mes.");
-            return; // Salir si no es un número
+            mostrarMensaje("Por favor, ingrese un numero valido para el mes.");
+            return; // Salir si no es un numero
         }
 
         List<Reservacion> reservacionesDelMes = controladorReserva.ctrBuscarReservacionPorMes(mes);
@@ -271,6 +278,11 @@ public class PanReservaUsuario extends JPanel implements Observer {
     private void btnCalendarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalendarioMouseEntered
         btnCalendario.setBackground(new Color(1, 90, 211));
     }//GEN-LAST:event_btnCalendarioMouseEntered
+
+    private void btnFavoritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritosActionPerformed
+        PanHabitacion currentHabitacion = (PanHabitacion) carrusel.getCurrentPanel();
+        currentHabitacion.alternarFavorito();
+    }//GEN-LAST:event_btnFavoritosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -23,6 +23,7 @@ public class PanHabitacion extends JPanel {
     private static final String IMAGE_PREFIX = "habitacion";
     private Habitacion habitacion;
     private int mesReserva;
+    private boolean favorito = false;
 
     public PanHabitacion(Habitacion habitacion) { //Constructo para cuando no se tiene un mes de reserva especifico, o cuando no se quiere mostrar dicho mes 
         this.habitacion = habitacion;
@@ -30,16 +31,18 @@ public class PanHabitacion extends JPanel {
         initComponents();
         configurarComponentes();
         ocultarMensaje();
-        
+        configurarFavorito();
+
     }
-    
+
     public PanHabitacion(Habitacion habitacion, int mesReserva, boolean favorito) { //Constructor para cuando se tiene un mes de reserva especifico
         this.habitacion = habitacion;
         this.mesReserva = mesReserva;
+        this.favorito = favorito;
         initComponents();
         configurarComponentes();
         configurarFechaReservacion(mesReserva);
-        configurarFavorito(favorito);
+        configurarFavorito();
     }
 
     private void configurarComponentes() {
@@ -66,9 +69,14 @@ public class PanHabitacion extends JPanel {
         String text = "Reservada, revise calendario del mes de " + MonthsOfYear.obtenerNombreMes(mesReserva).toLowerCase();
         lblFecha.setText(text);
     }
-    
-    private void configurarFavorito(boolean favorito) {
+
+    public void configurarFavorito() {
         lblFavorito.setVisible(favorito);
+    }
+    
+    public void alternarFavorito() {
+        favorito = !favorito;
+        configurarFavorito();
     }
 
     public void ocultarMensaje() {
