@@ -10,9 +10,9 @@ public class DBConexion {
     
     public static Connection getConexionBD(){
         try{
-            String url = "jdbc:mysql://localhost/biblioteca";
-            String usuario = "BibliotecaDBPTAP";
-            String password = "TapiAccess1_";
+            String url = "jdbc:mysql://localhost/hotel";
+            String usuario = "hotelarc";
+            String password = "hotelaccess1";
             conexion = (Connection) DriverManager.getConnection(url, usuario, password);
         } catch (SQLException ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
