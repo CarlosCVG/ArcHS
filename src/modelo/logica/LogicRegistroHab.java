@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.dao.DAORegistroHab;
 import modelo.vo.Habitacion;
+import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
 
 public class LogicRegistroHab {
@@ -32,22 +33,26 @@ public class LogicRegistroHab {
     public int getCountHuespedes() {
         return daorh.getCountHuespedes();
     }
+
     public int getCountReservaciones() {
         return daorh.getCountReservaciones();
     }
 
-    public boolean addHuesped(String usuario, String pass, int id_huesped, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) throws ExRegistroHab {
+    public boolean addHuesped(String usuario, String pass, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) throws ExRegistroHab {
         if (nombre.isBlank() || ap1.isBlank() || ap2.isBlank() || num_tarjeta.isBlank() || idioma.isBlank() || correo.isBlank()) {
             throw new ExRegistroHab("Rellena todos los campos");
         }
         if (esNumero(nombre) || esNumero(ap1) || esNumero(ap2)) {
             throw new ExRegistroHab("El nombre no puede contener numeros");
         }
-        if (num_tarjeta.length() != 19){
+        if (num_tarjeta.length() != 19) {
             throw new ExRegistroHab("Longitud de tarjeta incorrecta");
         }
-        return true;
+        return daorh.addHuesped(usuario, pass, nombre, ap1, ap2, num_tarjeta, idioma, correo);
     }
+    
+    
+    
 
     public boolean esNumero(String str) {
         boolean esNumero = false;
@@ -88,6 +93,10 @@ public class LogicRegistroHab {
         }
 
         return habitaciones;
+    }
+    
+    public Huesped findClient(String usuario, String pass){
+        return daorh.findClient(usuario, pass);
     }
 
 }

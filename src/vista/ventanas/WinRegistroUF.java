@@ -16,10 +16,10 @@ import modelo.vo.Huesped;
 public class WinRegistroUF extends javax.swing.JFrame {
 
     private String usuario, pass;
-    private int id_huesped;
     private String nombre, ap1, ap2, num_tarjeta, idioma, correo;
     private JFrame ventanaAnterior;
-    private int nuevoNumId, habitacion;
+    private int habitacion;
+    private Huesped nhuesped;
     private List<Huesped> huespedes = new ArrayList<>();
     private JTable tblRegistroFisico;
     CtrlRegistroHab ctrlrh = new CtrlRegistroHab();
@@ -31,10 +31,6 @@ public class WinRegistroUF extends javax.swing.JFrame {
         this.tblRegistroFisico = tblRegistroFisico;
         ctrlrh.getCountHuespedes();
         initComponents();
-        nuevoNumId = ctrlrh.getCountHuespedes() + 1;
-        txt1.setText("h" + nuevoNumId);
-        txt2.setText("passh");
-        txt3.setText("" + nuevoNumId);
         txt7.setForeground(Color.GRAY);
         txt7.setText("formato: XXXX-XXXX-XXXX-XXXX");
     }
@@ -49,9 +45,7 @@ public class WinRegistroUF extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         txt1 = new javax.swing.JTextField();
         txt2 = new javax.swing.JTextField();
-        txt3 = new javax.swing.JTextField();
         btnVolver = new javax.swing.JButton();
-        lbl3 = new javax.swing.JLabel();
         txt4 = new javax.swing.JTextField();
         txt5 = new javax.swing.JTextField();
         txt6 = new javax.swing.JTextField();
@@ -99,18 +93,8 @@ public class WinRegistroUF extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, -1, -1));
-
-        txt1.setEnabled(false);
-        txt1.setFocusable(false);
         getContentPane().add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 280, -1));
-
-        txt2.setEnabled(false);
-        txt2.setFocusable(false);
         getContentPane().add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 280, -1));
-
-        txt3.setEnabled(false);
-        txt3.setFocusable(false);
-        getContentPane().add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 280, -1));
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 153));
         btnVolver.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -122,11 +106,6 @@ public class WinRegistroUF extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        lbl3.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lbl3.setForeground(new java.awt.Color(255, 255, 255));
-        lbl3.setText("Id de Huesped:");
-        getContentPane().add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
         getContentPane().add(txt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 280, -1));
         getContentPane().add(txt5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 280, -1));
 
@@ -204,21 +183,20 @@ public class WinRegistroUF extends javax.swing.JFrame {
         try {
             usuario = txt1.getText();
             pass = txt2.getText();
-            id_huesped = Integer.parseInt(txt3.getText());
             nombre = txt4.getText();
             ap1 = txt5.getText();
             ap2 = txt6.getText();
-            num_tarjeta = "XXXX-XXXX-XXXX-XXXX";
+            num_tarjeta = txt7.getText();
             idioma = txt8.getText();
             correo = txt9.getText();
-            if (ctrlrh.addHuesped(usuario, pass, id_huesped, nombre, ap1, ap2, num_tarjeta, idioma, correo)) {
-                Huesped nhuesped = new Huesped(usuario, pass, id_huesped, nombre, ap1, ap2, num_tarjeta, idioma, correo);
-                WinRegistroRF wrrf = new WinRegistroRF(ventanaAnterior, habitacion ,nhuesped, tblRegistroFisico);
+            if (ctrlrh.addHuesped(usuario, pass, nombre, ap1, ap2, num_tarjeta, idioma, correo)) {
+                JOptionPane.showMessageDialog(null, "Cliente añadido con exito");
+                nhuesped = ctrlrh.findClient(usuario, pass);
+                WinRegistroRF wrrf = new WinRegistroRF(ventanaAnterior, habitacion, nhuesped, tblRegistroFisico);
                 wrrf.setBounds(200, 100, wrrf.getWidth(), wrrf.getHeight());
                 wrrf.setVisible(true);
                 this.dispose();
             }
-            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error al procesar los datos, captura nuevamente");
         } catch (ExRegistroHab ex) {
@@ -243,14 +221,14 @@ public class WinRegistroUF extends javax.swing.JFrame {
     }//GEN-LAST:event_txt8ActionPerformed
 
     private void txt7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt7FocusGained
-        if (txt7.getText().equals("formato: XXXX-XXXX-XXXX-XXXX")){
+        if (txt7.getText().equals("formato: XXXX-XXXX-XXXX-XXXX")) {
             txt7.setText("");
         }
         txt7.setForeground(Color.BLACK);
     }//GEN-LAST:event_txt7FocusGained
 
     private void txt7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt7FocusLost
-        if (txt7.getText().equals("")){
+        if (txt7.getText().equals("")) {
             txt7.setText("formato: XXXX-XXXX-XXXX-XXXX");
             txt7.setForeground(Color.GRAY);
         }
@@ -263,7 +241,6 @@ public class WinRegistroUF extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
-    private javax.swing.JLabel lbl3;
     private javax.swing.JLabel lbl4;
     private javax.swing.JLabel lbl5;
     private javax.swing.JLabel lbl6;
@@ -272,7 +249,6 @@ public class WinRegistroUF extends javax.swing.JFrame {
     private javax.swing.JLabel lbl9;
     public javax.swing.JTextField txt1;
     public javax.swing.JTextField txt2;
-    public javax.swing.JTextField txt3;
     public javax.swing.JTextField txt4;
     public javax.swing.JTextField txt5;
     public javax.swing.JTextField txt6;

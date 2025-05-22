@@ -164,7 +164,7 @@
             </Constraint>
           </Constraints>
           <SubComponents>
-            <Component class="componentes.RoundedButton" name="roundedButton1">
+            <Component class="componentes.RoundedButton" name="btnRegistro">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ad" green="4a" red="1" type="rgb"/>
@@ -183,10 +183,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="roundedButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistroActionPerformed"/>
               </Events>
             </Component>
-            <Component class="componentes.RoundedButton" name="roundedButton2">
+            <Component class="componentes.RoundedButton" name="btnIS">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ad" green="4a" red="1" type="rgb"/>
@@ -202,7 +202,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="roundedButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnISActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -277,11 +277,11 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="7_roundedButton1">
-                  <CodeVariable name="roundedButton1" type="8194" declaredType="componentes.RoundedButton"/>
+                <CodeExpression id="7_btnRegistro">
+                  <CodeVariable name="btnRegistro" type="8194" declaredType="componentes.RoundedButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="roundedButton1"/>
+                      <ComponentRef name="btnRegistro"/>
                     </ExpressionProvider>
                   </ExpressionOrigin>
                 </CodeExpression>
@@ -293,11 +293,11 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="8_roundedButton2">
-                  <CodeVariable name="roundedButton2" type="8194" declaredType="componentes.RoundedButton"/>
+                <CodeExpression id="8_btnIS">
+                  <CodeVariable name="btnIS" type="8194" declaredType="componentes.RoundedButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="roundedButton2"/>
+                      <ComponentRef name="btnIS"/>
                     </ExpressionProvider>
                   </ExpressionOrigin>
                 </CodeExpression>

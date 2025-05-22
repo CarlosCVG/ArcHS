@@ -51,8 +51,8 @@ public class PanLogin extends javax.swing.JPanel {
         header = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         footer = new javax.swing.JPanel();
-        roundedButton1 = new componentes.RoundedButton();
-        roundedButton2 = new componentes.RoundedButton();
+        btnRegistro = new componentes.RoundedButton();
+        btnIS = new componentes.RoundedButton();
 
         setPreferredSize(new java.awt.Dimension(600, 400));
         setLayout(new java.awt.BorderLayout());
@@ -145,32 +145,32 @@ public class PanLogin extends javax.swing.JPanel {
         flowLayout2.setAlignOnBaseline(true);
         footer.setLayout(flowLayout2);
 
-        roundedButton1.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton1.setBorder(null);
-        roundedButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Registro_Btn.png"))); // NOI18N
-        roundedButton1.setText("");
-        roundedButton1.setContentAreaFilled(true);
-        roundedButton1.setDefaultCapable(false);
-        roundedButton1.setPreferredSize(new java.awt.Dimension(160, 50));
-        roundedButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistro.setBackground(new java.awt.Color(1, 74, 173));
+        btnRegistro.setBorder(null);
+        btnRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Registro_Btn.png"))); // NOI18N
+        btnRegistro.setText("");
+        btnRegistro.setContentAreaFilled(true);
+        btnRegistro.setDefaultCapable(false);
+        btnRegistro.setPreferredSize(new java.awt.Dimension(160, 50));
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roundedButton1ActionPerformed(evt);
+                btnRegistroActionPerformed(evt);
             }
         });
-        footer.add(roundedButton1);
+        footer.add(btnRegistro);
 
-        roundedButton2.setBackground(new java.awt.Color(1, 74, 173));
-        roundedButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Inicio_de_sesion.png"))); // NOI18N
-        roundedButton2.setText("");
-        roundedButton2.setBorderPainted(false);
-        roundedButton2.setContentAreaFilled(true);
-        roundedButton2.setPreferredSize(new java.awt.Dimension(160, 50));
-        roundedButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnIS.setBackground(new java.awt.Color(1, 74, 173));
+        btnIS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Inicio_de_sesion.png"))); // NOI18N
+        btnIS.setText("");
+        btnIS.setBorderPainted(false);
+        btnIS.setContentAreaFilled(true);
+        btnIS.setPreferredSize(new java.awt.Dimension(160, 50));
+        btnIS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roundedButton2ActionPerformed(evt);
+                btnISActionPerformed(evt);
             }
         });
-        footer.add(roundedButton2);
+        footer.add(btnIS);
 
         jPanel1.add(footer, java.awt.BorderLayout.PAGE_END);
 
@@ -185,8 +185,8 @@ public class PanLogin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void roundedButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton1ActionPerformed
-        if (loginselected == 1 || loginselected == 3) {
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        if (loginselected == 1 || loginselected == 2) {
             JOptionPane.showMessageDialog(null, "Opcion deshabilitada para Administradores y Empleados");
         } else {
             ventanaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -195,15 +195,15 @@ public class PanLogin extends javax.swing.JPanel {
             wruv.setBounds(200, 100, wruv.getWidth(), wruv.getHeight());
             wruv.setVisible(true);
         }
-    }//GEN-LAST:event_roundedButton1ActionPerformed
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
-    private void roundedButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton2ActionPerformed
+    private void btnISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnISActionPerformed
         usuario = txtUser.getText();
         password = txtPassword.getText();
         switch (loginselected) {
             case 1:
                 Administrador administrador = new Administrador();
-                ctrll.initAdministradores();
+                //ctrll.initAdministradores();
                 if (ctrll.adminLogged(usuario, password) != null) {
                     administrador = ctrll.adminLogged(usuario, password);
                     //JOptionPane.showMessageDialog(null, administrador.getNombre());
@@ -217,8 +217,8 @@ public class PanLogin extends javax.swing.JPanel {
                 break;
             case 2:
                 Empleado empleado;
-                ctrll.initEmpleados();
-                ctrll.initPuestos();
+//                ctrll.initEmpleados();
+//                ctrll.initPuestos();
                 String nombrePuesto;
                 if (ctrll.empleadoLogged(usuario, password) != null) {
                     empleado = ctrll.empleadoLogged(usuario, password);
@@ -256,7 +256,7 @@ public class PanLogin extends javax.swing.JPanel {
 
             case 3:
                 Huesped huesped = new Huesped();
-                ctrll.initHuespedes();
+                //ctrll.initHuespedes();
                 if (ctrll.huespedLogged(usuario, password) != null) {
                     huesped = ctrll.huespedLogged(usuario, password);
 //                    JOptionPane.showMessageDialog(null, huesped.getNombre());
@@ -269,7 +269,7 @@ public class PanLogin extends javax.swing.JPanel {
                 }
                 break;
         }
-    }//GEN-LAST:event_roundedButton2ActionPerformed
+    }//GEN-LAST:event_btnISActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         WinSelectLogin selectlogin = new WinSelectLogin();
@@ -282,6 +282,8 @@ public class PanLogin extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
+    private componentes.RoundedButton btnIS;
+    private componentes.RoundedButton btnRegistro;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
     private javax.swing.JButton jButton2;
@@ -289,8 +291,6 @@ public class PanLogin extends javax.swing.JPanel {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUser;
-    private componentes.RoundedButton roundedButton1;
-    private componentes.RoundedButton roundedButton2;
     private componentes.custom_textfield txtPassword;
     private componentes.custom_textfield txtUser;
     // End of variables declaration//GEN-END:variables

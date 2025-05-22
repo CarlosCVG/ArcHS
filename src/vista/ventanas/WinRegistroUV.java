@@ -18,7 +18,6 @@ public class WinRegistroUV extends javax.swing.JFrame {
     private String nombre, ap1, ap2, num_tarjeta, idioma, correo;
     private JFrame ventanaAnterior;
     private List<Huesped> huespedes = new ArrayList<>();
-    private int nuevoNumId;
     CtrlRegistroHab ctrlrh = new CtrlRegistroHab();
 
     public WinRegistroUV(JFrame ventanaAnterior) {
@@ -26,7 +25,6 @@ public class WinRegistroUV extends javax.swing.JFrame {
         this.ventanaAnterior = ventanaAnterior;
         ctrlrh.getCountHuespedes();
         initComponents();
-        nuevoNumId = ctrlrh.getCountHuespedes() + 1;
         txt7.setForeground(Color.GRAY);
         txt7.setText("formato: XXXX-XXXX-XXXX-XXXX");
     }
@@ -179,15 +177,14 @@ public class WinRegistroUV extends javax.swing.JFrame {
         try {
             usuario = txt1.getText();
             pass = txt2.getText();
-            id_huesped = nuevoNumId;
             nombre = txt4.getText();
             ap1 = txt5.getText();
             ap2 = txt6.getText();
             num_tarjeta = txt7.getText();
             idioma = txt8.getText();
             correo = txt9.getText();
-            if (ctrlrh.addHuesped(usuario, pass, id_huesped, nombre, ap1, ap2, num_tarjeta, idioma, correo)) {
-                Huesped nhuesped = new Huesped(usuario, pass, id_huesped, nombre, ap1, ap2, num_tarjeta, idioma, correo);
+            if (ctrlrh.addHuesped(usuario, pass, nombre, ap1, ap2, num_tarjeta, idioma, correo)) {
+                JOptionPane.showMessageDialog(null, "Cliente añadido con exito");
             }
             if (ventanaAnterior != null) {
                 ventanaAnterior.setVisible(true);

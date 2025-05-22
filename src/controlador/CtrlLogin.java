@@ -75,8 +75,7 @@ public class CtrlLogin {
     public String searchPuesto(Empleado emp){
         List<Puesto> listaPuestos = getListaPuestos();
         for (Puesto p : listaPuestos) {
-            
-            if(p.getId_empleado() == emp.getId_empleado()){
+            if(p.getId_puesto() == emp.getId_puesto()){
                 return p.getNombre_puesto();
             }
         }
