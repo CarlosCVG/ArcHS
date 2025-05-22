@@ -8,6 +8,7 @@ package componentes;
  *
  * @author edwin
  */
+import modelo.util.Observer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

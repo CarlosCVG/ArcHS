@@ -4,8 +4,8 @@
  */
 package vista.ventanas;
 
-import componentes.Observable;
-import componentes.Observer;
+import modelo.util.Observable;
+import modelo.util.Observer;
 import controlador.CtrlFiltroReserva;
 import java.awt.Color;
 import java.awt.Graphics;

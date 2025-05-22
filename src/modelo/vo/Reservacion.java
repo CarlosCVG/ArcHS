@@ -6,16 +6,18 @@ public class Reservacion {
 
     private int id_reservacion, id_habitacion, id_huesped;
     private LocalDate f_entrada, f_salida;
+    private String estado;
 
     public Reservacion() {
     }
 
-    public Reservacion(int id_reservacion, int id_habitacion, int id_huesped, LocalDate f_entrada, LocalDate f_salida) {
+    public Reservacion(int id_reservacion, int id_habitacion, int id_huesped, String estado, LocalDate f_entrada, LocalDate f_salida) {
         this.id_reservacion = id_reservacion;
         this.id_habitacion = id_habitacion;
         this.id_huesped = id_huesped;
         this.f_entrada = f_entrada;
         this.f_salida = f_salida;
+        this.estado = estado;
     }
 
     public int getId_reservacion() {
@@ -38,6 +40,10 @@ public class Reservacion {
         return id_huesped;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
     public void setId_huesped(int id_huesped) {
         this.id_huesped = id_huesped;
     }
@@ -56,6 +62,10 @@ public class Reservacion {
 
     public void setF_salida(LocalDate f_salida) {
         this.f_salida = f_salida;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override

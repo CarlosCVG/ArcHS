@@ -4,7 +4,7 @@
  */
 package vista.paneles;
 
-import componentes.Observer;
+import modelo.util.Observer;
 import componentes.SelectorMes;
 import controlador.CtrlReservaUI;
 import java.awt.Color;
@@ -21,7 +21,7 @@ import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
 import vista.ventanas.WinReservacion;
 import javax.swing.JPanel;
-import modelo.vo.Favotito;
+import modelo.vo.Favorito;
 import modelo.vo.Reservacion;
 import vista.ventanas.WinFiltros;
 import vista.ventanas.WinCalendario;
@@ -34,13 +34,13 @@ public class PanReservaUsuario extends JPanel implements Observer {
 
     private CtrlReservaUI controladorReserva = new CtrlReservaUI();
     private List<Habitacion> habitacionesDisponibles;
-    private List<Favotito> favoritos;
+    private List<Favorito> favoritos;
     private Huesped huespedActual;
     private WinFiltros panelFiltros;
 
     private void provisionalFavoritos(){ //Nada mas la voy a tener por ahora, en lo que generamos la base de datos
-        favoritos.add(new Favotito(1, huespedActual.getId_huesped(), 1)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
-        favoritos.add(new Favotito(2, huespedActual.getId_huesped(), 2)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
+        favoritos.add(new Favorito(1, huespedActual.getId_huesped(), 1)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
+        favoritos.add(new Favorito(2, huespedActual.getId_huesped(), 2)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
     }
     
     public PanReservaUsuario(Huesped huesped) {

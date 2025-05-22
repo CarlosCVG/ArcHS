@@ -259,7 +259,7 @@ public class WinReservacion extends javax.swing.JFrame {
             LocalDate fechaSalida = LocalDate.of(yearSalida, monthSalida, daySalida); // <-- corregido
 
             // Crear reservación
-            Reservacion reservacion = new Reservacion(0, habitacion.getId_habitacion(), huesped.getId_huesped(), fechaEntrada, fechaSalida);
+            Reservacion reservacion = new Reservacion(0, habitacion.getId_habitacion(), huesped.getId_huesped(), "Estado Correjir luego", fechaEntrada, fechaSalida);
             controlador.ctrAgregarReservacion(reservacion);
 
             // Mostrar mensaje de éxito

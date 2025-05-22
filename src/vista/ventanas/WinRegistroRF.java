@@ -171,7 +171,7 @@ public class WinRegistroRF extends javax.swing.JFrame {
             int monthSalida = dateSalida.getMonth();
             int yearSalida = dateSalida.getYear();
             LocalDate fechaSalida = LocalDate.of(yearSalida, monthSalida, daySalida);
-            Reservacion reservacion = new Reservacion(id_reservacion, id_habitacion, id_huesped, fechaEntrada, fechaSalida);
+            Reservacion reservacion = new Reservacion(id_reservacion, id_habitacion, id_huesped, "Estado Correjir luego", fechaEntrada, fechaSalida);
             ctrlFR.ctrAgregarReservacion(reservacion);
 
             JOptionPane.showMessageDialog(this, "Reservación registrada para las fechas:\nEntrada: " + fechaEntrada + "\nSalida: " + fechaSalida, "Éxito", JOptionPane.INFORMATION_MESSAGE);

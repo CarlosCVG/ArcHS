@@ -85,7 +85,7 @@ public class mtRegistroHab extends AbstractTableModel {
             case 1 ->
                 hab.setPrecio((Double) aValue);
             case 2 ->
-                hab.setTamaño((Double) aValue);
+                hab.setSize((Double) aValue);
             case 3 ->
                 hab.setNum_camas((Integer) aValue);
             case 4 ->
@@ -103,7 +103,7 @@ public class mtRegistroHab extends AbstractTableModel {
             case 1 ->
                 hab.getPrecio();
             case 2 ->
-                hab.getTamaño();
+                hab.getSize();
             case 3 ->
                 hab.getNum_camas();
             case 4 ->

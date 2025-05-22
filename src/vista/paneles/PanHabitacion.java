@@ -4,7 +4,7 @@
  */
 package vista.paneles;
 
-import componentes.MonthsOfYear;
+import modelo.util.MonthsOfYear;
 import java.awt.Image;
 import java.io.File;
 import java.util.Random;
@@ -48,7 +48,7 @@ public class PanHabitacion extends JPanel {
     private void configurarComponentes() {
         lblIDHabitacion.setText("Habitación #" + habitacion.getId_habitacion() + ".");
         lblPrecio.setText("Precio: " + habitacion.getPrecio() + "$.");
-        lblSize.setText("Tamaño: " + habitacion.getTamaño() + "m².");
+        lblSize.setText("Tamaño: " + habitacion.getSize() + "m².");
         lblNumCamas.setText("Numero de camas: " + habitacion.getNum_camas() + ".");
         lblDescripcion.setText("Descripción:\n" + habitacion.getDescripcion());
 

@@ -3,17 +3,17 @@ package modelo.vo;
 public class Habitacion {
 
     private int id_habitacion;
-    private Double precio, tamaño;
+    private Double precio, size;
     private int num_camas;
     private String descripcion;
 
     public Habitacion() {
     }
 
-    public Habitacion(int id_habitacion, Double precio, Double tamaño, int num_camas, String descripcion) {
+    public Habitacion(int id_habitacion, Double precio, Double size, int num_camas, String descripcion) {
         this.id_habitacion = id_habitacion;
         this.precio = precio;
-        this.tamaño = tamaño;
+        this.size = size;
         this.num_camas = num_camas;
         this.descripcion = descripcion;
     }
@@ -34,12 +34,12 @@ public class Habitacion {
         this.precio = precio;
     }
 
-    public Double getTamaño() {
-        return tamaño;
+    public Double getSize() {
+        return size;
     }
 
-    public void setTamaño(Double tamaño) {
-        this.tamaño = tamaño;
+    public void setSize(Double tamaño) {
+        this.size = tamaño;
     }
 
     public int getNum_camas() {
@@ -60,14 +60,14 @@ public class Habitacion {
 
     @Override
     public String toString() {
-        return "Habitacion{" + "id_habitacion=" + id_habitacion + ", precio=" + precio + ", tama\u00f1o=" + tamaño + ", num_camas=" + num_camas + ", descripcion=" + descripcion + '}';
+        return "Habitacion{" + "id_habitacion=" + id_habitacion + ", precio=" + precio + ", tama\u00f1o=" + size + ", num_camas=" + num_camas + ", descripcion=" + descripcion + '}';
     }
 
     public String[] toArrayString() {
         String[] strArrHabitacion = new String[5];
         strArrHabitacion[0] = String.valueOf(this.id_habitacion);
         strArrHabitacion[1] = String.valueOf(this.precio);
-        strArrHabitacion[2] = String.valueOf(this.tamaño);
+        strArrHabitacion[2] = String.valueOf(this.size);
         strArrHabitacion[3] = String.valueOf(this.num_camas);
         strArrHabitacion[4] = this.descripcion;
         return strArrHabitacion;

@@ -1,5 +1,7 @@
 package componentes;
 
+import modelo.util.Observable;
+import modelo.util.Observer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

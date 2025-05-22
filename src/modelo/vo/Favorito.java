@@ -8,11 +8,20 @@ package modelo.vo;
  *
  * @author edwin
  */
-public class Favotito {
+public class Favorito {
     private int id_favorito;
     private int id_cliente;
     private int id_habitacion;
 
+    public Favorito(int id_favorito, int id_cliente, int id_habitacion) {
+        this.id_favorito = id_favorito;
+        this.id_cliente = id_cliente;
+        this.id_habitacion = id_habitacion;
+    }
+
+    public Favorito() {
+    }
+    
     public int getId_favorito() {
         return id_favorito;
     }
@@ -37,10 +46,5 @@ public class Favotito {
         this.id_habitacion = id_habitacion;
     }
 
-    public Favotito(int id_favorito, int id_cliente, int id_habitacion) {
-        this.id_favorito = id_favorito;
-        this.id_cliente = id_cliente;
-        this.id_habitacion = id_habitacion;
-    }
     
 }

@@ -4,8 +4,8 @@
  */
 package vista.ventanas;
 
-import componentes.Observable;
-import componentes.Observer;
+import modelo.util.Observable;
+import modelo.util.Observer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
