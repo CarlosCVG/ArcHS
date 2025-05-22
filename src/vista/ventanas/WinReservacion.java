@@ -75,6 +75,7 @@ public class WinReservacion extends javax.swing.JFrame {
         dateSalida = new componentes.DateSelector();
         lblNum = new javax.swing.JLabel();
         panelNumPersona = new javax.swing.JPanel();
+        txtUser = new componentes.custom_textfield();
         pnaelHabitacion = new javax.swing.JPanel();
         header = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
@@ -155,7 +156,7 @@ public class WinReservacion extends javax.swing.JFrame {
         lblNum.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         lblNum.setForeground(new java.awt.Color(255, 255, 255));
         lblNum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNum.setText("Fecha de salida");
+        lblNum.setText("Núm habitaciones");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -166,6 +167,25 @@ public class WinReservacion extends javax.swing.JFrame {
         panelFechas.add(lblNum, gridBagConstraints);
 
         panelNumPersona.setBackground(new java.awt.Color(1, 74, 173));
+        panelNumPersona.setLayout(new java.awt.GridBagLayout());
+
+        txtUser.setBackground(new java.awt.Color(255, 255, 255));
+        txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.setCaretColor(new java.awt.Color(255, 204, 0));
+        txtUser.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        txtUser.setPreferredSize(new java.awt.Dimension(150, 50));
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 15);
+        panelNumPersona.add(txtUser, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -181,7 +201,7 @@ public class WinReservacion extends javax.swing.JFrame {
         body.add(panelFechas, gridBagConstraints);
 
         pnaelHabitacion.setBackground(new java.awt.Color(1, 74, 173));
-        pnaelHabitacion.setPreferredSize(new java.awt.Dimension(700, 470));
+        pnaelHabitacion.setPreferredSize(new java.awt.Dimension(700, 450));
         pnaelHabitacion.setLayout(new java.awt.BorderLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -276,6 +296,10 @@ public class WinReservacion extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane LayeredPane;
     private javax.swing.JPanel body;
@@ -293,5 +317,6 @@ public class WinReservacion extends javax.swing.JFrame {
     private javax.swing.JPanel panelFechas;
     private javax.swing.JPanel panelNumPersona;
     private javax.swing.JPanel pnaelHabitacion;
+    private componentes.custom_textfield txtUser;
     // End of variables declaration//GEN-END:variables
 }

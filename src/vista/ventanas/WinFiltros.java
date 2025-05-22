@@ -8,6 +8,7 @@ import modelo.util.Observable;
 import modelo.util.Observer;
 import controlador.CtrlFiltroReserva;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class WinFiltros extends JFrame implements Observable {
     private List<Observer> observadores = new ArrayList<>();
     private Map<String, Object> filtros = new HashMap<>();
     private CtrlFiltroReserva controlador = new CtrlFiltroReserva();
+    private boolean filtroFavoritos = false;
 
     public WinFiltros() {
         initComponents();
@@ -127,6 +129,17 @@ public class WinFiltros extends JFrame implements Observable {
         precios.repaint(); // aplica los cambios
     }
 
+    private void personalizarCheckbox() {
+        Color amarilloPersonalizado = new Color(255, 204, 0);
+
+        checkBox.setBackground(amarilloPersonalizado); 
+        checkBox.setForeground(Color.WHITE);           
+
+        checkBox.setFont(new Font("Arial", Font.BOLD, 14));
+
+        checkBox.setFocusPainted(false);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -145,6 +158,8 @@ public class WinFiltros extends JFrame implements Observable {
         dateEntrada = new componentes.DateSelector();
         dateSalida = new componentes.DateSelector();
         jLabel6 = new javax.swing.JLabel();
+        checkBox = new javax.swing.JCheckBox();
+        jLabel7 = new javax.swing.JLabel();
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -186,7 +201,6 @@ public class WinFiltros extends JFrame implements Observable {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 20;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(precios, gridBagConstraints);
 
@@ -229,16 +243,16 @@ public class WinFiltros extends JFrame implements Observable {
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(lblMax, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("STXihei", 1, 60)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("AL");
+        jLabel5.setFont(new java.awt.Font("STXihei", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("FAVORITOS");
         jLabel5.setPreferredSize(new java.awt.Dimension(40, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 20;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(jLabel5, gridBagConstraints);
 
@@ -254,7 +268,7 @@ public class WinFiltros extends JFrame implements Observable {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 20;
@@ -271,7 +285,7 @@ public class WinFiltros extends JFrame implements Observable {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 20;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(dateEntrada, gridBagConstraints);
 
         dateSalida.setBackground(new java.awt.Color(1, 74, 173));
@@ -284,7 +298,7 @@ public class WinFiltros extends JFrame implements Observable {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 20;
-        gridBagConstraints.insets = new java.awt.Insets(30, 30, 30, 30);
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(dateSalida, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("STXihei", 1, 36)); // NOI18N
@@ -299,6 +313,37 @@ public class WinFiltros extends JFrame implements Observable {
         gridBagConstraints.ipadx = 20;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
         Body.add(jLabel6, gridBagConstraints);
+
+        checkBox.setBackground(new java.awt.Color(255, 204, 0));
+        checkBox.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
+        checkBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        checkBox.setContentAreaFilled(false);
+        checkBox.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        checkBox.setPreferredSize(new java.awt.Dimension(40, 40));
+        checkBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        Body.add(checkBox, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("STXihei", 1, 60)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("AL");
+        jLabel7.setPreferredSize(new java.awt.Dimension(40, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        Body.add(jLabel7, gridBagConstraints);
 
         jLayeredPane1.setLayer(Body, javax.swing.JLayeredPane.PALETTE_LAYER);
         jLayeredPane1.add(Body);
@@ -336,7 +381,7 @@ public class WinFiltros extends JFrame implements Observable {
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
         try {
             int costo = precios.getValue();
-            
+
             // Obtener fecha de entrada
             int dayEntrada = dateEntrada.getDay();
             int monthEntrada = dateEntrada.getMonth();
@@ -349,10 +394,13 @@ public class WinFiltros extends JFrame implements Observable {
             int yearSalida = dateSalida.getYear();
             LocalDate fechaSalida = LocalDate.of(yearSalida, monthSalida, daySalida); // <-- corregido
 
-
             filtros.put("costo", costo);
             filtros.put("fechaE", fechaEntrada);
             filtros.put("fechaS", fechaSalida);
+            
+            if (filtroFavoritos) {
+                filtros.put("favoritos", true);
+            }
 
             notifyObservers();
 
@@ -367,10 +415,15 @@ public class WinFiltros extends JFrame implements Observable {
         lblCosto.setText("$" + valor);
     }//GEN-LAST:event_preciosStateChanged
 
+    private void checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxActionPerformed
+        filtroFavoritos = !filtroFavoritos;        
+    }//GEN-LAST:event_checkBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Body;
     private javax.swing.JPanel Header;
     private javax.swing.JButton btnAplicar;
+    private javax.swing.JCheckBox checkBox;
     private componentes.DateSelector dateEntrada;
     private componentes.DateSelector dateSalida;
     private javax.swing.JButton jButton2;
@@ -378,6 +431,7 @@ public class WinFiltros extends JFrame implements Observable {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblFondo;

@@ -23,6 +23,7 @@ import vista.ventanas.WinReservacion;
 import javax.swing.JPanel;
 import modelo.vo.Favorito;
 import modelo.vo.Reservacion;
+import vista.paneles.PanHabitacion;
 import vista.ventanas.WinFiltros;
 import vista.ventanas.WinCalendario;
 
@@ -33,41 +34,47 @@ import vista.ventanas.WinCalendario;
 public class PanReservaUsuario extends JPanel implements Observer {
 
     private CtrlReservaUI controladorReserva = new CtrlReservaUI();
-    private List<Habitacion> habitacionesDisponibles;
+
+    private List<Habitacion> habitaciones;
     private List<Favorito> favoritos;
     private Huesped huespedActual;
     private WinFiltros panelFiltros;
 
-    private void provisionalFavoritos(){ //Nada mas la voy a tener por ahora, en lo que generamos la base de datos
-        favoritos.add(new Favorito(1, huespedActual.getId_huesped(), 1)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
-        favoritos.add(new Favorito(2, huespedActual.getId_huesped(), 2)); // Estoy forzando que el usuario actual tenga de favorito la habitacion 1 y 2
-    }
-    
     public PanReservaUsuario(Huesped huesped) {
         initComponents();
         this.huespedActual = huesped;
-        this.habitacionesDisponibles = controladorReserva.ctrHabitaciones();
+        this.habitaciones = controladorReserva.ctrHabitaciones();
         configurarComponentesUI();
     }
 
     private void configurarComponentesUI() {
-        // Configuración del carrusel de habitaciones
-        for (Habitacion habitacion : habitacionesDisponibles) {
-            Reservacion reserva = controladorReserva.ctrBuscarReservacion(habitacion);
-            if (reserva == null) {
-                carrusel.agregarPanel(new PanHabitacion(habitacion));
-            } else {
-                carrusel.agregarPanel(new PanHabitacion(habitacion, reserva.getF_entrada().getMonthValue(), 
-                        true //Aqui se debe validar que tenga o no favoritos el usuario con esa habitacion
-                ));
+        // Configuración del carrusel de habitaciones, busco las habitaciones con reservacion para colocar el mensaje
+        // ""
+        for (Habitacion habitacion : habitaciones) {
+
+            List<Favorito> favoritos = controladorReserva.ctrBuscarFavoritos(huespedActual);
+            boolean esFavorito = false;
+            for (Favorito favorito : favoritos) {
+                if (habitacion.getId_habitacion() == favorito.getId_habitacion()) {
+                    esFavorito = true;
+                    break;
+                }
             }
+
+            Reservacion reserva = controladorReserva.ctrBuscarReservacion(habitacion);
+
+            if (reserva != null) {
+                carrusel.agregarPanel(new PanHabitacion(habitacion, reserva.getF_entrada().getMonthValue(), esFavorito));
+            } else {
+                carrusel.agregarPanel(new PanHabitacion(habitacion, esFavorito));
+            }
+
+            configurarEstilosCarrusel();
+            configurarBotones();
         }
 
-        configurarEstilosCarrusel();
-        configurarBotones();
     }
 
-    
     private void configurarEstilosCarrusel() {
         Color colorPrincipal = new Color(1, 74, 173);
         carrusel.setColorVelo(colorPrincipal);
@@ -201,14 +208,14 @@ public class PanReservaUsuario extends JPanel implements Observer {
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
         // Cambiarlo despues.
-        
+
         List<JPanel> a = carrusel.getPanelList();
         List<PanHabitacion> b = new ArrayList<>();
-        
+
         for (JPanel jPanel : a) {
             b.add((PanHabitacion) jPanel);
         }
-        
+
         carrusel.detenerAutoScroll();
         PanHabitacion panelSeleccionado = (PanHabitacion) carrusel.getCurrentPanel();
         new WinReservacion(b, huespedActual).setVisible(true);
@@ -249,13 +256,13 @@ public class PanReservaUsuario extends JPanel implements Observer {
         int mes;
         try {
             LocalDate hoy = LocalDate.now();
-            
+
             mes = Integer.valueOf(mesSeleccionado);
             if (mes < 1 || mes > 12) {
                 mostrarMensaje("Por favor, ingrese un mes válido (1-12).");
                 return; // Mes invalido fuera menor que 1 y mayor que 12
             }
-            if(mes < hoy.getMonthValue()){
+            if (mes < hoy.getMonthValue()) {
                 mostrarMensaje("Por favor ingrese un mes igual o posterior al actual");
                 return; // Mes antes que hoy
             }
@@ -266,7 +273,7 @@ public class PanReservaUsuario extends JPanel implements Observer {
 
         List<Reservacion> reservacionesDelMes = controladorReserva.ctrBuscarReservacionPorMes(mes);
         WinCalendario calendario = new WinCalendario(mes, panelSeleccionado, huespedActual);
-        
+
         calendario.setReservaList(reservacionesDelMes);
         calendario.setVisible(true);
     }//GEN-LAST:event_btnCalendarioActionPerformed
@@ -299,12 +306,12 @@ public class PanReservaUsuario extends JPanel implements Observer {
     public void update() {
 
         // Lógica para actualizar las habitaciones con los filtros aplicados
-        habitacionesDisponibles = controladorReserva.ctrHabitacionesConFiltros(panelFiltros.getFiltros());
-        System.out.println(habitacionesDisponibles.size());
+        habitaciones = controladorReserva.ctrHabitacionesConFiltros(panelFiltros.getFiltros(), huespedActual);
+        System.out.println(habitaciones.size());
 
         carrusel.removePanels();
 
-        for (Habitacion habitacion : habitacionesDisponibles) {
+        for (Habitacion habitacion : habitaciones) {
             Reservacion reserva = controladorReserva.ctrBuscarReservacion(habitacion);
 
             if (reserva == null) {
@@ -315,7 +322,7 @@ public class PanReservaUsuario extends JPanel implements Observer {
         }
 
     }
-    
+
     private void mostrarMensaje(String mensaje) {
         ImageIcon originalIcon = new ImageIcon("src/vista/images/LOGO.png");  // Cambia esta ruta por la de tu imagen
 
@@ -331,6 +338,5 @@ public class PanReservaUsuario extends JPanel implements Observer {
 
         dialog.setVisible(true);
     }
-
 
 }

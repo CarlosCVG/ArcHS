@@ -8,6 +8,7 @@ import java.util.Map;
 import modelo.dao.DAOHabitacion;
 import modelo.dao.DAOReservacion;
 import modelo.vo.Habitacion;
+import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
 
 public class LogicHabitacion {
@@ -29,10 +30,16 @@ public class LogicHabitacion {
         return habitacionesDisponibles;
     }
 
-    public List<Habitacion> logicaHabitacionesFiltradas(Map<String, Object> filtros) {
+    public List<Habitacion> logicaHabitacionesFiltradas(Map<String, Object> filtros, Huesped huesped) {
         List<Habitacion> habitacionesFiltradas = new ArrayList<>();
-        List<Habitacion> habitaciones = daoHabitacion.daoGetHabitaciones();
+        List<Habitacion> habitaciones;
 
+        if (filtros.containsKey("favorito")){
+            habitaciones = daoHabitacion.daoGetHabitacionesFavoritas(huesped);
+        } else{
+            habitaciones = daoHabitacion.daoGetHabitaciones();
+        }
+        
         int filtroCosto = 3000;
         LocalDate filtroFechaE = LocalDate.now();
         LocalDate filtroFechaS = LocalDate.now();
@@ -47,6 +54,7 @@ public class LogicHabitacion {
         if (filtros.containsKey("fechaS")) {
             filtroFechaS = (LocalDate) filtros.get("fechaS");
         }
+        
 
         for (Habitacion habitacion : habitaciones) {
             // Filtrar por precio

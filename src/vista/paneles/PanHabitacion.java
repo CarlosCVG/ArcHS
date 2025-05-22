@@ -32,7 +32,16 @@ public class PanHabitacion extends JPanel {
         configurarComponentes();
         ocultarMensaje();
         configurarFavorito();
+    }
 
+    public PanHabitacion(Habitacion habitacion, boolean favorito) { //Constructo para cuando no se tiene un mes de reserva especifico, o cuando no se quiere mostrar dicho mes 
+        this.habitacion = habitacion;
+        this.mesReserva = mesReserva;
+        this.favorito = favorito;
+        initComponents();
+        configurarComponentes();
+        ocultarMensaje();
+        configurarFavorito();
     }
 
     public PanHabitacion(Habitacion habitacion, int mesReserva, boolean favorito) { //Constructor para cuando se tiene un mes de reserva especifico
@@ -73,7 +82,7 @@ public class PanHabitacion extends JPanel {
     public void configurarFavorito() {
         lblFavorito.setVisible(favorito);
     }
-    
+
     public void alternarFavorito() {
         favorito = !favorito;
         configurarFavorito();
