@@ -95,21 +95,32 @@ public class DateSelector extends JPanel {
                             break;
 
                         case "month":
-                            String monthAbbr = capitalizeAbbr(newValue);
-                            boolean validMonth = false;
-                            for (String m : MONTHS) {
-                                if (m.equals(monthAbbr)) {
-                                    validMonth = true;
-                                    break;
+                            try {
+                                int monthNum = Integer.parseInt(newValue);
+                                if (monthNum >= 1 && monthNum <= 12) {
+                                    label.setText(MONTHS[monthNum - 1]);
+                                } else {
+                                    showError("Mes inválido. Introduce un número entre 1 y 12 o una abreviación válida (Jan, Feb, ...).");
                                 }
-                            }
+                            } catch (NumberFormatException ex) {
+                                String monthAbbr = capitalizeAbbr(newValue);
+                                boolean validMonth = false;
+                                for (String m : MONTHS) {
+                                    if (m.equals(monthAbbr)) {
+                                        validMonth = true;
+                                        break;
+                                    }
+                                }
 
-                            if (validMonth) {
-                                label.setText(monthAbbr);
-                            } else {
-                                StringBuilder error = new StringBuilder("Mes inválido. Usa abreviaciones como: ");
-                                for (String m : MONTHS) error.append(m).append(", ");
-                                showError(error.toString());
+                                if (validMonth) {
+                                    label.setText(monthAbbr);
+                                } else {
+                                    StringBuilder error = new StringBuilder("Mes inválido. Usa un número del 1 al 12 o abreviaciones como: ");
+                                    for (String m : MONTHS) {
+                                        error.append(m).append(", ");
+                                    }
+                                    showError(error.toString());
+                                }
                             }
                             break;
 
@@ -149,7 +160,9 @@ public class DateSelector extends JPanel {
     }
 
     private String capitalizeAbbr(String input) {
-        if (input.length() < 3) return input;
+        if (input.length() < 3) {
+            return input;
+        }
         return input.substring(0, 1).toUpperCase() + input.substring(1, 3).toLowerCase();
     }
 
@@ -163,9 +176,18 @@ public class DateSelector extends JPanel {
 
     public int getMonth() {
         String monthText = monthLabel.getText();
-        for (int i = 0; i < MONTHS.length; i++) {
-            if (MONTHS[i].equals(monthText)) {
-                return i + 1;
+
+        try {
+            int monthNum = Integer.parseInt(monthText);
+            if (monthNum >= 1 && monthNum <= 12) {
+                return monthNum;
+            }
+        } catch (NumberFormatException ex) {
+
+            for (int i = 0; i < MONTHS.length; i++) {
+                if (MONTHS[i].equals(monthText)) {
+                    return i + 1;
+                }
             }
         }
         return 1;
@@ -182,11 +204,11 @@ public class DateSelector extends JPanel {
     public String getFormattedDate() {
         return String.format("%02d-%02d-%04d", getDay(), getMonth(), getYear());
     }
-    
-    public void setDate(LocalDate date){
+
+    public void setDate(LocalDate date) {
         yearLabel.setText(String.valueOf(date.getYear()));
         dayLabel.setText(String.valueOf(date.getDayOfMonth()));
         monthLabel.setText(String.valueOf(date.getMonthValue()));
-    }   
-    
+    }
+
 }

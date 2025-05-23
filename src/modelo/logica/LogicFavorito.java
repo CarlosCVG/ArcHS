@@ -28,4 +28,8 @@ public class LogicFavorito {
         return daoFavorito.daoBuscarFavoritosCliente(idCliente);
     }
     
+    public Favorito logicaBuscarFavorito(int idCliente, int idHabitacion){
+        return daoFavorito.daoBuscarFavorito(idCliente, idHabitacion);
+    }
+    
 }

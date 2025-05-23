@@ -397,10 +397,8 @@ public class WinFiltros extends JFrame implements Observable {
             filtros.put("costo", costo);
             filtros.put("fechaE", fechaEntrada);
             filtros.put("fechaS", fechaSalida);
+            filtros.put("favoritos", filtroFavoritos);
             
-            if (filtroFavoritos) {
-                filtros.put("favoritos", true);
-            }
 
             notifyObservers();
 

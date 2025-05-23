@@ -19,13 +19,12 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
     El intervalo de transición automática se puede configurar con el método setAutoScrollInterval.
     El carrusel permite agregar paneles mediante setPanelList o agregarPanel, y realizar animaciones de transición entre los paneles.
     Además, se utiliza el patrón Observable para notificar cambios a los observadores del componente que contiene al carrusel.
-    */
+     */
 
-    /*
+ /*
     Se pueden modificar algunas de las propiedades en las propiedades del componente 
     al añadir el componente a la paleta de componentes de Swing.
-    */
-    
+     */
     private int indiceActual = 0;  // Indice del panel actual
     private int proximoIndice = 0;  // Indice del siguiente panel
     private float alpha = 0.0f;  // Opacidad para la transición de desvanecimiento
@@ -52,7 +51,7 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
     private Color btnColorForMouseExit = Color.WHITE;
     private Color btnColorForMousePressed = Color.GRAY;
     private Color btnColorForMouseReleased = Color.BLACK;
-    
+
     private Color colorVelo = Color.WHITE;
 
     // === CONSTRUCTOR PREDETERMINADO ===
@@ -149,13 +148,13 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
     public void agregarPanel(JPanel panel) {
         panel.setPreferredSize(new Dimension(ancho, alto));
         panelList.add(panel);  // Agrega un nuevo panel al carrusel
-        if (panelList.size() == 1) {
-            mostrarPanel(0);  // Muestra el primer panel si es el único
-        }
+        mostrarPanel(0);  // Muestra el primer panel si es el único
+
     }
 
     public void removePanels() {
         panelList.clear();  // Elimina todos los paneles
+        indiceActual = 0;
     }
 
     private void mostrarPanel(int indice) {
@@ -333,7 +332,7 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
     public void setColorVelo(Color colorVelo) {
         this.colorVelo = colorVelo;
     }
-    
+
     private void setContenedorPanel() {
         contenedorPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -375,8 +374,8 @@ public class PanelCarrusel extends JPanel implements ActionListener, Observable 
         configurarEstiloBoton(btnIzquierda);
         configurarEstiloBoton(btnDerecha);
     }
-    
-    public void setBtnImage(ImageIcon iconRight, ImageIcon iconLeft){
+
+    public void setBtnImage(ImageIcon iconRight, ImageIcon iconLeft) {
         btnDerecha.setIcon(iconRight);
         btnIzquierda.setIcon(iconLeft);
         btnDerecha.setText("");

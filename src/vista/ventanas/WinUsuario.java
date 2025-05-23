@@ -2,6 +2,7 @@ package vista.ventanas;
 
 import java.awt.Color;
 import modelo.vo.Huesped;
+import vista.paneles.PanDatosUsuario;
 import vista.paneles.PanInicioUsuario;
 import vista.paneles.PanReservaUsuario;
 
@@ -35,10 +36,10 @@ public class WinUsuario extends javax.swing.JFrame {
         btnReservacion.setNormalColor(normalColor);
         btnReservacion.setPressedColor(pressedColor);
 
-        logo.setClickedColor(normalColor);
-        logo.setHoverColor(normalColor);
+        logo.setClickedColor(clickedColor);
+        logo.setHoverColor(hoverColor);
         logo.setNormalColor(normalColor);
-        logo.setPressedColor(normalColor);
+        logo.setPressedColor(pressedColor);
     }
 
     private void mostrarPanel(String state) {
@@ -55,6 +56,9 @@ public class WinUsuario extends javax.swing.JFrame {
             case "inicio":
                 mostrarInicio();
                 break;
+            case "datos":
+                mostrarDatos();
+                break;
             default:
                 throw new AssertionError("Estado desconocido: " + state);
         }
@@ -70,6 +74,10 @@ public class WinUsuario extends javax.swing.JFrame {
 
     private void mostrarInicio() {
         Center.add(new PanInicioUsuario());
+    }
+    
+    private void mostrarDatos() {
+        Center.add(new PanDatosUsuario(huesped));
     }
 
     @SuppressWarnings("unchecked")
@@ -134,6 +142,11 @@ public class WinUsuario extends javax.swing.JFrame {
         logo.setBackground(new java.awt.Color(1, 74, 173));
         logo.setText("");
         logo.setUrl("vista/images/logoARChs (1).png");
+        logo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -204,6 +217,10 @@ public class WinUsuario extends javax.swing.JFrame {
         selectlogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void logoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMouseClicked
+        mostrarPanel("datos");
+    }//GEN-LAST:event_logoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

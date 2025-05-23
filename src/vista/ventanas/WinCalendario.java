@@ -23,15 +23,15 @@ public class WinCalendario extends JFrame {
 
     private List<Reservacion> reservaciones;
     private int mounth;
-    private PanHabitacion habitacion;
+    private List<PanHabitacion> habitaciones;
     private List<Observer> observers = new ArrayList<>();
     private Huesped huesped;
 
-    public WinCalendario(int mounth, PanHabitacion habitacion, Huesped huesped) {
+    public WinCalendario(int mounth, List<PanHabitacion> habitaciones, Huesped huesped) {
         initComponents();
         setMounth(mounth);
         this.setLocationRelativeTo(null);
-        this.habitacion = habitacion;
+        this.habitaciones = habitaciones;
         this.huesped = huesped;
     }
 
@@ -117,7 +117,7 @@ public class WinCalendario extends JFrame {
         LocalDate fechaInicio = calendario.getFechaInicio();
         LocalDate fechaFin = calendario.getFechaFin();
 
-        WinReservacion reservacion = new WinReservacion(habitacion, huesped, fechaInicio, fechaFin);
+        WinReservacion reservacion = new WinReservacion(habitaciones, huesped, fechaInicio, fechaFin);
         reservacion.setVisible(true);
         
         this.dispose();

@@ -56,11 +56,10 @@ public class DAOFavorito {
     }
 
     public boolean daoAgregarFavoritos(Favorito favorito) {
-        String sql = "INSERT INTO favoritos (id_favorito, id_cliente, id_habitacion) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO favoritos (id_cliente, id_habitacion) VALUES (?, ?)";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setInt(1, favorito.getId_favorito());
-            stmt.setInt(2, favorito.getId_cliente());
-            stmt.setInt(3, favorito.getId_habitacion());
+            stmt.setInt(1, favorito.getId_cliente());
+            stmt.setInt(2, favorito.getId_habitacion());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -85,6 +84,25 @@ public class DAOFavorito {
             ex.printStackTrace();
         }
         return favoritos;
+    }
+
+    public Favorito daoBuscarFavorito(int idCliente, int idHabitacion) {
+        Favorito favorito = new Favorito();
+        String sql = "SELECT * FROM favoritos WHERE id_cliente = ? AND id_habitacion = ? ";
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setInt(1, idCliente);
+            stmt.setInt(2, idHabitacion);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return MapData.mapearFavorito(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }

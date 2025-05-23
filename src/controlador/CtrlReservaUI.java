@@ -28,20 +28,32 @@ public class CtrlReservaUI {
         return logicaHabitacion.logicaBuscarHabitaciones();
     }
 
-    public Reservacion ctrBuscarReservacion(Habitacion habitacion){
+    public List<Reservacion> ctrBuscarReservacion(Habitacion habitacion){
         return logicaReservacion.logicaBuscarPorHabitacion(habitacion.getId_habitacion());
     }
     
-    public List<Reservacion> ctrBuscarReservacionPorMes(int mes){
-        return logicaReservacion.logicaBuscarPorMes(mes);
+    public List<Reservacion> ctrBuscarReservaciones(){
+        return logicaReservacion.logicaBuscarReservaciones();
+    }
+    
+    public List<Reservacion> ctrBuscarPorMes(int year, int mes){
+        return logicaReservacion.logicaBuscarPorMes(year, mes);
+    }
+
+    public List<Reservacion> ctrBuscarReservasPorHabitacionYMes(int idHabitacion, int year, int mes){
+        return logicaReservacion.logicaBuscarPorHabitacionYMes(idHabitacion, year, mes);
     }
     
     public List<Favorito> ctrBuscarFavoritos(Huesped huesped){
         return logicaFavorito.logicaBuscarFavoritos(huesped.getId_huesped());
     }
     
+    public Favorito ctrBuscarFavorito(Huesped huesped, Habitacion habitacion){
+        return logicaFavorito.logicaBuscarFavorito(huesped.getId_huesped(), habitacion.getId_habitacion());
+    }
+    
     public boolean ctrAgregarFavorito(Favorito favorito){
-        return logicaFavorito.logicaEliminarFavorito(favorito);
+        return logicaFavorito.logicaAgregarFavorito(favorito);
     }
     
     public boolean ctrEliminarFavorito(Favorito favorito){

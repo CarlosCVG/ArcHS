@@ -11,8 +11,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -23,7 +22,6 @@ import vista.ventanas.WinReservacion;
 import javax.swing.JPanel;
 import modelo.vo.Favorito;
 import modelo.vo.Reservacion;
-import vista.paneles.PanHabitacion;
 import vista.ventanas.WinFiltros;
 import vista.ventanas.WinCalendario;
 
@@ -36,7 +34,7 @@ public class PanReservaUsuario extends JPanel implements Observer {
     private CtrlReservaUI controladorReserva = new CtrlReservaUI();
 
     private List<Habitacion> habitaciones;
-    private List<Favorito> favoritos;
+    private Set<Integer> idsFavoritos;
     private Huesped huespedActual;
     private WinFiltros panelFiltros;
 
@@ -48,31 +46,33 @@ public class PanReservaUsuario extends JPanel implements Observer {
     }
 
     private void configurarComponentesUI() {
-        // Configuración del carrusel de habitaciones, busco las habitaciones con reservacion para colocar el mensaje
-        // ""
-        for (Habitacion habitacion : habitaciones) {
+        configurarEstilosCarrusel();
+        configurarBotones();
 
-            List<Favorito> favoritos = controladorReserva.ctrBuscarFavoritos(huespedActual);
-            boolean esFavorito = false;
-            for (Favorito favorito : favoritos) {
-                if (habitacion.getId_habitacion() == favorito.getId_habitacion()) {
-                    esFavorito = true;
-                    break;
-                }
-            }
-
-            Reservacion reserva = controladorReserva.ctrBuscarReservacion(habitacion);
-
-            if (reserva != null) {
-                carrusel.agregarPanel(new PanHabitacion(habitacion, reserva.getF_entrada().getMonthValue(), esFavorito));
-            } else {
-                carrusel.agregarPanel(new PanHabitacion(habitacion, esFavorito));
-            }
-
-            configurarEstilosCarrusel();
-            configurarBotones();
+        // Convierte la lista de favoritos a un Set de IDs (Es mas rapido y evita repetir id)
+        idsFavoritos = new HashSet<>();
+        for (Favorito favorito : controladorReserva.ctrBuscarFavoritos(huespedActual)) {
+            idsFavoritos.add(favorito.getId_habitacion());
         }
 
+        Map<Integer, Reservacion> mapaReservas = new HashMap<>();
+        for (Reservacion r : controladorReserva.ctrBuscarReservaciones()) {
+            mapaReservas.put(r.getId_habitacion(), r);
+        }
+
+        for (Habitacion habitacion : habitaciones) {
+            boolean esFavorito = idsFavoritos.contains(habitacion.getId_habitacion());
+            Reservacion reserva = mapaReservas.get(habitacion.getId_habitacion());
+            PanHabitacion panelHabitacion = new PanHabitacion(habitacion);
+            if (reserva != null) {
+                panelHabitacion.setFavorito(esFavorito);
+                panelHabitacion.setMesReserva(reserva.getF_entrada().getMonthValue());
+                carrusel.agregarPanel(panelHabitacion);
+            } else {
+                panelHabitacion.setFavorito(esFavorito);
+                carrusel.agregarPanel(panelHabitacion);
+            }
+        }
     }
 
     private void configurarEstilosCarrusel() {
@@ -102,6 +102,20 @@ public class PanReservaUsuario extends JPanel implements Observer {
         ImageIcon icono = new ImageIcon(rutaIcono);
         Image imagenEscalada = icono.getImage().getScaledInstance(dimension.width, dimension.height, Image.SCALE_SMOOTH);
         boton.setIcon(new ImageIcon(imagenEscalada));
+    }
+
+    private List<PanHabitacion> filtrarHabitacionesFavoritas() {
+        List<PanHabitacion> habitacionesFavoritas = new ArrayList<>();
+
+        for (Habitacion habitacion : habitaciones) {
+            if (idsFavoritos.contains(habitacion.getId_habitacion())) {
+                PanHabitacion panelHabitacion = new PanHabitacion(habitacion);
+                panelHabitacion.setFavorito(true);
+                habitacionesFavoritas.add(panelHabitacion);
+            }
+        }
+
+        return habitacionesFavoritas;
     }
 
     @SuppressWarnings("unchecked")
@@ -207,18 +221,8 @@ public class PanReservaUsuario extends JPanel implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        // Cambiarlo despues.
-
-        List<JPanel> a = carrusel.getPanelList();
-        List<PanHabitacion> b = new ArrayList<>();
-
-        for (JPanel jPanel : a) {
-            b.add((PanHabitacion) jPanel);
-        }
-
         carrusel.detenerAutoScroll();
-        PanHabitacion panelSeleccionado = (PanHabitacion) carrusel.getCurrentPanel();
-        new WinReservacion(b, huespedActual).setVisible(true);
+        new WinReservacion(filtrarHabitacionesFavoritas(), huespedActual).setVisible(true);
     }//GEN-LAST:event_btnReservarActionPerformed
 
     private void btnReservarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservarMouseEntered
@@ -244,38 +248,50 @@ public class PanReservaUsuario extends JPanel implements Observer {
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void btnCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalendarioActionPerformed
-        // Selector de mes
         carrusel.detenerAutoScroll();
-        PanHabitacion panelSeleccionado = (PanHabitacion) carrusel.getCurrentPanel();
 
         SelectorMes selectorMesDialog = new SelectorMes(this);
-        selectorMesDialog.setMes(panelSeleccionado.getMesReserva());
         selectorMesDialog.setVisible(true);
         String mesSeleccionado = selectorMesDialog.getMesIngresado();
 
+        LocalDate hoy = LocalDate.now();
         int mes;
-        try {
-            LocalDate hoy = LocalDate.now();
 
-            mes = Integer.valueOf(mesSeleccionado);
+        try {
+            mes = Integer.parseInt(mesSeleccionado);
             if (mes < 1 || mes > 12) {
                 mostrarMensaje("Por favor, ingrese un mes válido (1-12).");
-                return; // Mes invalido fuera menor que 1 y mayor que 12
+                return;
             }
             if (mes < hoy.getMonthValue()) {
                 mostrarMensaje("Por favor ingrese un mes igual o posterior al actual");
-                return; // Mes antes que hoy
+                return;
             }
         } catch (NumberFormatException e) {
-            mostrarMensaje("Por favor, ingrese un numero valido para el mes.");
-            return; // Salir si no es un numero
+            mostrarMensaje("Por favor, ingrese un número válido para el mes.");
+            return;
         }
 
-        List<Reservacion> reservacionesDelMes = controladorReserva.ctrBuscarReservacionPorMes(mes);
-        WinCalendario calendario = new WinCalendario(mes, panelSeleccionado, huespedActual);
+        List<PanHabitacion> habitacionesFavoritas = filtrarHabitacionesFavoritas();
 
-        calendario.setReservaList(reservacionesDelMes);
+        List<Reservacion> reservacionesFavoritasDelMes = new ArrayList<>();
+
+        for (PanHabitacion panHabitacion : habitacionesFavoritas) {
+            int idHabitacion = panHabitacion.getHabitacion().getId_habitacion();
+
+            // Obtener las reservaciones de esta habitación en el mes seleccionado
+            List<Reservacion> reservaciones = controladorReserva.ctrBuscarReservasPorHabitacionYMes(idHabitacion, hoy.getYear(), mes);
+
+            // Agregar las reservaciones encontradas (si hay)
+            reservacionesFavoritasDelMes.addAll(reservaciones);
+        }
+
+        // Mostrar el calendario con los favoritos y sus reservaciones del mes
+        WinCalendario calendario = new WinCalendario(mes, habitacionesFavoritas, huespedActual);
+        calendario.setReservaList(reservacionesFavoritasDelMes);
         calendario.setVisible(true);
+
+
     }//GEN-LAST:event_btnCalendarioActionPerformed
 
     private void btnCalendarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalendarioMouseExited
@@ -288,7 +304,30 @@ public class PanReservaUsuario extends JPanel implements Observer {
 
     private void btnFavoritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritosActionPerformed
         PanHabitacion currentHabitacion = (PanHabitacion) carrusel.getCurrentPanel();
+        boolean estaSeleccionado = currentHabitacion.isFavorito();
+        int idHuesped = huespedActual.getId_huesped();
+        int idHabitacion = currentHabitacion.getHabitacion().getId_habitacion();
+
+        if (estaSeleccionado) {
+            // Si ya estaba favorito, buscamos y eliminamos el favorito existente
+            Favorito favoritoExistente = controladorReserva.ctrBuscarFavorito(huespedActual, currentHabitacion.getHabitacion());
+            controladorReserva.ctrEliminarFavorito(favoritoExistente);
+        } else {
+            // Si no estaba favorito, creamos y agregamos uno nuevo
+            System.out.println("Entre a crearlo");
+            Favorito nuevoFavorito = new Favorito(0, idHuesped, idHabitacion);
+            System.out.println(controladorReserva.ctrAgregarFavorito(nuevoFavorito));
+
+        }
+
+        // Cambiamos el estado de favorito en la UI
         currentHabitacion.alternarFavorito();
+
+        idsFavoritos = new HashSet<>();
+        for (Favorito favorito : controladorReserva.ctrBuscarFavoritos(huespedActual)) {
+            idsFavoritos.add(favorito.getId_habitacion());
+        }
+
     }//GEN-LAST:event_btnFavoritosActionPerformed
 
 
@@ -311,13 +350,22 @@ public class PanReservaUsuario extends JPanel implements Observer {
 
         carrusel.removePanels();
 
-        for (Habitacion habitacion : habitaciones) {
-            Reservacion reserva = controladorReserva.ctrBuscarReservacion(habitacion);
+        Map<Integer, Reservacion> mapaReservas = new HashMap<>();
+        for (Reservacion r : controladorReserva.ctrBuscarReservaciones()) {
+            mapaReservas.put(r.getId_habitacion(), r);
+        }
 
-            if (reserva == null) {
-                carrusel.agregarPanel(new PanHabitacion(habitacion));
+        for (Habitacion habitacion : habitaciones) {
+            boolean esFavorito = idsFavoritos.contains(habitacion.getId_habitacion());
+            Reservacion reserva = mapaReservas.get(habitacion.getId_habitacion());
+            PanHabitacion panelHabitacion = new PanHabitacion(habitacion);
+            if (reserva != null) {
+                panelHabitacion.setFavorito(esFavorito);
+                panelHabitacion.setMesReserva(reserva.getF_entrada().getMonthValue());
+                carrusel.agregarPanel(panelHabitacion);
             } else {
-                carrusel.agregarPanel(new PanHabitacion(habitacion, reserva.getF_entrada().getMonthValue(), true));
+                panelHabitacion.setFavorito(esFavorito);
+                carrusel.agregarPanel(panelHabitacion);
             }
         }
 

@@ -34,12 +34,12 @@ public class LogicHabitacion {
         List<Habitacion> habitacionesFiltradas = new ArrayList<>();
         List<Habitacion> habitaciones;
 
-        if (filtros.containsKey("favorito")){
+        if ((boolean) filtros.get("favoritos")) {
             habitaciones = daoHabitacion.daoGetHabitacionesFavoritas(huesped);
-        } else{
+        } else {
             habitaciones = daoHabitacion.daoGetHabitaciones();
         }
-        
+
         int filtroCosto = 3000;
         LocalDate filtroFechaE = LocalDate.now();
         LocalDate filtroFechaS = LocalDate.now();
@@ -54,25 +54,34 @@ public class LogicHabitacion {
         if (filtros.containsKey("fechaS")) {
             filtroFechaS = (LocalDate) filtros.get("fechaS");
         }
-        
 
         for (Habitacion habitacion : habitaciones) {
-            // Filtrar por precio
+            // Filtro por costo máximo
             if (habitacion.getPrecio() > filtroCosto) {
                 continue;
             }
 
-            // Verificar si la habitación está reservada
-            Reservacion reserva = daoReservacion.daoBuscarPorHabitacion(habitacion.getId_habitacion());
+            // Filtro de disponibilidad por fechas (solo si se proporcionaron ambas)
+            if (filtroFechaE != null && filtroFechaS != null) {
+                List<Reservacion> reservas = daoReservacion.daoBuscarPorHabitacion(habitacion.getId_habitacion());
 
-            if (reserva != null) {
-                LocalDate fechaInicioReserva = reserva.getF_entrada();
-                LocalDate fechaFinReserva = reserva.getF_salida();
+                if (reservas != null) {
+                    boolean haySolapamiento = false;
 
-                // Si las fechas se solapan, la habitación no está disponible
-                boolean fechasSeSolapan = !(filtroFechaS.isBefore(fechaInicioReserva) || filtroFechaE.isAfter(fechaFinReserva));
-                if (fechasSeSolapan) {
-                    continue;
+                    for (Reservacion r : reservas) {
+                        LocalDate fechaInicioReserva = r.getF_entrada();
+                        LocalDate fechaFinReserva = r.getF_salida();
+
+                        boolean fechasSeSolapan = !(filtroFechaS.isBefore(fechaInicioReserva) || filtroFechaE.isAfter(fechaFinReserva));
+                        if (fechasSeSolapan) {
+                            haySolapamiento = true;
+                            break;
+                        }
+                    }
+
+                    if (haySolapamiento) {
+                        continue; // Saltar esta habitación si alguna reserva se solapa
+                    }
                 }
             }
 

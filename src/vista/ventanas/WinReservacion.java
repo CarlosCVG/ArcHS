@@ -7,14 +7,22 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
@@ -23,41 +31,113 @@ import vista.paneles.PanHabitacion;
 public class WinReservacion extends javax.swing.JFrame {
 
     private CtrlFechaReservacion controlador = new CtrlFechaReservacion();
-    private Habitacion habitacion;
+    private Set<Habitacion> habitacionesSeleccionadas = new HashSet<>();
+    private List<PanHabitacion> habitaciones;
+
     private Huesped huesped;
+    private int numCamasRequeridas = -1;
+    private int totalCamasSeleccionadas = 0;
+    private double costoTotal = 0;
 
-    public WinReservacion(List<PanHabitacion> habitacion, Huesped huesped) {
-        initComponents();
-        setLocationRelativeTo(null);
-        this.huesped = huesped;
-
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(0, 1, 0, 0)); 
-        contentPanel.setPreferredSize(new Dimension(700, habitacion.size()*530 + 100));
-        contentPanel.setBackground(new Color(1, 74, 173));
-
-        for (int i = 0; i < habitacion.size(); i++) {
-            PanHabitacion panel = habitacion.get(i);
-            panel.ocultarMensaje();
-            contentPanel.add(panel);
-        }
-
-        JScrollPane jScrollPane1 = new JScrollPane(contentPanel);
-        ScrollPaneCustomizer.customizeScrollPane(jScrollPane1);
-        pnaelHabitacion.add(jScrollPane1, BorderLayout.CENTER);
-
+    public WinReservacion(List<PanHabitacion> listaPaneles, Huesped huesped) {
+        this(listaPaneles, huesped, null, null);
     }
 
-    public WinReservacion(PanHabitacion habitacion, Huesped huesped, LocalDate fechaInicio, LocalDate fechaFin) {
+    public WinReservacion(List<PanHabitacion> listaPaneles, Huesped huesped, LocalDate fechaInicio, LocalDate fechaFin) {
         initComponents();
         setLocationRelativeTo(null);
-        this.habitacion = habitacion.getHabitacion();
+        this.habitaciones = listaPaneles;
         this.huesped = huesped;
-        System.out.println(this.huesped);
-        this.pnaelHabitacion.add(habitacion, BorderLayout.CENTER);
-        dateEntrada.setDate(fechaInicio);
-        dateSalida.setDate(fechaFin);
-        habitacion.ocultarMensaje();
+
+        if (fechaInicio != null && fechaFin != null) {
+            dateEntrada.setDate(fechaInicio);
+            dateSalida.setDate(fechaFin);
+        }
+
+        construirPanelHabitaciones(listaPaneles);
+    }
+
+    private void construirPanelHabitaciones(List<PanHabitacion> listaPaneles) {
+        JPanel contentPanel = new JPanel(new GridLayout(0, 1, 0, 0));
+        contentPanel.setPreferredSize(new Dimension(700, listaPaneles.size() * 530 + 100));
+        contentPanel.setBackground(new Color(1, 74, 173));
+        if (listaPaneles.isEmpty()) {
+            construirPanelVacio(contentPanel);
+        } else {
+            for (PanHabitacion panel : listaPaneles) {
+                panel.ocultarMensaje();
+                panel.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        boolean nuevoEstado = !panel.getSeleccionado();
+                        panel.setSeleccionado(nuevoEstado); // Cambia visual y lógicamente el estado
+                        actualizarSeleccion(panel.getHabitacion(), nuevoEstado, panel);
+                    }
+                });
+                contentPanel.add(panel);
+            }
+
+        }
+        JScrollPane scroll = new JScrollPane(contentPanel);
+        ScrollPaneCustomizer.customizeScrollPane(scroll);
+        pnaelHabitacion.add(scroll, BorderLayout.CENTER);
+    }
+
+    private void actualizarSeleccion(Habitacion habitacion, boolean seleccionado, PanHabitacion panel) {
+        if (seleccionado) {
+            int camasRestantes = numCamasRequeridas - totalCamasSeleccionadas;
+
+            if (camasRestantes <= 0) {
+                JOptionPane.showMessageDialog(this, "Ya se ha alcanzado el número requerido de camas.", "Límite alcanzado", JOptionPane.WARNING_MESSAGE);
+                panel.setSeleccionado(false); // Desmarcar visual y lógicamente
+                return;
+            }
+
+            habitacionesSeleccionadas.add(habitacion);
+            totalCamasSeleccionadas += habitacion.getNum_camas();
+        } else {
+            habitacionesSeleccionadas.remove(habitacion);
+            totalCamasSeleccionadas -= habitacion.getNum_camas();
+        }
+
+        int camasRestantes = numCamasRequeridas - totalCamasSeleccionadas;
+        txtUser.setText(camasRestantes <= 0 ? "Completo" : String.valueOf(camasRestantes));
+    }
+
+    private void construirPanelVacio(JPanel contentPanel) {
+        JPanel mensajePanel = new JPanel();
+        mensajePanel.setBackground(new Color(1, 74, 173));
+        mensajePanel.setPreferredSize(new Dimension(700, 150));
+        mensajePanel.setLayout(new BoxLayout(mensajePanel, BoxLayout.Y_AXIS));
+
+        JLabel linea1 = new JLabel("Sin favoritos,", SwingConstants.CENTER);
+        JLabel linea2 = new JLabel("seleccione en la pestaña de habitaciones", SwingConstants.CENTER);
+        JLabel linea3 = new JLabel("nuevos favoritos para reservar", SwingConstants.CENTER);
+
+        // Color y fuente
+        Color textoColor = Color.WHITE;
+        Font textoFont = new Font("SansSerif", Font.BOLD, 16);
+        linea1.setForeground(textoColor);
+        linea2.setForeground(textoColor);
+        linea3.setForeground(textoColor);
+        linea1.setFont(textoFont);
+        linea2.setFont(textoFont);
+        linea3.setFont(textoFont);
+
+        // Centrar horizontalmente
+        linea1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        linea2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        linea3.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Separación entre líneas
+        mensajePanel.add(Box.createVerticalGlue());
+        mensajePanel.add(linea1);
+        mensajePanel.add(linea2);
+        mensajePanel.add(linea3);
+        mensajePanel.add(Box.createVerticalGlue());
+
+        contentPanel.add(mensajePanel);
+        contentPanel.setPreferredSize(new Dimension(700, 200));
     }
 
     @SuppressWarnings("unchecked")
@@ -156,7 +236,7 @@ public class WinReservacion extends javax.swing.JFrame {
         lblNum.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         lblNum.setForeground(new java.awt.Color(255, 255, 255));
         lblNum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNum.setText("Núm habitaciones");
+        lblNum.setText("Núm camas");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -171,12 +251,18 @@ public class WinReservacion extends javax.swing.JFrame {
 
         txtUser.setBackground(new java.awt.Color(255, 255, 255));
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.setToolTipText("Presione \"Enter\" para fijar el número de camas");
         txtUser.setCaretColor(new java.awt.Color(255, 204, 0));
         txtUser.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtUser.setPreferredSize(new java.awt.Dimension(150, 50));
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
+            }
+        });
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -266,30 +352,52 @@ public class WinReservacion extends javax.swing.JFrame {
 
     private void btnReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservacionActionPerformed
         try {
-            // Obtener fecha de entrada
-            int dayEntrada = dateEntrada.getDay();
-            int monthEntrada = dateEntrada.getMonth();
-            int yearEntrada = dateEntrada.getYear();
-            LocalDate fechaEntrada = LocalDate.of(yearEntrada, monthEntrada, dayEntrada);
+            LocalDate fechaEntrada = LocalDate.of(dateEntrada.getYear(), dateEntrada.getMonth(), dateEntrada.getDay());
+            LocalDate fechaSalida = LocalDate.of(dateSalida.getYear(), dateSalida.getMonth(), dateSalida.getDay());
 
-            // Obtener fecha de salida
-            int daySalida = dateSalida.getDay();
-            int monthSalida = dateSalida.getMonth();
-            int yearSalida = dateSalida.getYear();
-            LocalDate fechaSalida = LocalDate.of(yearSalida, monthSalida, daySalida); // <-- corregido
+            if (totalCamasSeleccionadas < numCamasRequeridas) {
+                JOptionPane.showMessageDialog(this, "Se seleccionaron menos camas de las necesarias.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else if (totalCamasSeleccionadas > numCamasRequeridas) {
+                int opcion = JOptionPane.showConfirmDialog(this,
+                        "Has seleccionado más camas de las necesarias. ¿Deseas continuar?",
+                        "Camas excedentes", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (opcion != JOptionPane.YES_OPTION) {
+                    return;
+                }
+            }
 
-            // Crear reservación
-            Reservacion reservacion = new Reservacion(0, habitacion.getId_habitacion(), huesped.getId_huesped(), "Estado Correjir luego", fechaEntrada, fechaSalida);
-            controlador.ctrAgregarReservacion(reservacion);
+            long dias = ChronoUnit.DAYS.between(fechaEntrada, fechaSalida);
+            if (dias <= 0) {
+                JOptionPane.showMessageDialog(this, "La fecha de salida debe ser posterior a la de entrada.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            // Mostrar mensaje de éxito
-            JOptionPane.showMessageDialog(this, "Reservación registrada para las fechas:\nEntrada: " + fechaEntrada + "\nSalida: " + fechaSalida, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            StringBuilder mensaje = new StringBuilder("Se seleccionaron las siguientes habitaciones:\n");
+            double costoTotal = 0;
 
+            for (Habitacion hab : habitacionesSeleccionadas) {
+                Reservacion res = new Reservacion(0, hab.getId_habitacion(), huesped.getId_huesped(), "Pendiente", fechaEntrada, fechaSalida);
+                double costoHabitacion = hab.getPrecio() + (hab.getPrecio() * dias/3);  // Costo por días
+                costoTotal += costoHabitacion;
+                controlador.ctrAgregarReservacion(res);
+                mensaje.append("Habitación #").append(hab.getId_habitacion())
+                        .append(" - Coste: ").append(String.format("%.2f", costoHabitacion)).append("\n");
+            }
+
+            mensaje.append("Total: ").append(String.format("%.2f", costoTotal));
+
+            JOptionPane.showMessageDialog(this, "Reservación registrada para:\nEntrada: " + fechaEntrada + "\nSalida: " + fechaSalida + "\n" + mensaje,
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+            this.dispose();
         } catch (ExAgregar ex) {
             JOptionPane.showMessageDialog(this, "Error al registrar reservación: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_btnReservacionActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -299,6 +407,32 @@ public class WinReservacion extends javax.swing.JFrame {
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            try {
+                int nuevoValor = Integer.parseInt(txtUser.getText().trim());
+                if (nuevoValor <= 0 || nuevoValor > 20) {
+                    throw new NumberFormatException("Número fuera de rango permitido (1-20)");
+                }
+
+                // Reiniciar variables de control
+                numCamasRequeridas = nuevoValor;
+                totalCamasSeleccionadas = 0;
+                habitacionesSeleccionadas.clear();
+
+                // Reiniciar visualmente todos los paneles
+                for (PanHabitacion pan : habitaciones) {
+                    pan.setSeleccionado(false);
+                }
+
+                txtUser.setText(String.valueOf(nuevoValor));
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Ingrese un número válido de camas (1-20).", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtUserKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane LayeredPane;

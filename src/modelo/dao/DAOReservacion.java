@@ -51,7 +51,7 @@ public class DAOReservacion {
     }
 
     public boolean daoAgregarReservacion(Reservacion reservacion) {
-        String sql = "INSERT INTO reservaciones (id_reservacion, id_habitacion, id_cliente, f_entrada, f_salida, estado) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO reservaciones (id_reservacion, id_habitacion, id_cliente, f_entrada, f_salida, estado) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setInt(1, reservacion.getId_reservacion());
             stmt.setInt(2, reservacion.getId_habitacion());
@@ -67,20 +67,39 @@ public class DAOReservacion {
         }
     }
 
-    public Reservacion daoBuscarPorHabitacion(int idHabitacion) {
+    public List<Reservacion> daoBuscarPorHabitacion(int idHabitacion) {
+        List<Reservacion> reservaciones = new ArrayList<>();
         String sql = "SELECT * FROM reservaciones WHERE id_habitacion = ?";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setInt(1, idHabitacion);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return MapData.mapearReserva(rs);
+            while (rs.next()) {
+                reservaciones.add(MapData.mapearReserva(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return reservaciones;
+
+    }
+
+    public List<Reservacion> daoBuscarPorHuesped(int idHuesped) {
+        List<Reservacion> reservaciones = new ArrayList<>();
+        String sql = "SELECT * FROM reservaciones WHERE id_cliente = ?";
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setInt(1, idHuesped);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                reservaciones.add(MapData.mapearReserva(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return reservaciones;
 
     }
 
@@ -101,13 +120,41 @@ public class DAOReservacion {
 
     }
 
-    public List<Reservacion> daoBuscarPorMes(int mes) {
+    public List<Reservacion> daoBuscarPorMes(int year, int mes) {
         List<Reservacion> reservaciones = new ArrayList<>();
         String sql = "SELECT * FROM reservaciones WHERE"
-                + " MONTH(f_entrada) = ? OR MONTH(f_salida) = ?";
+                + " (MONTH(f_entrada) = ? AND YEAR(f_entrada) = ?)"
+                + " OR (MONTH(f_salida) = ? AND YEAR(f_salida) = ?)";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setInt(1, mes);
-            stmt.setInt(2, mes);
+            stmt.setInt(2, year);
+            stmt.setInt(3, mes);
+            stmt.setInt(4, year);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                reservaciones.add(MapData.mapearReserva(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return reservaciones;
+    }
+
+    public List<Reservacion> daoBuscarPorHabitacionYMes(int idHabitacion, int year, int mes) {
+        List<Reservacion> reservaciones = new ArrayList<>();
+        String sql = "SELECT * FROM reservaciones WHERE"
+                + " ((MONTH(f_entrada) = ? AND YEAR(f_entrada) = ?)"
+                + " OR (MONTH(f_salida) = ? AND YEAR(f_salida) = ?))"
+                + " AND id_habitacion = ?";
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setInt(1, mes);
+            stmt.setInt(2, year);
+            stmt.setInt(3, mes);
+            stmt.setInt(4, year);
+            stmt.setInt(5, idHabitacion);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

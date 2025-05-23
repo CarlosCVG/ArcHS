@@ -4,12 +4,18 @@
  */
 package vista.paneles;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import modelo.util.MonthsOfYear;
 import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import modelo.vo.Habitacion;
 
@@ -22,39 +28,48 @@ public class PanHabitacion extends JPanel {
     private static final String IMAGE_FOLDER_PATH = "src/vista/images/habitacionIMG/";
     private static final String IMAGE_PREFIX = "habitacion";
     private Habitacion habitacion;
-    private int mesReserva;
+    private int mesReserva = -1;
     private boolean favorito = false;
+    private boolean seleccionado = false;
+    private JPanel overlaySeleccion;
 
-    public PanHabitacion(Habitacion habitacion) { //Constructo para cuando no se tiene un mes de reserva especifico, o cuando no se quiere mostrar dicho mes 
+    public PanHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
-        this.mesReserva = mesReserva;
-        initComponents();
-        configurarComponentes();
-        ocultarMensaje();
-        configurarFavorito();
+        inicializar();
     }
 
-    public PanHabitacion(Habitacion habitacion, boolean favorito) { //Constructo para cuando no se tiene un mes de reserva especifico, o cuando no se quiere mostrar dicho mes 
+    public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
-        this.mesReserva = mesReserva;
-        this.favorito = favorito;
-        initComponents();
-        configurarComponentes();
-        ocultarMensaje();
-        configurarFavorito();
     }
 
-    public PanHabitacion(Habitacion habitacion, int mesReserva, boolean favorito) { //Constructor para cuando se tiene un mes de reserva especifico
-        this.habitacion = habitacion;
+    public void setMesReserva(int mesReserva) {
         this.mesReserva = mesReserva;
+    }
+
+    public void setFavorito(boolean favorito) {
         this.favorito = favorito;
+        lblFavorito.setVisible(favorito);
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    private void inicializar() {
         initComponents();
         configurarComponentes();
-        configurarFechaReservacion(mesReserva);
         configurarFavorito();
+
+        if (mesReserva > 0) {
+            configurarFechaReservacion(mesReserva);
+        } else {
+            ocultarMensaje();
+        }
     }
 
     private void configurarComponentes() {
+        setPanelSeleccion();
+
         lblIDHabitacion.setText("Habitación #" + habitacion.getId_habitacion() + ".");
         lblPrecio.setText("Precio: " + habitacion.getPrecio() + "$.");
         lblSize.setText("Tamaño: " + habitacion.getSize() + "m².");
@@ -68,6 +83,16 @@ public class PanHabitacion extends JPanel {
 
     public Habitacion getHabitacion() {
         return habitacion;
+    }
+
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
+        overlaySeleccion.setVisible(seleccionado);
+        overlaySeleccion.repaint();
+    }
+
+    public boolean getSeleccionado() {
+        return seleccionado;
     }
 
     public int getMesReserva() {
@@ -90,12 +115,8 @@ public class PanHabitacion extends JPanel {
 
     public void ocultarMensaje() {
         PanelFecha.setVisible(false);
-
     }
 
-    /**
-     * Asigna una imagen aleatoria escalada al JLabel recibido.
-     */
     private void setImageRandom(JLabel label, int height, int width) {
         int imageCount = countFilesInFolder(IMAGE_FOLDER_PATH);
         if (imageCount == 0) {
@@ -111,32 +132,46 @@ public class PanHabitacion extends JPanel {
         label.setIcon(new ImageIcon(scaled));
     }
 
-    /**
-     * Devuelve un entero aleatorio en el rango [min, max]
-     */
+    private void setPanelSeleccion() {
+        overlaySeleccion = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setColor(new Color(0, 0, 0, 100));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g2d.dispose();
+            }
+        };
+        overlaySeleccion.setOpaque(false);
+        overlaySeleccion.setBounds(0, 0, getWidth(), getHeight());
+        overlaySeleccion.setVisible(false);
+
+        layeredPane.add(overlaySeleccion, JLayeredPane.MODAL_LAYER);
+
+        layeredPane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                overlaySeleccion.setSize(layeredPane.getSize());
+            }
+        });
+    }
+
     private int getRandomInt(int min, int max) {
         return new Random().nextInt(max - min + 1) + min;
     }
 
-    /**
-     * Cuenta la cantidad de archivos en una carpeta.
-     */
     private int countFilesInFolder(String folderPath) {
         File folder = new File(folderPath);
         File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg"));
-
-        if (files != null) {
-            return files.length;
-        }
-
-        return 0;
+        return files != null ? files.length : 0;
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        layeredPane = new javax.swing.JLayeredPane();
         PanelIMG = new javax.swing.JPanel();
         lblIMG1 = new javax.swing.JLabel();
         lblIMG2 = new javax.swing.JLabel();
@@ -176,7 +211,7 @@ public class PanHabitacion extends JPanel {
         lblIMG3.setOpaque(true);
         PanelIMG.add(lblIMG3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 150, 250));
 
-        jLayeredPane1.add(PanelIMG);
+        layeredPane.add(PanelIMG);
         PanelIMG.setBounds(0, 0, 300, 530);
 
         PanelInfo.setBackground(new java.awt.Color(1, 74, 173));
@@ -215,7 +250,7 @@ public class PanHabitacion extends JPanel {
         lblDescripcion.setFocusable(false);
         PanelInfo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 382, 220));
 
-        jLayeredPane1.add(PanelInfo);
+        layeredPane.add(PanelInfo);
         PanelInfo.setBounds(300, 0, 400, 530);
 
         PanelFecha.setOpaque(false);
@@ -236,18 +271,18 @@ public class PanHabitacion extends JPanel {
 
         PanelFecha.add(jLayeredPane2, java.awt.BorderLayout.CENTER);
 
-        jLayeredPane1.setLayer(PanelFecha, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane1.add(PanelFecha);
+        layeredPane.setLayer(PanelFecha, javax.swing.JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(PanelFecha);
         PanelFecha.setBounds(20, 420, 660, 80);
 
         lblFavorito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/fondoFavorito.png"))); // NOI18N
         lblFavorito.setText("jLabel1");
         lblFavorito.setPreferredSize(new java.awt.Dimension(120, 120));
-        jLayeredPane1.setLayer(lblFavorito, javax.swing.JLayeredPane.PALETTE_LAYER);
-        jLayeredPane1.add(lblFavorito);
+        layeredPane.setLayer(lblFavorito, javax.swing.JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(lblFavorito);
         lblFavorito.setBounds(10, 10, 120, 120);
 
-        add(jLayeredPane1, java.awt.BorderLayout.CENTER);
+        add(layeredPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -255,8 +290,8 @@ public class PanHabitacion extends JPanel {
     private javax.swing.JPanel PanelFecha;
     private javax.swing.JPanel PanelIMG;
     private javax.swing.JPanel PanelInfo;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
+    private javax.swing.JLayeredPane layeredPane;
     private javax.swing.JTextPane lblDescripcion;
     private javax.swing.JLabel lblFavorito;
     private javax.swing.JLabel lblFecha;
