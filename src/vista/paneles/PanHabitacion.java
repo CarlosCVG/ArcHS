@@ -117,20 +117,6 @@ public class PanHabitacion extends JPanel {
         PanelFecha.setVisible(false);
     }
 
-    private void setImageRandom(JLabel label, int height, int width) {
-        int imageCount = countFilesInFolder(IMAGE_FOLDER_PATH);
-        if (imageCount == 0) {
-            label.setText("Sin imagen");
-            return;
-        }
-
-        int index = getRandomInt(0, imageCount - 1);
-        String imagePath = IMAGE_FOLDER_PATH + IMAGE_PREFIX + index + ".jpg";
-
-        ImageIcon icon = new ImageIcon(imagePath);
-        Image scaled = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        label.setIcon(new ImageIcon(scaled));
-    }
 
     private void setPanelSeleccion() {
         overlaySeleccion = new JPanel() {
@@ -157,6 +143,21 @@ public class PanHabitacion extends JPanel {
         });
     }
 
+    private void setImageRandom(JLabel label, int height, int width) {
+        int imageCount = countFilesInFolder(IMAGE_FOLDER_PATH);
+        if (imageCount == 0) {
+            label.setText("Sin imagen");
+            return;
+        }
+
+        int index = getRandomInt(0, imageCount - 1);
+        String imagePath = IMAGE_FOLDER_PATH + IMAGE_PREFIX + index + ".jpg";
+
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image scaled = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        label.setIcon(new ImageIcon(scaled));
+    }
+    
     private int getRandomInt(int min, int max) {
         return new Random().nextInt(max - min + 1) + min;
     }

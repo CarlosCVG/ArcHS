@@ -36,7 +36,7 @@ public class Calendario extends JPanel {
         this.year = year;
         this.month = month;
         this.reservaciones = reservaciones;
-        this.setBackground(Color.WHITE); //Color de fondo
+        this.setBackground(new Color(45, 52, 54));
         generarColoresHabitaciones();
 
         addMouseListener(new MouseAdapter() {
