@@ -21,18 +21,17 @@ public class WinRegistroUF extends javax.swing.JFrame {
     private int habitacion;
     private Huesped nhuesped;
     private List<Huesped> huespedes = new ArrayList<>();
-    private JTable tblRegistroFisico;
+    private List<Habitacion> habitaciones = new ArrayList<>();
     CtrlRegistroHab ctrlrh = new CtrlRegistroHab();
 
-    public WinRegistroUF(JFrame ventanaAnterior, int habitacion, JTable tblRegistroFisico) {
+    public WinRegistroUF(JFrame ventanaAnterior) {
         this.setUndecorated(true);
         this.ventanaAnterior = ventanaAnterior;
-        this.habitacion = habitacion;
-        this.tblRegistroFisico = tblRegistroFisico;
         ctrlrh.getCountHuespedes();
         initComponents();
         txt7.setForeground(Color.GRAY);
         txt7.setText("formato: XXXX-XXXX-XXXX-XXXX");
+        habitaciones = ctrlrh.getListaHabitaciones();
     }
 
     @SuppressWarnings("unchecked")
@@ -192,9 +191,15 @@ public class WinRegistroUF extends javax.swing.JFrame {
             if (ctrlrh.addHuesped(usuario, pass, nombre, ap1, ap2, num_tarjeta, idioma, correo)) {
                 JOptionPane.showMessageDialog(null, "Cliente añadido con exito");
                 nhuesped = ctrlrh.findClient(usuario, pass);
-                WinRegistroRF wrrf = new WinRegistroRF(ventanaAnterior, habitacion, nhuesped, tblRegistroFisico);
-                wrrf.setBounds(200, 100, wrrf.getWidth(), wrrf.getHeight());
-                wrrf.setVisible(true);
+//                WinRegistroRF wrrf = new WinRegistroRF(ventanaAnterior, habitacion, nhuesped, tblRegistroFisico);
+//                wrrf.setBounds(200, 100, wrrf.getWidth(), wrrf.getHeight());
+//                wrrf.setVisible(true);
+                System.out.println("Habitaciones a pasar: " + habitaciones.size());
+
+                WinSelectorHabitacion wsh = new WinSelectorHabitacion(nhuesped, habitaciones);
+                //wsh.setHabitacionList(habitaciones);
+                wsh.setVisible(true);
+
                 this.dispose();
             }
         } catch (NumberFormatException e) {

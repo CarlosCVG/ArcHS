@@ -75,6 +75,7 @@ public class SelectorHabitaciones extends JPanel {
         generarColoresHabitaciones();
         cargarImagenes();
         configurarMouseListener();
+        repaint();
     }
 
     public List<Habitacion> getHabitaciones() {

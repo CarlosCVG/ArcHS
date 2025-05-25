@@ -14,9 +14,8 @@ import vista.ventanas.WinRegistroUF;
 
 public class PanRegistro extends javax.swing.JPanel {
 
-    private int habToR;
     private List<Habitacion> habitaciones = new ArrayList<>();
-    private mtRegistroHab mtrhLocal;
+
     CtrlRegistroHab ctrlrh = new CtrlRegistroHab();
     private JFrame ventanaAnterior;
 
@@ -43,7 +42,6 @@ public class PanRegistro extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblTituloTabla = new javax.swing.JLabel();
-        txtIdHab = new componentes.custom_textfield();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -120,32 +118,16 @@ public class PanRegistro extends javax.swing.JPanel {
         lblTituloTabla.setText("Habitaciones destacadas para el dia de hoy:");
         pnlGnrl.add(lblTituloTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 780, 40));
 
-        txtIdHab.setForeground(new java.awt.Color(255, 255, 255));
-        pnlGnrl.add(txtIdHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 550, 170, -1));
-
         add(pnlGnrl, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        try {
-            mtrhLocal = new mtRegistroHab();
-            //Aqui esta
-            habToR = Integer.parseInt(txtIdHab.getText());
-            habitaciones = mtrhLocal.getHabitaciones();
-            if (ctrlrh.revisarDisponible(habToR, habitaciones)) {
-                ventanaAnterior.setVisible(false);
-                WinRegistroUF wruf = new WinRegistroUF(ventanaAnterior, habToR, tblRegistroFisico);
-                wruf.setBounds(200, 100, wruf.getWidth(), wruf.getHeight());
-                wruf.setVisible(true);
-                txtIdHab.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "La habitacion no esta disponible para su reservacion");
-                txtIdHab.setText("");
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Ingresa un numero para el Num. Habitacion");
-            txtIdHab.setText("");
-        }
+
+        ventanaAnterior.setVisible(false);
+        WinRegistroUF wruf = new WinRegistroUF(ventanaAnterior);
+        wruf.setBounds(200, 100, wruf.getWidth(), wruf.getHeight());
+        wruf.setVisible(true);
+
     }//GEN-LAST:event_btnReservarActionPerformed
 
 
@@ -162,6 +144,5 @@ public class PanRegistro extends javax.swing.JPanel {
     private javax.swing.JPanel pnlReservar;
     private javax.swing.JPanel pnlTablaHoy;
     private javax.swing.JTable tblRegistroFisico;
-    private componentes.custom_textfield txtIdHab;
     // End of variables declaration//GEN-END:variables
 }

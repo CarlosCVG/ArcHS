@@ -19,9 +19,12 @@ public class WinSelectorHabitacion extends javax.swing.JFrame {
 
     List<Habitacion> habitaciones;
     private Huesped huesded;
-    public WinSelectorHabitacion(Huesped huesped) {
+    public WinSelectorHabitacion(Huesped huesped, List<Habitacion> habitaciones) {
         initComponents();
         this.huesded = huesped;
+        this.habitaciones = habitaciones;
+        //setHabitacionList(habitaciones);
+        Shabitaciones.setHabitaciones(habitaciones);
     }
 
     public void setHabitacionList(List<Habitacion> habitaciones){

@@ -249,7 +249,6 @@ public class WinReservacion extends javax.swing.JFrame {
         panelNumPersona.setBackground(new java.awt.Color(1, 74, 173));
         panelNumPersona.setLayout(new java.awt.GridBagLayout());
 
-        txtUser.setBackground(new java.awt.Color(255, 255, 255));
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
         txtUser.setToolTipText("Presione \"Enter\" para fijar el número de camas");
         txtUser.setCaretColor(new java.awt.Color(255, 204, 0));
