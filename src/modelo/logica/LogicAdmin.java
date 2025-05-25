@@ -17,4 +17,8 @@ public class LogicAdmin {
     public boolean sendTask(Administrador admin, Empleado empleado, String asunto, String task) {
         return daoadmin.sendTask(admin, empleado, asunto, task);
     }
+    
+    public String cantRxM(int numMes) {
+        return daoadmin.cantRxM(numMes);
+    }
 }

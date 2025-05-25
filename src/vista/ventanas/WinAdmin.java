@@ -7,6 +7,7 @@ import modelo.componentes.mtHabReservadas;
 import modelo.componentes.mtRegistroHab;
 import modelo.vo.Administrador;
 import modelo.vo.Empleado;
+import vista.paneles.PanAdminCE;
 import vista.paneles.PanAdminEmpleados;
 import vista.paneles.PanAdminTask;
 import vista.paneles.PanEmpleadoDatos;
@@ -17,6 +18,7 @@ public class WinAdmin extends javax.swing.JFrame {
 
     private PanAdminEmpleados adminempleados;
     private PanAdminTask panAT;
+    private PanAdminCE panCE;
     private Administrador administrador;
 //    private PanAdminTareas adminempleados;
 //    private PanAdminCE adminempleados;
@@ -162,12 +164,11 @@ public class WinAdmin extends javax.swing.JFrame {
 
     private void btnCEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCEMouseClicked
         
-//        mthr = new mtHabReservadas();
-//        reservado = new PanReservado(mthr);
-//        Rigth.removeAll();
-//        Rigth.add(reservado);
-//        Rigth.revalidate();
-//        Rigth.repaint();
+        panCE = new PanAdminCE();
+        Rigth.removeAll();
+        Rigth.add(panCE);
+        Rigth.revalidate();
+        Rigth.repaint();
     }//GEN-LAST:event_btnCEMouseClicked
 
 

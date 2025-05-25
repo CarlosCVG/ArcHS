@@ -96,4 +96,22 @@ public class DAOAdmin {
         }
     }
 
+    public String cantRxM(int numMes) {
+        String cantidad = "0";
+        String sql = "SELECT COUNT(*) FROM reservaciones WHERE MONTH(f_entrada) = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, numMes);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cantidad = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cantidad;
+    }
+
 }

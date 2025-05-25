@@ -19,5 +19,9 @@ public class CtrlAdmin {
     public boolean sendTask(Administrador admin, Empleado empleado, String asunto, String task) {
         return ladmin.sendTask(admin, empleado, asunto, task);
     }
+
+    public String cantRxM(int numMes) {
+        return ladmin.cantRxM(numMes);
+    }
     
 }
