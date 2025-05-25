@@ -40,15 +40,14 @@ public class PanLogin extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         body = new javax.swing.JPanel();
         lblUser = new javax.swing.JLabel();
         txtUser = new componentes.custom_textfield();
         lblPassword = new javax.swing.JLabel();
-        txtPassword = new componentes.custom_textfield();
         lblLogo = new javax.swing.JLabel();
+        txtPassword2 = new componentes.PasswordField();
         header = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         footer = new javax.swing.JPanel();
@@ -63,65 +62,25 @@ public class PanLogin extends javax.swing.JPanel {
 
         body.setBackground(new java.awt.Color(1, 74, 173));
         body.setForeground(new java.awt.Color(1, 74, 173));
-        body.setLayout(new java.awt.GridBagLayout());
+        body.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/usuario_icono_corto.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 43;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
-        body.add(lblUser, gridBagConstraints);
+        body.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 130, 40));
 
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 342;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 15);
-        body.add(txtUser, gridBagConstraints);
+        body.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 406, 37));
 
         lblPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Password_icono_corto.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 34;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
-        body.add(lblPassword, gridBagConstraints);
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 342;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 15);
-        body.add(txtPassword, gridBagConstraints);
+        body.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 160, 40));
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/LogoARC.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        body.add(lblLogo, gridBagConstraints);
+        body.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 436, -1));
+        body.add(txtPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 410, -1));
 
         jPanel1.add(body, java.awt.BorderLayout.CENTER);
 
@@ -182,10 +141,6 @@ public class PanLogin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         if (loginselected == 1 || loginselected == 2) {
             JOptionPane.showMessageDialog(null, "Opcion deshabilitada para Administradores y Empleados");
@@ -200,7 +155,7 @@ public class PanLogin extends javax.swing.JPanel {
 
     private void btnISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnISActionPerformed
         usuario = txtUser.getText();
-        password = txtPassword.getText();
+        password = txtPassword2.getText();
         switch (loginselected) {
             case 1:
                 Administrador administrador = new Administrador();
@@ -296,7 +251,7 @@ public class PanLogin extends javax.swing.JPanel {
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUser;
-    private componentes.custom_textfield txtPassword;
+    private componentes.PasswordField txtPassword2;
     private componentes.custom_textfield txtUser;
     // End of variables declaration//GEN-END:variables
 }
