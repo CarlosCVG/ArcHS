@@ -25,15 +25,14 @@ public class loginUI extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         body = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         custom_textfield3 = new componentes.custom_textfield();
         jLabel5 = new javax.swing.JLabel();
-        custom_textfield4 = new componentes.custom_textfield();
         jLabel1 = new javax.swing.JLabel();
+        passwordField1 = new componentes.PasswordField();
         header = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         footer = new javax.swing.JPanel();
@@ -53,6 +52,7 @@ public class loginUI extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/usuario_icono_corto.png"))); // NOI18N
         body.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 130, 40));
 
+        custom_textfield3.setBackground(new java.awt.Color(60, 63, 65));
         custom_textfield3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custom_textfield3ActionPerformed(evt);
@@ -63,15 +63,11 @@ public class loginUI extends javax.swing.JPanel {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/Password_icono_corto.png"))); // NOI18N
         body.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 160, 40));
 
-        custom_textfield4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                custom_textfield4ActionPerformed(evt);
-            }
-        });
-        body.add(custom_textfield4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 406, 37));
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/LogoARC.png"))); // NOI18N
         body.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 140, 170));
+
+        passwordField1.setBackground(new java.awt.Color(1, 74, 173));
+        body.add(passwordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 420, 40));
 
         jPanel1.add(body, java.awt.BorderLayout.CENTER);
 
@@ -125,10 +121,6 @@ public class loginUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_custom_textfield3ActionPerformed
 
-    private void custom_textfield4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom_textfield4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_custom_textfield4ActionPerformed
-
     private void roundedButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roundedButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_roundedButton1ActionPerformed
@@ -141,7 +133,6 @@ public class loginUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
     private componentes.custom_textfield custom_textfield3;
-    private componentes.custom_textfield custom_textfield4;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
     private javax.swing.JButton jButton2;
@@ -149,6 +140,7 @@ public class loginUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private componentes.PasswordField passwordField1;
     private componentes.RoundedButton roundedButton1;
     private componentes.RoundedButton roundedButton2;
     // End of variables declaration//GEN-END:variables
