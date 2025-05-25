@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package vista.ventanas;
 
 import componentes.SelectorHabitaciones;
@@ -10,25 +7,26 @@ import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
 import vista.paneles.PanHabitacion;
 
-/**
- *
- * @author edwin
- */
 public class WinSelectorHabitacion extends javax.swing.JFrame {
 
     List<Habitacion> habitaciones;
     private Huesped huesded;
     private CtrlSelectorHabitacion controlador;
+    private JFrame ventanaAnterior;
 
-    public WinSelectorHabitacion(Huesped huesped, List<Habitacion> habitaciones) {
+    public WinSelectorHabitacion(Huesped huesped, List<Habitacion> habitaciones, JFrame ventanaAnterior) {
+        setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(null);
         this.huesded = huesped;
         this.habitaciones = habitaciones;
+        this.ventanaAnterior = ventanaAnterior;
         //setHabitacionList(habitaciones);
         Shabitaciones.setHabitaciones(habitaciones);
     }
@@ -133,7 +131,7 @@ public class WinSelectorHabitacion extends javax.swing.JFrame {
         controlador = new CtrlSelectorHabitacion();
 
         List<Habitacion> habitacionesSeleccionadas = Shabitaciones.getHabitacionesSeleccionadas();
-        System.out.println("Seleccionadas " + habitacionesSeleccionadas);
+        //System.out.println("Seleccionadas " + habitacionesSeleccionadas);
              
         List<Reservacion> todasLasReservaciones = controlador.ctrBuscarReservaciones();
 
@@ -158,7 +156,7 @@ public class WinSelectorHabitacion extends javax.swing.JFrame {
         System.out.println(habitacionesSeleccionadas.size());
 
         int mesActual = LocalDate.now().getMonthValue();
-        WinCalendario calendario = new WinCalendario(mesActual, panelesHabitacion, huesded);
+        WinCalendario calendario = new WinCalendario(mesActual, panelesHabitacion, huesded, ventanaAnterior, this);
         calendario.setReservaList(reservacionesImportantes);
         calendario.setVisible(true);
 
@@ -167,7 +165,10 @@ public class WinSelectorHabitacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReservacionActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
+        if (ventanaAnterior != null) {
+            ventanaAnterior.setVisible(true);
+        }
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

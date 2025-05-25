@@ -29,6 +29,7 @@ public class WinRegistroUF extends javax.swing.JFrame {
         this.ventanaAnterior = ventanaAnterior;
         ctrlrh.getCountHuespedes();
         initComponents();
+        setLocationRelativeTo(null);
         txt7.setForeground(Color.GRAY);
         txt7.setText("formato: XXXX-XXXX-XXXX-XXXX");
         habitaciones = ctrlrh.getListaHabitaciones();
@@ -191,15 +192,13 @@ public class WinRegistroUF extends javax.swing.JFrame {
             if (ctrlrh.addHuesped(usuario, pass, nombre, ap1, ap2, num_tarjeta, idioma, correo)) {
                 JOptionPane.showMessageDialog(null, "Cliente añadido con exito");
                 nhuesped = ctrlrh.findClient(usuario, pass);
+                WinSelectorHabitacion wsh = new WinSelectorHabitacion(nhuesped, habitaciones, ventanaAnterior);
+                wsh.setVisible(true);
 //                WinRegistroRF wrrf = new WinRegistroRF(ventanaAnterior, habitacion, nhuesped, tblRegistroFisico);
 //                wrrf.setBounds(200, 100, wrrf.getWidth(), wrrf.getHeight());
 //                wrrf.setVisible(true);
-                System.out.println("Habitaciones a pasar: " + habitaciones.size());
-
-                WinSelectorHabitacion wsh = new WinSelectorHabitacion(nhuesped, habitaciones);
-                //wsh.setHabitacionList(habitaciones);
-                wsh.setVisible(true);
-
+//                System.out.println("Habitaciones a pasar: " + habitaciones.size());
+//                wsh.setHabitacionList(habitaciones);
                 this.dispose();
             }
         } catch (NumberFormatException e) {

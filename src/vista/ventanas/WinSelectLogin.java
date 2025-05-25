@@ -9,6 +9,7 @@ public class WinSelectLogin extends javax.swing.JFrame {
 
     public WinSelectLogin() {
         this.setUndecorated(true);
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 

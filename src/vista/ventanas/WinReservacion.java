@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ public class WinReservacion extends javax.swing.JFrame {
     private int numCamasRequeridas = -1;
     private int totalCamasSeleccionadas = 0;
     private double costoTotal = 0;
+    private JFrame ventanaAnterior;
 
     public WinReservacion(List<PanHabitacion> listaPaneles, Huesped huesped) {
         this(listaPaneles, huesped, null, null);
@@ -55,6 +57,11 @@ public class WinReservacion extends javax.swing.JFrame {
         }
 
         construirPanelHabitaciones(listaPaneles);
+    }
+
+    public WinReservacion(List<PanHabitacion> listaPaneles, Huesped huesped, LocalDate fechaInicio, LocalDate fechaFin, JFrame ventanaAnterior) {
+        this(listaPaneles, huesped, fechaInicio, fechaFin);
+        this.ventanaAnterior = ventanaAnterior;
     }
 
     private void construirPanelHabitaciones(List<PanHabitacion> listaPaneles) {
@@ -377,7 +384,7 @@ public class WinReservacion extends javax.swing.JFrame {
 
             for (Habitacion hab : habitacionesSeleccionadas) {
                 Reservacion res = new Reservacion(0, hab.getId_habitacion(), huesped.getId_huesped(), "Pendiente", fechaEntrada, fechaSalida);
-                double costoHabitacion = hab.getPrecio() + (hab.getPrecio() * dias/3);  // Costo por días
+                double costoHabitacion = hab.getPrecio() + (hab.getPrecio() * dias / 3);  // Costo por días
                 costoTotal += costoHabitacion;
                 controlador.ctrAgregarReservacion(res);
                 mensaje.append("Habitación #").append(hab.getId_habitacion())
@@ -389,7 +396,12 @@ public class WinReservacion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Reservación registrada para:\nEntrada: " + fechaEntrada + "\nSalida: " + fechaSalida + "\n" + mensaje,
                     "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
-            this.dispose();
+            if (ventanaAnterior != null) {
+                ventanaAnterior.setVisible(true);
+                this.dispose();
+            } else {
+                this.dispose();
+            }
         } catch (ExAgregar ex) {
             JOptionPane.showMessageDialog(this, "Error al registrar reservación: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -400,7 +412,13 @@ public class WinReservacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReservacionActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
+
+        if (ventanaAnterior != null) {
+            ventanaAnterior.setVisible(true);
+            this.dispose();
+        } else {
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed

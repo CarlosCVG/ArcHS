@@ -18,6 +18,7 @@ public class WinEmpleado extends javax.swing.JFrame {
         this.nombrePuesto = nombrePuesto;
         this.setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(null);
         configurarComponentes(btnInicio);
         configurarComponentes(btnTask);
         info = new PanEmpleadoDatos(empleado, nombrePuesto);

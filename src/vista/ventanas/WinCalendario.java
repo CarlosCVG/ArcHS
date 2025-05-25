@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista.ventanas;
 
 import modelo.util.Observable;
@@ -15,10 +11,6 @@ import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
 import vista.paneles.PanHabitacion;
 
-/**
- *
- * @author edwin
- */
 public class WinCalendario extends JFrame {
 
     private List<Reservacion> reservaciones;
@@ -26,6 +18,7 @@ public class WinCalendario extends JFrame {
     private List<PanHabitacion> habitaciones;
     private List<Observer> observers = new ArrayList<>();
     private Huesped huesped;
+    private JFrame ventanaAnterior, ventanaSH;
 
     public WinCalendario(int mounth, List<PanHabitacion> habitaciones, Huesped huesped) {
         initComponents();
@@ -33,6 +26,16 @@ public class WinCalendario extends JFrame {
         this.setLocationRelativeTo(null);
         this.habitaciones = habitaciones;
         this.huesped = huesped;
+    }
+
+    public WinCalendario(int mounth, List<PanHabitacion> habitaciones, Huesped huesped, JFrame ventanaAnterior, JFrame ventanaSH) {
+        initComponents();
+        setMounth(mounth);
+        this.setLocationRelativeTo(null);
+        this.habitaciones = habitaciones;
+        this.huesped = huesped;
+        this.ventanaAnterior = ventanaAnterior;
+        this.ventanaSH = ventanaSH;
     }
 
     public void setReservaList(List<Reservacion> reservaciones) {
@@ -110,18 +113,32 @@ public class WinCalendario extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
+        if (ventanaSH != null) {
+            ventanaSH.setVisible(true);
+            this.dispose();
+        } else if (ventanaAnterior != null) {
+            ventanaAnterior.setVisible(true);
+            this.dispose();
+        } else {
+            this.dispose();
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservacionActionPerformed
         LocalDate fechaInicio = calendario.getFechaInicio();
         LocalDate fechaFin = calendario.getFechaFin();
+        
 
-        WinReservacion reservacion = new WinReservacion(habitaciones, huesped, fechaInicio, fechaFin);
-        reservacion.setVisible(true);
-        
-        this.dispose();
-        
+        if (ventanaAnterior != null) {
+            WinReservacion reservacion = new WinReservacion(habitaciones, huesped, fechaInicio, fechaFin, ventanaAnterior);
+            reservacion.setVisible(true);
+            this.dispose();
+        } else {
+            WinReservacion reservacion = new WinReservacion(habitaciones, huesped, fechaInicio, fechaFin);
+            reservacion.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btnReservacionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -132,6 +149,5 @@ public class WinCalendario extends JFrame {
     private javax.swing.JPanel header;
     private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
-
 
 }

@@ -24,6 +24,7 @@ public class WinRecepcion extends javax.swing.JFrame {
         this.nombrePuesto = nombrePuesto;
         this.setUndecorated(true);
         initComponents();
+        setLocationRelativeTo(null);
         configurarComponentes(btnInicio);
         configurarComponentes(btnRegistro);
         configurarComponentes(btnReservado);
