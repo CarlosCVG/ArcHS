@@ -2,6 +2,7 @@ package vista.ventanas;
 
 import componentes.panel_btn;
 import java.awt.Color;
+import modelo.componentes.mtHabReservadas;
 import modelo.componentes.mtRegistroHab;
 import modelo.vo.Empleado;
 import vista.paneles.PanEmpleadoDatos;
@@ -13,10 +14,10 @@ public class WinRecepcion extends javax.swing.JFrame {
     private PanEmpleadoDatos info;
     private PanRegistro registro;
     private PanReservado reservado;
-    private int tmSelector;
     private Empleado empleado;
     private String nombrePuesto;
     private mtRegistroHab mrth;
+    private mtHabReservadas mthr;
 
     public WinRecepcion(Empleado empleado, String nombrePuesto) {
         this.empleado = empleado;
@@ -147,8 +148,8 @@ public class WinRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInicioMouseClicked
 
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
-        tmSelector = 1;
-        mrth = new mtRegistroHab(tmSelector);
+        
+        mrth = new mtRegistroHab();
         registro = new PanRegistro(mrth, this);
         Rigth.removeAll();
         Rigth.add(registro);
@@ -157,9 +158,9 @@ public class WinRecepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistroMouseClicked
 
     private void btnReservadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReservadoMouseClicked
-        tmSelector = 2;
-        mrth = new mtRegistroHab(tmSelector);
-        reservado = new PanReservado(mrth);
+        
+        mthr = new mtHabReservadas();
+        reservado = new PanReservado(mthr);
         Rigth.removeAll();
         Rigth.add(reservado);
         Rigth.revalidate();

@@ -128,7 +128,7 @@ public class PanRegistro extends javax.swing.JPanel {
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
         try {
-            mtrhLocal = new mtRegistroHab(1);
+            mtrhLocal = new mtRegistroHab();
             //Aqui esta
             habToR = Integer.parseInt(txtIdHab.getText());
             habitaciones = mtrhLocal.getHabitaciones();

@@ -20,6 +20,18 @@ public class LogicRegistroHab {
     public List<Reservacion> getListaReservaciones() {
         return daorh.getListaReservaciones();
     }
+    
+    public List<Reservacion> searchLikeReservacion(String txtToSearch){
+        return daorh.searchLikeReservacion(txtToSearch);
+    }
+    
+    public Huesped getClienteByIdReservacion(int idReservacion){
+        return daorh.getClienteByIdReservacion(idReservacion);
+    }
+    
+    public boolean deleteReservation(Reservacion rselected){
+        return daorh.deleteReservation(rselected);
+    }
 
     public boolean revisarDisponible(int HabToR, List<Habitacion> habitaciones) {
         for (Habitacion hab : habitaciones) {
@@ -65,7 +77,7 @@ public class LogicRegistroHab {
         return esNumero;
     }
 
-    public List<Habitacion> filtrarListaHabitaciones(List<Reservacion> reservaciones, List<Habitacion> habitacionesNF, int tmSelector) {
+    public List<Habitacion> filtrarListaHabitaciones() {
 //        List<Habitacion> habitaciones = new ArrayList<>();
 //        if (tmSelector == 1) {
 //            for (Habitacion habi : habitacionesNF) {
@@ -91,6 +103,10 @@ public class LogicRegistroHab {
 //            }
 //        }
         return daorh.filterHabHoy();
+    }
+    
+    public List<Object[]> filtrarListaReservaciones() {
+        return daorh.filtrarListaReservaciones();
     }
     
     public Huesped findClient(String usuario, String pass){

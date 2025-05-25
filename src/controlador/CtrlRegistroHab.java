@@ -16,28 +16,68 @@ public class CtrlRegistroHab {
 
     LogicRegistroHab logicarh = new LogicRegistroHab();
 
-    public void styleTable(JTable tblRegistroFisico) {
-        JTableHeader header = tblRegistroFisico.getTableHeader();
+    public void styleTable(JTable tblToStyle) {
+        JTableHeader header = tblToStyle.getTableHeader();
         header.setBackground(Color.decode("#014AAD"));
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        tblRegistroFisico.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        tblRegistroFisico.setRowHeight(25);
-        tblRegistroFisico.setGridColor(Color.LIGHT_GRAY);
-        tblRegistroFisico.setSelectionBackground(new Color(0, 120, 215));
-        tblRegistroFisico.setSelectionForeground(Color.WHITE);
-        tblRegistroFisico.setShowHorizontalLines(true);
-        tblRegistroFisico.setShowVerticalLines(false);
-        tblRegistroFisico.setIntercellSpacing(new Dimension(0, 0));
-        tblRegistroFisico.setFillsViewportHeight(true);
-        tblRegistroFisico.getColumnModel().getColumn(0).setPreferredWidth(70);
-        tblRegistroFisico.getColumnModel().getColumn(1).setPreferredWidth(40);
-        tblRegistroFisico.getColumnModel().getColumn(2).setPreferredWidth(40);
-        tblRegistroFisico.getColumnModel().getColumn(3).setPreferredWidth(40);
-        tblRegistroFisico.getColumnModel().getColumn(4).setPreferredWidth(200);
+        tblToStyle.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tblToStyle.setRowHeight(25);
+        tblToStyle.setGridColor(Color.LIGHT_GRAY);
+        tblToStyle.setSelectionBackground(new Color(0, 120, 215));
+        tblToStyle.setSelectionForeground(Color.WHITE);
+        tblToStyle.setShowHorizontalLines(true);
+        tblToStyle.setShowVerticalLines(false);
+        tblToStyle.setIntercellSpacing(new Dimension(0, 0));
+        tblToStyle.setFillsViewportHeight(true);
+        tblToStyle.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        tblToStyle.getColumnModel().getColumn(0).setPreferredWidth(110);
+        tblToStyle.getColumnModel().getColumn(1).setPreferredWidth(50);
+        tblToStyle.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tblToStyle.getColumnModel().getColumn(3).setPreferredWidth(110);
+        tblToStyle.getColumnModel().getColumn(4).setPreferredWidth(340);
+
+    }
+    public void styleTableReservaciones(JTable tblToStyle) {
+        JTableHeader header = tblToStyle.getTableHeader();
+        header.setBackground(Color.decode("#014AAD"));
+        header.setForeground(Color.WHITE);
+        header.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        tblToStyle.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        tblToStyle.setRowHeight(25);
+        tblToStyle.setGridColor(Color.LIGHT_GRAY);
+        tblToStyle.setSelectionBackground(new Color(0, 120, 215));
+        tblToStyle.setSelectionForeground(Color.WHITE);
+        tblToStyle.setShowHorizontalLines(true);
+        tblToStyle.setShowVerticalLines(false);
+        tblToStyle.setIntercellSpacing(new Dimension(0, 0));
+        tblToStyle.setFillsViewportHeight(true);
+        tblToStyle.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        tblToStyle.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblToStyle.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tblToStyle.getColumnModel().getColumn(2).setPreferredWidth(160);
+        tblToStyle.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tblToStyle.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tblToStyle.getColumnModel().getColumn(5).setPreferredWidth(70);
+        tblToStyle.getColumnModel().getColumn(6).setPreferredWidth(95);
 
     }
 
+    
+    public List<Reservacion> searchLikeReservacion(String txtToSearch){
+        return logicarh.searchLikeReservacion(txtToSearch);
+    }
+    
+    public Huesped getClienteByIdReservacion(int idReservacion){
+        return logicarh.getClienteByIdReservacion(idReservacion);
+    }
+    
+    public boolean deleteReservation(Reservacion rselected){
+        return logicarh.deleteReservation(rselected);
+    }
+    
     public List<Habitacion> getListaHabitaciones() {
         return logicarh.getListaHabitaciones();
     }
@@ -58,8 +98,11 @@ public class CtrlRegistroHab {
         return logicarh.getCountReservaciones();
     }
 
-    public List<Habitacion> filtrarListaHabitaciones(List<Reservacion> reservaciones, List<Habitacion> habitacionesNF, int tmSelector) {
-        return logicarh.filtrarListaHabitaciones(reservaciones, habitacionesNF, tmSelector);
+    public List<Habitacion> filtrarListaHabitaciones() {
+        return logicarh.filtrarListaHabitaciones();
+    }
+    public List<Object[]> filtrarListaReservaciones() {
+        return logicarh.filtrarListaReservaciones();
     }
 
     public boolean addHuesped(String usuario, String pass, String nombre, String ap1, String ap2, String num_tarjeta, String idioma, String correo) throws ExRegistroHab {

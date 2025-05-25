@@ -10,26 +10,22 @@ import modelo.vo.Reservacion;
 import repositorio.RepHabitaciones;
 import repositorio.RepReservaciones;
 
-public class mtRegistroHab extends AbstractTableModel {
+public class mtHabReservadas extends AbstractTableModel {
 
-    private static List<Habitacion> habitaciones = new ArrayList<>();
+    private static List<Object[]> reservaciones = new ArrayList<>();
     CtrlRegistroHab ctrlrh;
     private final String[] titulos = {
-        "No. Habitacion", "Precio", "m^2", "Cant. Camas", "Descripcion"
+        "Reservacion", "Habitacion", "A Nombre De:", "F. Entrada", "F. Salida", "Precio", "No. Camas"
     };
 
-    public mtRegistroHab() {
+    public mtHabReservadas() {
         ctrlrh = new CtrlRegistroHab();
-        habitaciones = ctrlrh.filtrarListaHabitaciones();
-    }
-
-    public List<Habitacion> getHabitaciones() {
-        return habitaciones;
+        reservaciones = ctrlrh.filtrarListaReservaciones();
     }
 
     @Override
     public int getRowCount() {
-        return habitaciones.size();
+        return reservaciones.size();
     }
 
     @Override
@@ -48,7 +44,7 @@ public class mtRegistroHab extends AbstractTableModel {
     }
 
     public void recargarTabla() {
-        habitaciones = ctrlrh.filtrarListaHabitaciones();
+        reservaciones = ctrlrh.filtrarListaReservaciones();
         fireTableDataChanged();
     }
 
@@ -69,49 +65,27 @@ public class mtRegistroHab extends AbstractTableModel {
 //    }
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Habitacion hab = habitaciones.get(rowIndex);
-        switch (columnIndex) {
-            case 0 ->
-                hab.setId_habitacion((Integer) aValue);
-            case 1 ->
-                hab.setPrecio((Double) aValue);
-            case 2 ->
-                hab.setSize((Double) aValue);
-            case 3 ->
-                hab.setNum_camas((Integer) aValue);
-            case 4 ->
-                hab.setDescripcion((String) aValue);
-        }
+        Object[] fila = reservaciones.get(rowIndex);
+        fila[columnIndex] = aValue;
         fireTableCellUpdated(rowIndex, columnIndex);
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Habitacion hab = habitaciones.get(rowIndex);
-        return switch (columnIndex) {
-            case 0 ->
-                hab.getId_habitacion();
-            case 1 ->
-                hab.getPrecio();
-            case 2 ->
-                hab.getSize();
-            case 3 ->
-                hab.getNum_camas();
-            case 4 ->
-                hab.getDescripcion();
-            default ->
-                null;
-        };
+        Object[] fila = reservaciones.get(rowIndex);
+        return fila[columnIndex];
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return switch (columnIndex) {
-            case 0, 3 ->
+            case 0, 1, 6 ->
                 Integer.class;
-            case 1, 2 ->
+            case 5 ->
                 Double.class;
-            case 4 ->
+            case 3, 4 ->
+                java.sql.Date.class;
+            case 2 ->
                 String.class;
             default ->
                 Object.class;
