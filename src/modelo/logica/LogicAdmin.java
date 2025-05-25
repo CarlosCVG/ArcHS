@@ -3,6 +3,7 @@ package modelo.logica;
 
 import java.util.List;
 import modelo.dao.DAOAdmin;
+import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 
 public class LogicAdmin {
@@ -12,5 +13,8 @@ public class LogicAdmin {
     }
     public List<Empleado> searchLikeNombre(String txtToSearch) {
         return daoadmin.searchLikeNombre(txtToSearch);
+    }
+    public boolean sendTask(Administrador admin, Empleado empleado, String asunto, String task) {
+        return daoadmin.sendTask(admin, empleado, asunto, task);
     }
 }

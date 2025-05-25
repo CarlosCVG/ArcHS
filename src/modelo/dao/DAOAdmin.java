@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.conexion.DBConexion;
 import modelo.util.MapData;
+import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 
 public class DAOAdmin {
@@ -44,12 +47,11 @@ public class DAOAdmin {
         }
         return null;
     }
-    
+
     public List<Empleado> searchLikeNombre(String txtToSearch) {
         List<Empleado> listaempleados = new ArrayList<>();
         String sql = "SELECT * FROM empleados "
                 + "WHERE nombre LIKE ? OR ap1 LIKE ? OR ap2 LIKE ?";
-
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             String txtLikes = "%" + txtToSearch + "%";
@@ -69,5 +71,29 @@ public class DAOAdmin {
         return null;
     }
 
-    
+    public boolean sendTask(Administrador admin, Empleado empleado, String asunto, String task) {
+        try {
+            String qryInsert;
+            PreparedStatement ps;
+            qryInsert = "INSERT INTO tareas (id_administrador, id_empleado, asunto, mensaje, lectura) "
+                    + "VALUES (?, ?, ?, ?, 'pendiente')";
+
+            ps = conexion.prepareStatement(qryInsert, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, admin.getId_admin());
+            ps.setInt(2, empleado.getId_empleado());
+            ps.setString(3, asunto);
+            ps.setString(4, task);
+
+            int numRegistrosIns = ps.executeUpdate();
+
+            if (numRegistrosIns == 0) {
+                throw new SQLException("Ocurrio un error durante la Operacion de Insertar");
+            }
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en codigo: " + ex.getMessage());
+            return false;
+        }
+    }
+
 }

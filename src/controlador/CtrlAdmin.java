@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.List;
 import modelo.logica.LogicAdmin;
+import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 
 public class CtrlAdmin {
@@ -14,4 +15,9 @@ public class CtrlAdmin {
     public List<Empleado> searchLikeNombre(String txtToSearch) {
         return ladmin.searchLikeNombre(txtToSearch);
     }
+
+    public boolean sendTask(Administrador admin, Empleado empleado, String asunto, String task) {
+        return ladmin.sendTask(admin, empleado, asunto, task);
+    }
+    
 }

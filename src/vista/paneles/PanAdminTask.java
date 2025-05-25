@@ -1,5 +1,6 @@
 package vista.paneles;
 
+import controlador.CtrlAdmin;
 import controlador.CtrlTask;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,9 +17,12 @@ import modelo.vo.Tarea;
 
 public class PanAdminTask extends javax.swing.JPanel {
 
-    private CtrlTask ctask = new CtrlTask();
-    private String selectedbp;
+    private CtrlAdmin ctrlad = new CtrlAdmin();
+    private String selectedbp, txtToSearch;
     private Tarea selectedtsk;
+    private Empleado empleado;
+    private String asunto, task;
+    private Administrador admin;
 
     public PanAdminTask(Administrador admin) {
         initComponents();
@@ -26,24 +30,9 @@ public class PanAdminTask extends javax.swing.JPanel {
         ImageIcon iconReservar = new ImageIcon("src/vista/images/Tareas_titulo.png");
         Image scaledReservar = iconReservar.getImage().getScaledInstance(100, 32, Image.SCALE_SMOOTH);
         lblTituloTareas.setIcon(new ImageIcon(scaledReservar));
-
+        this.admin = admin;
         styleTexts(txtTask);
-        txtTask.setEditable(false);
-//        inicioCombos();
     }
-
-//    public void inicioCombos() {
-//        selectedbp = (String) comboBP.getSelectedItem();
-//        if (selectedbp.equals("buzon")) {
-//            for (Tarea tarea : ctask.searchByRegistro(selectedbp, empleado.getId_empleado())) {
-//                comboSelectMsj.addItem(tarea);
-//            }
-//        } else if (selectedbp.equals("pendiente")) {
-//            for (Tarea tarea : ctask.searchByRegistro(selectedbp, empleado.getId_empleado())) {
-//                comboSelectMsj.addItem(tarea);
-//            }
-//        }
-//    }
 
     public void styleTexts(JTextArea tf) {
 
@@ -66,11 +55,10 @@ public class PanAdminTask extends javax.swing.JPanel {
         txtTask = new javax.swing.JTextArea();
         btnSend = new componentes.RoundedButton();
         lblAsunto = new javax.swing.JLabel();
-        lblRemitente = new javax.swing.JLabel();
-        comboBP = new componentes.VComboBox();
-        comboSelectMsj = new componentes.VComboBox();
-        lblAsunto2 = new javax.swing.JLabel();
-        lblBandeja = new javax.swing.JLabel();
+        lblDestinatario = new javax.swing.JLabel();
+        txtBusqueda = new componentes.custom_textfield();
+        comboNombres = new componentes.VComboBox();
+        txtAsunto = new componentes.custom_textfield();
 
         pnlFondo.setBackground(new java.awt.Color(1, 74, 173));
         pnlFondo.setForeground(new java.awt.Color(1, 74, 173));
@@ -78,14 +66,14 @@ public class PanAdminTask extends javax.swing.JPanel {
         pnlFondo.setMinimumSize(new java.awt.Dimension(900, 500));
         pnlFondo.setPreferredSize(new java.awt.Dimension(900, 500));
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnlFondo.add(lblTituloTareas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 103, 51));
+        pnlFondo.add(lblTituloTareas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 103, 51));
 
         txtTask.setBackground(new java.awt.Color(1, 74, 173));
         txtTask.setColumns(20);
         txtTask.setForeground(new java.awt.Color(255, 255, 255));
         txtTask.setLineWrap(true);
         txtTask.setRows(5);
-        txtTask.setText("Tus tareas se muestran aqui.");
+        txtTask.setToolTipText("Mensaje a enviar:");
         txtTask.setWrapStyleWord(true);
         txtTask.setMaximumSize(new java.awt.Dimension(232, 84));
         txtTask.setMinimumSize(new java.awt.Dimension(232, 84));
@@ -93,7 +81,7 @@ public class PanAdminTask extends javax.swing.JPanel {
 
         pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 295, 680, 170));
 
-        btnSend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/imgtareac.png"))); // NOI18N
+        btnSend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/imgETad.png"))); // NOI18N
         btnSend.setText("");
         btnSend.setBorderPainted(false);
         btnSend.addActionListener(new java.awt.event.ActionListener() {
@@ -101,46 +89,46 @@ public class PanAdminTask extends javax.swing.JPanel {
                 btnSendActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 470, 250, 50));
+        pnlFondo.add(btnSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 470, 240, 50));
 
         lblAsunto.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lblAsunto.setForeground(new java.awt.Color(255, 255, 255));
         lblAsunto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAsunto.setText("Asunto del mensaje");
-        pnlFondo.add(lblAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 680, 40));
+        lblAsunto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        pnlFondo.add(lblAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 680, 40));
 
-        lblRemitente.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        lblRemitente.setForeground(new java.awt.Color(255, 255, 255));
-        lblRemitente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblRemitente.setText("Remitente");
-        pnlFondo.add(lblRemitente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 350, 40));
+        lblDestinatario.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        lblDestinatario.setForeground(new java.awt.Color(255, 255, 255));
+        lblDestinatario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDestinatario.setText("Elige el destinatario:");
+        pnlFondo.add(lblDestinatario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 260, 40));
 
-        comboBP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pendiente", "buzon" }));
-        comboBP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBPActionPerformed(evt);
+        txtBusqueda.setForeground(new java.awt.Color(255, 255, 255));
+        txtBusqueda.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
             }
         });
-        pnlFondo.add(comboBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 220, -1));
+        pnlFondo.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 260, 30));
 
-        comboSelectMsj.addActionListener(new java.awt.event.ActionListener() {
+        comboNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboSelectMsjActionPerformed(evt);
+                comboNombresActionPerformed(evt);
             }
         });
-        pnlFondo.add(comboSelectMsj, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 360, -1));
+        pnlFondo.add(comboNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 350, -1));
 
-        lblAsunto2.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        lblAsunto2.setForeground(new java.awt.Color(255, 255, 255));
-        lblAsunto2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAsunto2.setText("Registro de tareas:");
-        pnlFondo.add(lblAsunto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 220, 40));
-
-        lblBandeja.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        lblBandeja.setForeground(new java.awt.Color(255, 255, 255));
-        lblBandeja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBandeja.setText("Bandeja de tareas:");
-        pnlFondo.add(lblBandeja, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 230, 40));
+        txtAsunto.setForeground(new java.awt.Color(255, 255, 255));
+        txtAsunto.setToolTipText("Asunto del mensaje:");
+        txtAsunto.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        txtAsunto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAsuntoKeyReleased(evt);
+            }
+        });
+        pnlFondo.add(txtAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 680, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -154,41 +142,19 @@ public class PanAdminTask extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboBPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBPActionPerformed
-//        selectedbp = (String) comboBP.getSelectedItem();
-//        comboSelectMsj.removeAllItems();
-//
-//        if (selectedbp.equals("buzon")) {
-//            btnSend.setEnabled(false);
-//        } else {
-//            btnSend.setEnabled(true);
-//        }
-//
-//        if (selectedbp.equals("buzon")) {
-//            for (Tarea tarea : ctask.searchByRegistro(selectedbp, empleado.getId_empleado())) {
-//                comboSelectMsj.addItem(tarea);
-//            }
-//        } else if (selectedbp.equals("pendiente")) {
-//            for (Tarea tarea : ctask.searchByRegistro(selectedbp, empleado.getId_empleado())) {
-//                comboSelectMsj.addItem(tarea);
-//            }
-//        }
-    }//GEN-LAST:event_comboBPActionPerformed
-
-    private void comboSelectMsjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSelectMsjActionPerformed
-//        selectedtsk = (Tarea) comboSelectMsj.getSelectedItem();
-//        if (selectedtsk != null) {
-//            lblRemitente.setText("De: " + ctask.findAdminById(selectedtsk.getId_administrador()));
-//            lblAsunto.setText(selectedtsk.getAsunto());
-//            txtTask.setText(selectedtsk.getMensaje());
-//        } else {
-//            lblRemitente.setText("Sin remitente");
-//            lblAsunto.setText("Sin asunto");
-//            txtTask.setText("No hay ningún mensaje seleccionado");
-//        }
-    }//GEN-LAST:event_comboSelectMsjActionPerformed
-
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+
+        if (comboNombres.getSelectedItem() != null) {
+            empleado = (Empleado)comboNombres.getSelectedItem();
+            asunto = txtAsunto.getText();
+            task = txtTask.getText();
+            if(ctrlad.sendTask(admin, empleado, asunto, task)){
+                JOptionPane.showMessageDialog(null, "Mensaje enviado con exito");
+                txtAsunto.setText("");
+                txtTask.setText("");
+                txtBusqueda.setText("");
+            }
+        }
 //        selectedtsk = (Tarea) comboSelectMsj.getSelectedItem();
 //        if (selectedtsk != null) {
 //            ctask.updateLectura(selectedtsk);
@@ -211,18 +177,33 @@ public class PanAdminTask extends javax.swing.JPanel {
 //        }
     }//GEN-LAST:event_btnSendActionPerformed
 
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        txtToSearch = txtBusqueda.getText();
+        comboNombres.removeAllItems();
+        for (Empleado empleado : ctrlad.searchLikeNombre(txtToSearch)) {
+            comboNombres.addItem(empleado);
+        }
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void comboNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNombresActionPerformed
+
+    }//GEN-LAST:event_comboNombresActionPerformed
+
+    private void txtAsuntoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsuntoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAsuntoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private componentes.RoundedButton btnSend;
-    private componentes.VComboBox comboBP;
-    private componentes.VComboBox comboSelectMsj;
+    private componentes.VComboBox comboNombres;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAsunto;
-    private javax.swing.JLabel lblAsunto2;
-    private javax.swing.JLabel lblBandeja;
-    private javax.swing.JLabel lblRemitente;
+    private javax.swing.JLabel lblDestinatario;
     private javax.swing.JLabel lblTituloTareas;
     private javax.swing.JPanel pnlFondo;
+    private componentes.custom_textfield txtAsunto;
+    private componentes.custom_textfield txtBusqueda;
     private javax.swing.JTextArea txtTask;
     // End of variables declaration//GEN-END:variables
 }

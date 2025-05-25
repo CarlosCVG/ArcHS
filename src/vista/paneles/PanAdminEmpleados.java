@@ -86,6 +86,12 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
         txtID.setForeground(new java.awt.Color(255, 204, 0));
         txtID.setText("Buscar por nombre:");
         body.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 180, 40));
+
+        comboNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboNombresActionPerformed(evt);
+            }
+        });
         body.add(comboNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 350, -1));
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
@@ -133,6 +139,10 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void comboNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNombresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNombresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
