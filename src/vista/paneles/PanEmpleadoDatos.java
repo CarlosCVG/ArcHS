@@ -35,12 +35,10 @@ public class PanEmpleadoDatos extends javax.swing.JPanel {
 
         //ContentTxtArea = "Bienvenido/a " + empleado.getNombre() + " " + empleado.getAp1() + " " + empleado.getAp2();
         //ContentTxtArea = ContentTxtArea + "\n\n" + "Revisa tus datos. Si algun dato es incorrecto comunicalo con\nel Administrador del sistema.";
-        ContentTxtArea = "Curp: " + empleado.getCurp();
-        ContentTxtArea = ContentTxtArea + "\n" + "Email: " + empleado.getEmail();
-        ContentTxtArea = ContentTxtArea + "\n" + "Telefono: " + empleado.getTelefono();
-        ContentTxtArea = ContentTxtArea + "\n" + "RFC: " + empleado.getRfc();
-        ContentTxtArea = ContentTxtArea + "\n" + "NSS: " + empleado.getNss();
-        ContentTxtArea = ContentTxtArea + "\n\n" + "Tu puesto es : " + nombrePuesto;
+        ContentTxtArea =                            "Curp:              " + empleado.getCurp();
+        ContentTxtArea = ContentTxtArea + "\n" +    "Email:             " + empleado.getEmail();
+        ContentTxtArea = ContentTxtArea + "\n" +    "Telefono:          " + empleado.getTelefono();
+        ContentTxtArea = ContentTxtArea + "\n\n" +  "Tu puesto es:      " + nombrePuesto;
 
         tf.setText(ContentTxtArea);
     }
@@ -72,6 +70,7 @@ public class PanEmpleadoDatos extends javax.swing.JPanel {
         jPanel1.setMinimumSize(new java.awt.Dimension(900, 500));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 500));
 
+        txtDatosGen.setEditable(false);
         txtDatosGen.setBackground(new java.awt.Color(1, 74, 173));
         txtDatosGen.setColumns(20);
         txtDatosGen.setRows(5);
@@ -119,8 +118,8 @@ public class PanEmpleadoDatos extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(lblAdvice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

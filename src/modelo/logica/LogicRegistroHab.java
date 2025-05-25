@@ -66,33 +66,31 @@ public class LogicRegistroHab {
     }
 
     public List<Habitacion> filtrarListaHabitaciones(List<Reservacion> reservaciones, List<Habitacion> habitacionesNF, int tmSelector) {
-        List<Habitacion> habitaciones = new ArrayList<>();
-
-        if (tmSelector == 1) {
-            for (Habitacion habi : habitacionesNF) {
-                boolean estaReservada = false;
-                for (Reservacion reserv : reservaciones) {
-                    if (habi.getId_habitacion() == reserv.getId_habitacion()) {
-                        estaReservada = true;
-                        break;
-                    }
-                }
-                if (!estaReservada) {
-                    habitaciones.add(habi);
-                }
-            }
-        } else if (tmSelector == 2) {
-            for (Habitacion habi : habitacionesNF) {
-                for (Reservacion reserv : reservaciones) {
-                    if (habi.getId_habitacion() == reserv.getId_habitacion()) {
-                        habitaciones.add(habi);
-                        break;
-                    }
-                }
-            }
-        }
-
-        return habitaciones;
+//        List<Habitacion> habitaciones = new ArrayList<>();
+//        if (tmSelector == 1) {
+//            for (Habitacion habi : habitacionesNF) {
+//                boolean estaReservada = false;
+//                for (Reservacion reserv : reservaciones) {
+//                    if (habi.getId_habitacion() == reserv.getId_habitacion()) {
+//                        estaReservada = true;
+//                        break;
+//                    }
+//                }
+//                if (!estaReservada) {
+//                    habitaciones.add(habi);
+//                }
+//            }
+//        } else if (tmSelector == 2) {
+//            for (Habitacion habi : habitacionesNF) {
+//                for (Reservacion reserv : reservaciones) {
+//                    if (habi.getId_habitacion() == reserv.getId_habitacion()) {
+//                        habitaciones.add(habi);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+        return daorh.filterHabHoy();
     }
     
     public Huesped findClient(String usuario, String pass){

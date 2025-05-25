@@ -200,9 +200,9 @@ public class SelectorHabitaciones extends JPanel {
         }
     }
 
-    public List<Habitacion> getHabitacionesSeleccionadas() {
-        return habitacionesSeleccionadas;
-    }
+//    public List<Habitacion> getHabitacionesSeleccionadas() {
+//        return habitacionesSeleccionadas;
+//    }
 
     private int getRandomInt(int min, int max) {
         return new Random().nextInt(max - min + 1) + min;

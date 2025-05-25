@@ -18,14 +18,14 @@ public class mtRegistroHab extends AbstractTableModel {
     private static List<Reservacion> reservaciones = new ArrayList<>();
     CtrlRegistroHab ctrlrh;
     private final String[] titulos = {
-        "ID HABITACIÓN", "PRECIO", "TAMAÑO", "NÚM. CAMAS", "DESCRIPCIÓN"
+        "No. Habitacion", "Precio", "m^2", "Cant. Camas", "Descripcion"
     };
 
     public mtRegistroHab(int tmSelector) {
         this.tmSelector = tmSelector;
         ctrlrh = new CtrlRegistroHab();
-        RepHabitaciones rephabitaciones = new RepHabitaciones();
-        RepReservaciones represervaciones = new RepReservaciones();
+//        RepHabitaciones rephabitaciones = new RepHabitaciones();
+//        RepReservaciones represervaciones = new RepReservaciones();
         reservaciones = ctrlrh.getListaReservaciones();
         habitacionesNF = ctrlrh.getListaHabitaciones();
         habitaciones = ctrlrh.filtrarListaHabitaciones(reservaciones, habitacionesNF, tmSelector);

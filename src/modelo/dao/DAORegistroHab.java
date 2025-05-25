@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.conexion.DBConexion;
@@ -19,17 +20,64 @@ import repositorio.RepReservaciones;
 public class DAORegistroHab {
 
     private Connection conexion;
+    
 
     public DAORegistroHab() {
         conexion = new DBConexion().getConexionBD();
     }
     
     public List<Habitacion> getListaHabitaciones() {
-        return RepHabitaciones.getListaHabitaciones();
+        List<Habitacion> listaHabitaciones= new ArrayList<>();
+        String sql = "SELECT * FROM habitaciones";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                listaHabitaciones.add(MapData.mapearHabitacion(rs));
+            }
+            return listaHabitaciones;
+        } catch (SQLException e){
+            e.printStackTrace();
+        } catch( Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public List<Reservacion> getListaReservaciones() {
-        return RepReservaciones.getListaReservaciones();
+        List<Reservacion> listaReserva= new ArrayList<>();
+        String sql = "SELECT * FROM reservaciones";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                listaReserva.add(MapData.mapearReserva(rs));
+            }
+            return listaReserva;
+        } catch (SQLException e){
+            e.printStackTrace();
+        } catch( Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public List<Habitacion> filterHabHoy(){
+        List<Habitacion> listToShow = new ArrayList<>();
+        String sql = "SELECT DISTINCT habitaciones.id_habitacion, habitaciones.num_camas, "
+                + "habitaciones.size, habitaciones.precio, habitaciones.descripcion FROM habitaciones "
+                + "LEFT JOIN reservaciones ON reservaciones.id_habitacion = habitaciones.id_habitacion "
+                + "WHERE reservaciones.f_entrada <> CURDATE() OR reservaciones.f_entrada IS NULL";
+        try (PreparedStatement ps = conexion.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                listToShow.add(MapData.mapearHabitacion(rs));
+            }
+            return listToShow;
+        } catch (SQLException e){
+            e.printStackTrace();
+        } catch( Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public int getCountHuespedes() {
