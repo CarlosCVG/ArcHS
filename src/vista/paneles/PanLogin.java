@@ -9,6 +9,7 @@ import modelo.vo.Administrador;
 import modelo.vo.Empleado;
 import modelo.vo.Huesped;
 import modelo.vo.Puesto;
+import vista.ventanas.WinAdmin;
 import vista.ventanas.WinAdministrador;
 import vista.ventanas.WinEmpleado;
 import vista.ventanas.WinRecepcion;
@@ -207,8 +208,12 @@ public class PanLogin extends javax.swing.JPanel {
                 if (ctrll.adminLogged(usuario, password) != null) {
                     administrador = ctrll.adminLogged(usuario, password);
                     //JOptionPane.showMessageDialog(null, administrador.getNombre());
-                    WinAdministrador adminWindow = new WinAdministrador();
+//                    WinAdministrador adminWindow = new WinAdministrador();
+//                    adminWindow.setVisible(true);
+                    
+                    WinAdmin adminWindow = new WinAdmin(administrador);
                     adminWindow.setVisible(true);
+                    adminWindow.setBounds(100, 10, 1000, 700);
                     Window framePadre = SwingUtilities.getWindowAncestor(this);
                     framePadre.dispose();
                 } else {
