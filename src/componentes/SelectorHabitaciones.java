@@ -1,40 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package componentes;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Random;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import modelo.util.Observer;
 import modelo.vo.Habitacion;
-import modelo.vo.Reservacion;
-import repositorio.RepHabitaciones;
-import vista.paneles.PanHabitacion;
 
-/**
- *
- * @author edwin
- */
 public class SelectorHabitaciones extends JPanel {
 
     private static final String IMAGE_FOLDER_PATH = "src/vista/images/habitacionIMG/";
@@ -44,7 +29,7 @@ public class SelectorHabitaciones extends JPanel {
     private List<RectCelda> celdas = new ArrayList<>();
     private List<Habitacion> habitacionesSeleccionadas = new ArrayList<>();
     private Map<Integer, Color> colorHabitaciones = new HashMap<>();
-    private Map<Integer, Image> imagenesHabitaciones = new HashMap<>();
+    private Map<Integer, ImageIcon> imagenesHabitaciones = new HashMap<>();
 
     private int fontSize = 21;
 
@@ -71,23 +56,25 @@ public class SelectorHabitaciones extends JPanel {
 
     public void setHabitaciones(List<Habitacion> habitaciones) {
         this.habitaciones = habitaciones;
-        this.setBackground(new Color(45, 52, 54));
+        this.habitacionesSeleccionadas.clear();
+        this.celdas.clear();
+        this.colorHabitaciones.clear();
+        this.imagenesHabitaciones.clear();
         generarColoresHabitaciones();
         cargarImagenes();
-        configurarMouseListener();
         repaint();
     }
 
     public List<Habitacion> getHabitaciones() {
         return habitaciones;
     }
-    
-    public List<Habitacion> getHabitacionesSeleccionadas(){
+
+    public List<Habitacion> getHabitacionesSeleccionadas() {
         return habitacionesSeleccionadas;
     }
-    
+
     private void configurarMouseListener() {
-        addMouseListener(new MouseAdapter() {
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Habitacion habitacionSeleccionada = getSelectedRoom(e);
@@ -117,14 +104,17 @@ public class SelectorHabitaciones extends JPanel {
             return;
         }
 
+        int imageSize = 100; // Ajusta al tamaño deseado
+
         for (Habitacion h : habitaciones) {
             int id = h.getId_habitacion();
             int index = getRandomInt(0, imageCount - 1);
             String imagePath = IMAGE_FOLDER_PATH + IMAGE_PREFIX + index + ".jpg";
             File file = new File(imagePath);
             if (file.exists()) {
-                ImageIcon icon = new ImageIcon(imagePath);
-                imagenesHabitaciones.put(id, icon.getImage());
+                ImageIcon original = new ImageIcon(imagePath);
+                Image scaled = original.getImage().getScaledInstance(imageSize, imageSize, Image.SCALE_SMOOTH);
+                imagenesHabitaciones.put(id, new ImageIcon(scaled));
             }
         }
     }
@@ -157,11 +147,31 @@ public class SelectorHabitaciones extends JPanel {
         int offsetX = (this.getWidth() - panelWidth) / 2;
         int offsetY = (this.getHeight() - panelHeight) / 2;
 
-        g.setFont(new Font("Monospace", Font.PLAIN, fontSize));
+        // Usamos Graphics2D para mejor control
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setFont(new Font("Monospace", Font.BOLD, fontSize));
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         int roomCounter = 0;
         for (int row = 0; row < rows && roomCounter < habitaciones.size(); row++) {
             for (int col = 0; col < cols && roomCounter < habitaciones.size(); col++) {
+                if (row > 0) {
+                    if (cols % 2 == 0) {
+                        // Par: saltar las dos columnas del centro
+                        int midLeft = (cols / 2) - 1;
+                        int midRight = cols / 2;
+                        if (col == midLeft || col == midRight) {
+                            continue; // No dibujar ni contar habitación en estas posiciones
+                        }
+                    } else {
+                        // Impar: saltar la columna del centro
+                        int mid = cols / 2;
+                        if (col == mid) {
+                            continue; // No dibujar ni contar habitación en esta posición
+                        }
+                    }
+                }
+                
                 Habitacion habitacion = habitaciones.get(roomCounter);
 
                 int x = offsetX + col * roomWidth;
@@ -174,36 +184,50 @@ public class SelectorHabitaciones extends JPanel {
                 celdas.add(new RectCelda(habitacion, rect));
 
                 // Fondo color según selección
-                g.setColor(habitacionesSeleccionadas.contains(habitacion) ? colorHabitaciones.get(habitacion.getId_habitacion()) : Color.GRAY);
-                g.fillOval(circleX, circleY, diameter, diameter);
+                if (habitacionesSeleccionadas.contains(habitacion)) {
+                    g2.setColor(Color.YELLOW); // Amarillo para selección
+                } else {
+                    g2.setColor(Color.GRAY);
+                }
+                g2.fillOval(circleX, circleY, diameter, diameter);
 
-                // Imagen
-                Image img = imagenesHabitaciones.get(habitacion.getId_habitacion());
-                if (img != null) {
-                    g.drawImage(img.getScaledInstance(diameter, diameter, Image.SCALE_SMOOTH), circleX, circleY, null);
+                // Imagen (más pequeña para que no sobresalga)
+                ImageIcon icon = imagenesHabitaciones.get(habitacion.getId_habitacion());
+                if (icon != null) {
+                    int padding = diameter / 10;
+                    int imgSize = diameter - 2 * padding;
+                    g2.drawImage(icon.getImage(), circleX + padding, circleY + padding, imgSize, imgSize, this);
                 }
 
-                // Borde
-                g.setColor(Color.BLACK);
-                g.drawOval(circleX, circleY, diameter, diameter);
+                // Borde negro
+                g2.setColor(Color.BLACK);
+                g2.drawOval(circleX, circleY, diameter, diameter);
 
-                // Texto
+                // Texto con contorno para mayor visibilidad
                 String label = "Hab " + habitacion.getId_habitacion();
-                FontMetrics fm = g.getFontMetrics();
+                FontMetrics fm = g2.getFontMetrics();
                 int textWidth = fm.stringWidth(label);
                 int textX = circleX + (diameter - textWidth) / 2;
                 int textY = circleY + diameter - 5;
-                g.setColor(Color.WHITE);
-                g.drawString(label, textX, textY);
+
+                // Dibujo contorno negro
+                g2.setColor(Color.BLACK);
+                for (int dx = -1; dx <= 1; dx++) {
+                    for (int dy = -1; dy <= 1; dy++) {
+                        if (dx != 0 || dy != 0) {
+                            g2.drawString(label, textX + dx, textY + dy);
+                        }
+                    }
+                }
+
+                // Dibujo texto blanco encima
+                g2.setColor(Color.WHITE);
+                g2.drawString(label, textX, textY);
 
                 roomCounter++;
             }
         }
     }
-
-//    public List<Habitacion> getHabitacionesSeleccionadas() {
-//        return habitacionesSeleccionadas;
-//    }
 
     private int getRandomInt(int min, int max) {
         return new Random().nextInt(max - min + 1) + min;

@@ -4,11 +4,15 @@
  */
 package vista.ventanas;
 
+import componentes.SelectorHabitaciones;
+import controlador.CtrlSelectorHabitacion;
+import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.vo.Habitacion;
 import modelo.vo.Huesped;
+import modelo.vo.Reservacion;
 import vista.paneles.PanHabitacion;
 
 /**
@@ -19,6 +23,8 @@ public class WinSelectorHabitacion extends javax.swing.JFrame {
 
     List<Habitacion> habitaciones;
     private Huesped huesded;
+    private CtrlSelectorHabitacion controlador;
+
     public WinSelectorHabitacion(Huesped huesped, List<Habitacion> habitaciones) {
         initComponents();
         this.huesded = huesped;
@@ -27,14 +33,6 @@ public class WinSelectorHabitacion extends javax.swing.JFrame {
         Shabitaciones.setHabitaciones(habitaciones);
     }
 
-    public void setHabitacionList(List<Habitacion> habitaciones){
-        this.habitaciones = habitaciones;
-        Shabitaciones.setHabitaciones(habitaciones);
-    }
-    
-    
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -132,17 +130,38 @@ public class WinSelectorHabitacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservacionActionPerformed
-        habitaciones = Shabitaciones.getHabitacionesSeleccionadas();
-        List<PanHabitacion> PanHabitacion = new ArrayList<>();
-        
-        for (Habitacion h : habitaciones) {
-            PanHabitacion.add(new PanHabitacion(h));
+        controlador = new CtrlSelectorHabitacion();
+
+        List<Habitacion> habitacionesSeleccionadas = Shabitaciones.getHabitacionesSeleccionadas();
+        System.out.println("Seleccionadas " + habitacionesSeleccionadas);
+             
+        List<Reservacion> todasLasReservaciones = controlador.ctrBuscarReservaciones();
+
+        List<Reservacion> reservacionesImportantes = new ArrayList<>();
+        List<PanHabitacion> panelesHabitacion = new ArrayList<>();
+
+        List<Integer> idsSeleccionados = new ArrayList<>();
+        for (Habitacion h : habitacionesSeleccionadas) {
+            idsSeleccionados.add(h.getId_habitacion());
+        }
+
+        for (Reservacion r : todasLasReservaciones) {
+            if (idsSeleccionados.contains(r.getId_habitacion())) {
+                reservacionesImportantes.add(r);
+            }
+        }
+
+        for (Habitacion h : habitacionesSeleccionadas) {
+            panelesHabitacion.add(new PanHabitacion(h));
         }
         
-        int month = LocalDate.now().getMonthValue();
-        
-        WinCalendario calendario = new WinCalendario(month, PanHabitacion, huesded);
+        System.out.println(habitacionesSeleccionadas.size());
+
+        int mesActual = LocalDate.now().getMonthValue();
+        WinCalendario calendario = new WinCalendario(mesActual, panelesHabitacion, huesded);
+        calendario.setReservaList(reservacionesImportantes);
         calendario.setVisible(true);
+
         this.dispose();
 
     }//GEN-LAST:event_btnReservacionActionPerformed
