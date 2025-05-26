@@ -34,7 +34,7 @@ public class WinAdmin extends javax.swing.JFrame {
         configurarComponentes(btnME);
         configurarComponentes(btnAT);
         configurarComponentes(btnCE);
-        adminempleados = new PanAdminEmpleados(mten);
+        adminempleados = new PanAdminEmpleados(mten, this);
         Rigth.add(adminempleados);
     }
 
@@ -147,7 +147,7 @@ public class WinAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnMEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMEMouseClicked
-        adminempleados = new PanAdminEmpleados(mten);
+        adminempleados = new PanAdminEmpleados(mten, this);
         Rigth.removeAll();
         Rigth.add(adminempleados);
         Rigth.revalidate();

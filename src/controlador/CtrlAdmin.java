@@ -1,5 +1,6 @@
 package controlador;
 
+import excepciones.ExRegistroHab;
 import java.util.List;
 import modelo.logica.LogicAdmin;
 import modelo.vo.Administrador;
@@ -23,5 +24,18 @@ public class CtrlAdmin {
     public String cantRxM(int numMes) {
         return ladmin.cantRxM(numMes);
     }
+
+    public boolean deleteEmpleado(Empleado empleadoSelected) {
+        return ladmin.deleteEmpleado(empleadoSelected);
+    }
+
+    public boolean addEmpleado(String usuario, String pass, String nombre, String ap1, String ap2, String curp, String telefono, String email, String puesto) throws ExRegistroHab {
+        return ladmin.addEmpleado(usuario, pass, nombre, ap1, ap2, curp, telefono, email, puesto);
+    }
+    public boolean modEmpleado(int id_empleado, String usuario, String pass, String nombre, String ap1, String ap2, String curp, String telefono, String email, String puesto) throws ExRegistroHab {
+        return ladmin.modEmpleado(id_empleado, usuario, pass, nombre, ap1, ap2, curp, telefono, email, puesto);
+    }
+    
+    
     
 }

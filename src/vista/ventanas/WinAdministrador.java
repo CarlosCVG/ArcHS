@@ -1,14 +1,12 @@
 package vista.ventanas;
 
-import controlador.CtrlAdministrador;
-
 public class WinAdministrador extends javax.swing.JFrame {
-    private CtrlAdministrador controlador;
+//    private CtrlAdministrador controlador;
 
     public WinAdministrador() {
         this.setUndecorated(true);
         initComponents();
-        this.controlador = new CtrlAdministrador(this);
+//        this.controlador = new CtrlAdministrador(this);
         this.setLocationRelativeTo(null);
     }
 
@@ -179,9 +177,9 @@ public class WinAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnNewEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEmpleadoActionPerformed
-        WinRegistroEmp re = new WinRegistroEmp();
-        re.setVisible(true);
-        dispose();
+//        WinRegistroEmp re = new WinRegistroEmp();
+//        re.setVisible(true);
+//        dispose();
     }//GEN-LAST:event_btnNewEmpleadoActionPerformed
 
     private void btnEliminarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarEmpActionPerformed

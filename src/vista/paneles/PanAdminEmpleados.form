@@ -64,7 +64,7 @@
             <Property name="rows" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="componentes.RoundedButton" name="roundedButton3">
+            <Component class="componentes.RoundedButton" name="btnNuevo">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ad" green="4a" red="1" type="rgb"/>
@@ -80,10 +80,10 @@
                 <Property name="contentAreaFilled" type="boolean" value="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="roundedButton3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="componentes.RoundedButton" name="roundedButton5">
+            <Component class="componentes.RoundedButton" name="btnDelete">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ad" green="4a" red="1" type="rgb"/>
@@ -95,8 +95,11 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="contentAreaFilled" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="componentes.RoundedButton" name="roundedButton6">
+            <Component class="componentes.RoundedButton" name="btnMod">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ad" green="4a" red="1" type="rgb"/>
@@ -112,7 +115,7 @@
                 <Property name="contentAreaFilled" type="boolean" value="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="roundedButton6ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
