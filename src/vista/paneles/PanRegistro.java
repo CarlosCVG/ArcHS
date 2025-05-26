@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
 import modelo.componentes.mtRegistroHab;
+import modelo.util.ScrollPaneCustomizer;
+import modelo.util.TableCustomizer;
 import modelo.vo.Habitacion;
 import vista.ventanas.WinRegistroUF;
 
@@ -24,6 +26,8 @@ public class PanRegistro extends javax.swing.JPanel {
         initComponents();
         tblRegistroFisico.setModel(mtrh);
         ctrlrh.styleTable(tblRegistroFisico);
+        ScrollPaneCustomizer.customizeScrollPane(jScrollPane1);
+        TableCustomizer.customizeTable(tblRegistroFisico);
     }
 
     @SuppressWarnings("unchecked")

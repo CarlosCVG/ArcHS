@@ -62,8 +62,10 @@ public class WinRecepcion extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         Header.setBackground(new java.awt.Color(1, 74, 173));
+        Header.setPreferredSize(new java.awt.Dimension(930, 130));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(1, 74, 173));
@@ -86,9 +88,9 @@ public class WinRecepcion extends javax.swing.JFrame {
 
         Left.setBackground(new java.awt.Color(1, 74, 173));
         Left.setMinimumSize(new java.awt.Dimension(190, 0));
-        Left.setPreferredSize(new java.awt.Dimension(190, 0));
+        Left.setPreferredSize(new java.awt.Dimension(200, 570));
         Left.setRequestFocusEnabled(false);
-        Left.setLayout(new java.awt.GridLayout(3, 0, 20, 20));
+        Left.setLayout(new java.awt.GridLayout(3, 0, 0, 20));
 
         btnInicio.setBackground(new java.awt.Color(1, 74, 173));
         btnInicio.setText("");
@@ -124,6 +126,7 @@ public class WinRecepcion extends javax.swing.JFrame {
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
         Rigth.setBackground(new java.awt.Color(1, 74, 173));
+        Rigth.setPreferredSize(new java.awt.Dimension(0, 570));
         Rigth.setLayout(new java.awt.CardLayout());
         getContentPane().add(Rigth, java.awt.BorderLayout.CENTER);
 

@@ -67,6 +67,9 @@ public class PanLogin extends javax.swing.JPanel {
         lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/usuario_icono_corto.png"))); // NOI18N
         body.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 130, 40));
 
+        txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtUser.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
@@ -80,6 +83,8 @@ public class PanLogin extends javax.swing.JPanel {
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/LogoARC.png"))); // NOI18N
         body.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 436, -1));
+
+        txtPassword2.setForeground(new java.awt.Color(0, 0, 0));
         body.add(txtPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 410, -1));
 
         jPanel1.add(body, java.awt.BorderLayout.CENTER);
@@ -148,7 +153,6 @@ public class PanLogin extends javax.swing.JPanel {
             ventanaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
             ventanaAnterior.setVisible(false);
             WinRegistroUV wruv = new WinRegistroUV(ventanaAnterior);
-            wruv.setBounds(200, 100, wruv.getWidth(), wruv.getHeight());
             wruv.setVisible(true);
         }
     }//GEN-LAST:event_btnRegistroActionPerformed
@@ -168,7 +172,6 @@ public class PanLogin extends javax.swing.JPanel {
                     
                     WinAdmin adminWindow = new WinAdmin(administrador);
                     adminWindow.setVisible(true);
-                    adminWindow.setBounds(100, 10, 1000, 700);
                     Window framePadre = SwingUtilities.getWindowAncestor(this);
                     framePadre.dispose();
                 } else {
@@ -187,21 +190,18 @@ public class PanLogin extends javax.swing.JPanel {
                     if (nombrePuesto.equals("Recepcionista")) {
 //                        JOptionPane.showMessageDialog(null, "Recep");
                         WinRecepcion empleadoWindow = new WinRecepcion(empleado, nombrePuesto);
-                        empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
                     } else if (nombrePuesto.equals("Limpieza")) {
 //                        JOptionPane.showMessageDialog(null, "Limpieza");
                         WinEmpleado empleadoWindow = new WinEmpleado(empleado, nombrePuesto);
-                        empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
                     } else if (nombrePuesto.equals("Camarero")) {
 //                        JOptionPane.showMessageDialog(null, "Camarero");
                         WinEmpleado empleadoWindow = new WinEmpleado(empleado, nombrePuesto);
-                        empleadoWindow.setBounds(100, 10, 1000, 700);
                         empleadoWindow.setVisible(true);
                         Window framePadre = SwingUtilities.getWindowAncestor(this);
                         framePadre.dispose();
@@ -233,7 +233,6 @@ public class PanLogin extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         WinSelectLogin selectlogin = new WinSelectLogin();
-        selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
         selectlogin.setVisible(true);
         Window framePadre = SwingUtilities.getWindowAncestor(this);
         framePadre.dispose();

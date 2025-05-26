@@ -1,6 +1,6 @@
 package vista.ventanas;
 
-import componentes.ScrollPaneCustomizer;
+import modelo.util.ScrollPaneCustomizer;
 import controlador.CtrlFechaReservacion;
 import excepciones.ExAgregar;
 import java.awt.BorderLayout;

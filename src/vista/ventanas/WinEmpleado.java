@@ -14,10 +14,9 @@ public class WinEmpleado extends javax.swing.JFrame {
     private String nombrePuesto;
 
     public WinEmpleado(Empleado empleado, String nombrePuesto) {
+        initComponents();
         this.empleado = empleado;
         this.nombrePuesto = nombrePuesto;
-        this.setUndecorated(true);
-        initComponents();
         setLocationRelativeTo(null);
         configurarComponentes(btnInicio);
         configurarComponentes(btnTask);
@@ -49,19 +48,21 @@ public class WinEmpleado extends javax.swing.JFrame {
         btnInicio = new componentes.panel_btn();
         btnTask = new componentes.panel_btn();
         Rigth = new javax.swing.JPanel();
-        Footer = new javax.swing.JPanel();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         Header.setBackground(new java.awt.Color(1, 74, 173));
+        Header.setPreferredSize(new java.awt.Dimension(930, 130));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(1, 74, 173));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP1 (1).png"))); // NOI18N
-        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 580, -1));
+        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 580, -1));
 
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP3 (1).png"))); // NOI18N
         btnClose.setBorder(null);
@@ -78,7 +79,7 @@ public class WinEmpleado extends javax.swing.JFrame {
 
         Left.setBackground(new java.awt.Color(1, 74, 173));
         Left.setMinimumSize(new java.awt.Dimension(190, 0));
-        Left.setPreferredSize(new java.awt.Dimension(190, 0));
+        Left.setPreferredSize(new java.awt.Dimension(200, 570));
         Left.setRequestFocusEnabled(false);
         Left.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -90,7 +91,7 @@ public class WinEmpleado extends javax.swing.JFrame {
                 btnInicioMouseClicked(evt);
             }
         });
-        Left.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        Left.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
         btnInicio.getAccessibleContext().setAccessibleDescription("");
 
         btnTask.setBackground(new java.awt.Color(1, 74, 173));
@@ -101,23 +102,20 @@ public class WinEmpleado extends javax.swing.JFrame {
                 btnTaskMouseClicked(evt);
             }
         });
-        Left.add(btnTask, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        Left.add(btnTask, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
         Rigth.setBackground(new java.awt.Color(1, 74, 173));
+        Rigth.setPreferredSize(new java.awt.Dimension(800, 570));
         Rigth.setLayout(new java.awt.CardLayout());
         getContentPane().add(Rigth, java.awt.BorderLayout.CENTER);
-
-        Footer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(Footer, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         WinSelectLogin selectlogin = new WinSelectLogin();
-        selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
         selectlogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
@@ -142,7 +140,6 @@ public class WinEmpleado extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Footer;
     private javax.swing.JPanel Header;
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Rigth;

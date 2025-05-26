@@ -2,6 +2,7 @@ package controlador;
 
 import excepciones.ExRegistroHab;
 import java.util.List;
+import java.util.Map;
 import modelo.logica.LogicAdmin;
 import modelo.vo.Administrador;
 import modelo.vo.Empleado;
@@ -21,8 +22,8 @@ public class CtrlAdmin {
         return ladmin.sendTask(admin, empleado, asunto, task);
     }
 
-    public String cantRxM(int numMes) {
-        return ladmin.cantRxM(numMes);
+    public Map<Integer, Integer> cantRxM(int numMes) {
+        return ladmin.cantReservacionesPorMes(numMes);
     }
 
     public boolean deleteEmpleado(Empleado empleadoSelected) {

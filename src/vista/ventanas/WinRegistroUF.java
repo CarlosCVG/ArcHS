@@ -33,6 +33,7 @@ public class WinRegistroUF extends javax.swing.JFrame {
         txt7.setForeground(Color.GRAY);
         txt7.setText("formato: XXXX-XXXX-XXXX-XXXX");
         habitaciones = ctrlrh.getListaHabitaciones();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

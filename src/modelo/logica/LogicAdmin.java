@@ -4,6 +4,7 @@ package modelo.logica;
 import excepciones.ExRegistroHab;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import modelo.dao.DAOAdmin;
 import modelo.vo.Administrador;
 import modelo.vo.Empleado;
@@ -20,8 +21,8 @@ public class LogicAdmin {
         return daoadmin.sendTask(admin, empleado, asunto, task);
     }
     
-    public String cantRxM(int numMes) {
-        return daoadmin.cantRxM(numMes);
+    public Map<Integer, Integer> cantReservacionesPorMes(int numMes) {
+        return daoadmin.cantReservacionesPorMes(numMes);
     }
     
     public boolean deleteEmpleado(Empleado empleadoSelected) {

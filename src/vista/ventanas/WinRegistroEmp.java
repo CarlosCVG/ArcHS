@@ -18,7 +18,6 @@ public class WinRegistroEmp extends javax.swing.JFrame {
     private String usuario, pass, nombre, ap1, ap2, curp, telefono, email, puesto;
 
     public WinRegistroEmp(JFrame ventanaAnterior) {
-        this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         this.ventanaAnterior = ventanaAnterior;
@@ -70,6 +69,8 @@ public class WinRegistroEmp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(1, 74, 173));
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         comboPuestos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Recepcionista", "Limpieza", "Camarero", " " }));

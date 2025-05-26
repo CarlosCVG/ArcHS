@@ -38,6 +38,7 @@ public class WinRegistroRF extends javax.swing.JFrame {
         txt1.setText("" + nuevoNumId);
         txt2.setText("" + habitacion);
         txt3.setText("" + nhuesped.getId_huesped());
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

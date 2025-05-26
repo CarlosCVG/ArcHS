@@ -1,7 +1,9 @@
 package vista.ventanas;
 
 public class WinLogin extends javax.swing.JFrame {
+    
 private int loginselected;
+
     public WinLogin(int loginselected) {
         this.setUndecorated(true);
         initComponents();

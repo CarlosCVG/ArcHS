@@ -4,6 +4,8 @@ import controlador.CtrlRegistroHab;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JOptionPane;
 import modelo.componentes.mtHabReservadas;
+import modelo.util.ScrollPaneCustomizer;
+import modelo.util.TableCustomizer;
 import modelo.vo.Huesped;
 import modelo.vo.Reservacion;
 
@@ -17,6 +19,8 @@ public class PanReservado extends javax.swing.JPanel {
         initComponents();
         tblReservaciones.setModel(mtrh);
         ctrlrh.styleTableReservaciones(tblReservaciones);
+        ScrollPaneCustomizer.customizeScrollPane(jScrollPane1);
+        TableCustomizer.customizeTable(tblReservaciones);
 
         combo.setRenderer(new DefaultListCellRenderer() {
             @Override
@@ -33,6 +37,7 @@ public class PanReservado extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReservaciones = new javax.swing.JTable();
@@ -51,7 +56,7 @@ public class PanReservado extends javax.swing.JPanel {
         txtNombreEncontrado = new componentes.custom_textfield();
 
         setBackground(new java.awt.Color(1, 74, 173));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.GridBagLayout());
 
         tblReservaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,19 +71,45 @@ public class PanReservado extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblReservaciones);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 730, 200));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 150;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(jScrollPane1, gridBagConstraints);
 
         lblTituloEliminar.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lblTituloEliminar.setForeground(new java.awt.Color(255, 255, 255));
         lblTituloEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTituloEliminar.setText("Eliminar reservaciones");
-        add(lblTituloEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 770, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblTituloEliminar, gridBagConstraints);
 
         lblTituloTabla1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         lblTituloTabla1.setForeground(new java.awt.Color(255, 255, 255));
         lblTituloTabla1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTituloTabla1.setText("Habitaciones reservadas en alguna fecha");
-        add(lblTituloTabla1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 780, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblTituloTabla1, gridBagConstraints);
 
         txtBusqueda.setForeground(new java.awt.Color(255, 255, 255));
         txtBusqueda.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
@@ -92,13 +123,29 @@ public class PanReservado extends javax.swing.JPanel {
                 txtBusquedaKeyReleased(evt);
             }
         });
-        add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 230, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(txtBusqueda, gridBagConstraints);
 
         lblFechaEntrada.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         lblFechaEntrada.setForeground(new java.awt.Color(255, 255, 255));
         lblFechaEntrada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFechaEntrada.setText("Fecha de entrada:");
-        add(lblFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 190, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblFechaEntrada, gridBagConstraints);
 
         lblResultFE.setForeground(new java.awt.Color(255, 255, 255));
         lblResultFE.setEnabled(false);
@@ -114,19 +161,43 @@ public class PanReservado extends javax.swing.JPanel {
                 lblResultFEKeyReleased(evt);
             }
         });
-        add(lblResultFE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 230, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblResultFE, gridBagConstraints);
 
         lblNombre.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombre.setText("Con Nombre:");
-        add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 150, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblNombre, gridBagConstraints);
 
         lblFechaSalida.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         lblFechaSalida.setForeground(new java.awt.Color(255, 255, 255));
         lblFechaSalida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFechaSalida.setText("Fecha de salida:");
-        add(lblFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, 190, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblFechaSalida, gridBagConstraints);
 
         lblResultFS.setForeground(new java.awt.Color(255, 255, 255));
         lblResultFS.setEnabled(false);
@@ -142,7 +213,15 @@ public class PanReservado extends javax.swing.JPanel {
                 lblResultFSKeyReleased(evt);
             }
         });
-        add(lblResultFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 520, 230, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblResultFS, gridBagConstraints);
 
         roundedButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/imgERjva.png"))); // NOI18N
         roundedButton1.setText("");
@@ -152,26 +231,57 @@ public class PanReservado extends javax.swing.JPanel {
                 roundedButton1ActionPerformed(evt);
             }
         });
-        add(roundedButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 500, 230, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(roundedButton1, gridBagConstraints);
 
+        combo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        combo.setPreferredSize(new java.awt.Dimension(0, 0));
         combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboActionPerformed(evt);
             }
         });
-        add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 240, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        add(combo, gridBagConstraints);
 
         lblSelectReservaID.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         lblSelectReservaID.setForeground(new java.awt.Color(255, 255, 255));
         lblSelectReservaID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSelectReservaID.setText("Reservacion:");
-        add(lblSelectReservaID, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 150, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblSelectReservaID, gridBagConstraints);
 
         lblNombreEncontrado.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         lblNombreEncontrado.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreEncontrado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreEncontrado.setText("Nombre Encontrado:");
-        add(lblNombreEncontrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 250, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(lblNombreEncontrado, gridBagConstraints);
 
         txtNombreEncontrado.setForeground(new java.awt.Color(255, 255, 255));
         txtNombreEncontrado.setEnabled(false);
@@ -187,7 +297,15 @@ public class PanReservado extends javax.swing.JPanel {
                 txtNombreEncontradoKeyReleased(evt);
             }
         });
-        add(txtNombreEncontrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 230, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 20;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(txtNombreEncontrado, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed

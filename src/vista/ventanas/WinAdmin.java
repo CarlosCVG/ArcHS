@@ -25,9 +25,8 @@ public class WinAdmin extends javax.swing.JFrame {
     private mtEmpleadosNueva mten = new mtEmpleadosNueva();
     
     public WinAdmin(Administrador administrador) {
-        this.setUndecorated(true);
         initComponents();
-        
+                
         this.setLocationRelativeTo(null);
         this.administrador = administrador;
 
@@ -68,14 +67,17 @@ public class WinAdmin extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         Header.setBackground(new java.awt.Color(1, 74, 173));
+        Header.setPreferredSize(new java.awt.Dimension(990, 130));
         Header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(1, 74, 173));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/ADMIN_TITULO.png"))); // NOI18N
-        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 890, -1));
+        Header.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 890, -1));
 
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/images/TAP3 (1).png"))); // NOI18N
         btnClose.setBorder(null);
@@ -92,11 +94,12 @@ public class WinAdmin extends javax.swing.JFrame {
 
         Left.setBackground(new java.awt.Color(1, 74, 173));
         Left.setMinimumSize(new java.awt.Dimension(190, 0));
-        Left.setPreferredSize(new java.awt.Dimension(190, 0));
+        Left.setPreferredSize(new java.awt.Dimension(200, 570));
         Left.setRequestFocusEnabled(false);
         Left.setLayout(new java.awt.GridLayout(3, 0, 20, 20));
 
         btnME.setBackground(new java.awt.Color(1, 74, 173));
+        btnME.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnME.setText("");
         btnME.setUrl("vista/images/imgAdmin1.png");
         btnME.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,7 +133,8 @@ public class WinAdmin extends javax.swing.JFrame {
         getContentPane().add(Left, java.awt.BorderLayout.WEST);
 
         Rigth.setBackground(new java.awt.Color(1, 74, 173));
-        Rigth.setLayout(new java.awt.CardLayout());
+        Rigth.setPreferredSize(new java.awt.Dimension(800, 570));
+        Rigth.setLayout(new java.awt.BorderLayout());
         getContentPane().add(Rigth, java.awt.BorderLayout.CENTER);
 
         Footer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -141,7 +145,6 @@ public class WinAdmin extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         WinSelectLogin selectlogin = new WinSelectLogin();
-        selectlogin.setBounds(250, 25, selectlogin.getWidth(), selectlogin.getHeight());
         selectlogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed

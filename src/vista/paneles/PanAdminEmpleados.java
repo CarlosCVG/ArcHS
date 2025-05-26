@@ -4,6 +4,8 @@ import controlador.CtrlAdmin;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.componentes.mtEmpleadosNueva;
+import modelo.util.ScrollPaneCustomizer;
+import modelo.util.TableCustomizer;
 import modelo.vo.Empleado;
 import vista.ventanas.WinRegistroEmp;
 
@@ -15,13 +17,16 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
 
     public PanAdminEmpleados(mtEmpleadosNueva mten, JFrame ventanaAnterior) {
         initComponents();
-        tblEmpleados.setModel(mten);
         this.ventanaAnterior = ventanaAnterior;
+        tblEmpleados.setModel(mten);
+        ScrollPaneCustomizer.customizeScrollPane(jScrollPane1);
+        TableCustomizer.customizeTable(tblEmpleados);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         body = new javax.swing.JPanel();
         Left = new javax.swing.JPanel();
@@ -36,7 +41,7 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
 
         body.setBackground(new java.awt.Color(1, 74, 173));
         body.setInheritsPopupMenu(true);
-        body.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        body.setLayout(new java.awt.GridBagLayout());
 
         Left.setBackground(new java.awt.Color(1, 74, 173));
         Left.setMinimumSize(new java.awt.Dimension(250, 10));
@@ -81,7 +86,15 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
         });
         Left.add(btnMod);
 
-        body.add(Left, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 780, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 530;
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(100, 20, 0, 18);
+        body.add(Left, gridBagConstraints);
 
         txtBusqueda.setForeground(new java.awt.Color(255, 255, 255));
         txtBusqueda.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -90,19 +103,39 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
                 txtBusquedaKeyReleased(evt);
             }
         });
-        body.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, 220, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 156;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(70, 0, 0, 0);
+        body.add(txtBusqueda, gridBagConstraints);
 
         txtID.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
         txtID.setForeground(new java.awt.Color(255, 204, 0));
         txtID.setText("Buscar por nombre:");
-        body.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 180, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 15;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(70, 30, 147, 0);
+        body.add(txtID, gridBagConstraints);
 
         comboNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboNombresActionPerformed(evt);
             }
         });
-        body.add(comboNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 350, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 278;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(70, 20, 0, 18);
+        body.add(comboNombres, gridBagConstraints);
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,26 +150,34 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblEmpleados);
 
-        body.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 780, 180));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 200;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 18);
+        body.add(jScrollPane1, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(body, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+            .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 580, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         ventanaAnterior.setVisible(false);
         WinRegistroEmp wremp = new WinRegistroEmp(ventanaAnterior);
-        wremp.setBounds(200, 100, wremp.getWidth(), wremp.getHeight());
         wremp.setVisible(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -145,7 +186,6 @@ public class PanAdminEmpleados extends javax.swing.JPanel {
         if (EmpleadoToModify != null) {
             ventanaAnterior.setVisible(false);
             WinRegistroEmp wremp = new WinRegistroEmp(ventanaAnterior, (Empleado) comboNombres.getSelectedItem(), 2);
-            wremp.setBounds(200, 100, wremp.getWidth(), wremp.getHeight());
             wremp.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "No hay un empleado seleccionado");

@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import modelo.conexion.DBConexion;
 import modelo.util.MapData;
@@ -96,22 +98,28 @@ public class DAOAdmin {
         }
     }
 
-    public String cantRxM(int numMes) {
-        String cantidad = "0";
-        String sql = "SELECT COUNT(*) FROM reservaciones WHERE MONTH(f_entrada) = ?";
+    public Map<Integer, Integer> cantReservacionesPorMes(int anio) {
+        Map<Integer, Integer> reservasPorMes = new HashMap<>();
+        String sql = "SELECT MONTH(f_entrada) AS mes, COUNT(*) AS cantidad "
+                + "FROM reservaciones "
+                + "WHERE YEAR(f_entrada) = ? "
+                + "GROUP BY MONTH(f_entrada)";
 
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-            ps.setInt(1, numMes);
+            ps.setInt(1, anio);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                cantidad = rs.getString(1);
+            while (rs.next()) {
+                int mes = rs.getInt("mes");
+                int cantidad = rs.getInt("cantidad");
+                reservasPorMes.put(mes, cantidad);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return cantidad;
+
+        return reservasPorMes;
     }
 
     public boolean deleteEmpleado(Empleado empleadoSelected) {
